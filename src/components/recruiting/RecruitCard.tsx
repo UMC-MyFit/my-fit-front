@@ -6,7 +6,7 @@ interface RecruitCardProps {
 }
 function RecruitCard() {
   return (
-    <div className="w-[360px] h-[123px] rounded-[10px] border border-ct-gray-200 px-3 py-2">
+    <div className="w-[360px] h-[123px] rounded-[10px] border border-ct-gray-200 px-3 py-2 ">
       <div className="w-[344.64px] h-[115.19px]">
         <div className="w-[344.64px] h-[52.23px] flex justify-between items-center">
           <div className="flex items-center gap-[6px]">
