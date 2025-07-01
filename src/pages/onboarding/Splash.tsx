@@ -26,14 +26,14 @@ function Splash() {
           {/* 이메일 입력 */}
           <input
             type="email"
-            className="mt-[40px] w-full px-4 py-3 rounded-md bg-transparent border border-ct-white text-ct-white font-sans text-body1 placeholder-ct-white placeholder:font-sans placeholder:text-body1"
+            className="mt-[40px] w-full px-4 py-3 rounded-md bg-transparent  border-[0.5px] border-ct-white text-ct-white font-sans text-body1 placeholder-ct-white placeholder:font-sans placeholder:text-body1"
             placeholder="이메일을 입력해주세요"
           />
 
           {/* 비밀번호 입력 */}
           <input
             type="password"
-            className="mt-[16px] w-full px-4 py-3 rounded-md bg-transparent border border-ct-white text-ct-white font-sans text-body1 placeholder-ct-white placeholder:font-sans placeholder:text-body1"
+            className="mt-[16px] w-full px-4 py-3 rounded-md bg-transparent border-[0.5px] border-ct-white text-ct-white font-sans text-body1 placeholder-ct-white placeholder:font-sans placeholder:text-body1"
             placeholder="비밀번호를 입력해주세요"
           />
 
@@ -43,7 +43,7 @@ function Splash() {
           </button>
 
           {/* 탭 */}
-          <div className="mt-[16px] w-full flex justify-center items-center font-sans text-ct-white text-sub1 gap-[8px]">
+          <div className="mt-[16px] w-full flex justify-center items-center font-sans text-ct-white text-sub2 gap-[8px]">
             <span>비밀번호 재설정</span>
             <span>|</span>
             <span>회원가입</span>
@@ -51,9 +51,11 @@ function Splash() {
 
           {/* SNS */}
           <div className="mt-[57px] flex flex-col items-center">
-            <p className="text-white text-sm mb-4">소셜 계정으로 로그인</p>
+            <p className=" text-body2 text-ct-gray-200 mb-[18px] ">
+              소셜 계정으로 로그인
+            </p>
             {/* 아이콘 그룹 */}
-            <div className="flex gap-[18px]">
+            <div className="flex gap-[19px]">
               <img
                 src="/assets/onboarding/flash_kakao_logo.svg"
                 alt="Kakao Login"
