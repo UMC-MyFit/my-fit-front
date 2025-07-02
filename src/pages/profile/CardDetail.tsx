@@ -5,7 +5,7 @@ function CardDetail() {
     <div className="w-full h-full">
       <TopBar>
         <img
-          src="/public/assets/common/headerLogo.svg"
+          src="/assets/common/headerLogo.svg"
           alt="로고"
           className="w-[68px] h-[30px]"
         />
