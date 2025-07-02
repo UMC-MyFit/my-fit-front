@@ -15,7 +15,7 @@ const tagList = [
 
 function CardTagContainer() {
   return (
-    <div className="gap-[5px] flex flex-wrap">
+    <div className="gap-[5px] flex flex-wrap w-full justify-center">
       {tagList.map((tag, index) => (
         <CardTagItem key={index} tag={tag} />
       ))}

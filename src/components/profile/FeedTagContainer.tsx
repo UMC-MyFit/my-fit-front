@@ -15,7 +15,7 @@ const tagList = [
 
 function FeedTagContainer() {
   return (
-    <div className="gap-[5px] flex flex-wrap">
+    <div className="gap-[5px] flex flex-wrap w-full justify-start">
       {tagList.map((tag, index) => (
         <FeedTagItem key={index} tag={tag} />
       ))}
