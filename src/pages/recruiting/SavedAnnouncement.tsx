@@ -13,10 +13,6 @@ function SavedAnnouncement() {
       <div className="flex flex-col pt-[66px] gap-[12px] items-center mb-[89px] ">
         <RecruitCard />
         <RecruitCard />
-        <RecruitCard />
-        <RecruitCard />
-        <RecruitCard />
-        <RecruitCard />
       </div>
       <BottomNav />
     </>
