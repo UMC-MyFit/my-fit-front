@@ -8,6 +8,7 @@ import Splash from "../pages/onboarding/Splash";
 import RecruitAnnouncement from "../pages/recruiting/RecruitAnnouncement";
 import SelectMembers from "../pages/onboarding/SelectMembers";
 import RegisterMethod from "../pages/onboarding/RegisterMethod";
+import RegisterEmail from "../pages/onboarding/RegisterEmail";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "onboarding/register-method",
         element: <RegisterMethod />,
+      },
+      {
+        path: "onboarding/register-email",
+        element: <RegisterEmail />,
       },
     ],
   },
