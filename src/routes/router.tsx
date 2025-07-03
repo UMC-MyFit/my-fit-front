@@ -15,7 +15,11 @@ import CompanySetting from "../pages/setting/CompanySetting";
 import VerifiedCompanySetting from "../pages/setting/VerifiedCompanySetting";
 =======
 import RegisterMethod from "../pages/onboarding/RegisterMethod";
+<<<<<<< HEAD
 >>>>>>> 6769262 (feat: 회원가입 방식 선택 페이지(RegisterMethod) 생성)
+=======
+import RegisterEmail from "../pages/onboarding/RegisterEmail";
+>>>>>>> de178de (feat: 이메일 회원가입(RegisterEmail) 페이지 작업 시작)
 
 const router = createBrowserRouter([
   {
@@ -74,6 +78,10 @@ const router = createBrowserRouter([
         path: "onboarding/register-method",
         element: <RegisterMethod />,
 >>>>>>> 6769262 (feat: 회원가입 방식 선택 페이지(RegisterMethod) 생성)
+      },
+      {
+        path: "onboarding/register-email",
+        element: <RegisterEmail />,
       },
     ],
   },
