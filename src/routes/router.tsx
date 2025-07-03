@@ -7,6 +7,7 @@ import Recruiting from "../pages/recruiting/Recruiting";
 import Splash from "../pages/onboarding/Splash";
 import RecruitAnnouncement from "../pages/recruiting/RecruitAnnouncement";
 import SelectMembers from "../pages/onboarding/SelectMembers";
+import RegisterMethod from "../pages/onboarding/RegisterMethod";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "onboarding/selectmembers",
         element: <SelectMembers />,
+      },
+      {
+        path: "onboarding/register-method",
+        element: <RegisterMethod />,
       },
     ],
   },
