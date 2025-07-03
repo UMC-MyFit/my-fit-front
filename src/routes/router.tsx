@@ -12,6 +12,7 @@ import RegisterAnnouncement from "../pages/recruiting/RegisterAnnouncement";
 import PersonalSetting from "../pages/setting/PersonalSetting";
 import CompanySetting from "../pages/setting/CompanySetting";
 import VerifiedCompanySetting from "../pages/setting/VerifiedCompanySetting";
+import AlarmSetting from "../pages/setting/AlarmSetting";
 import RegisterEmail from "../pages/onboarding/RegisterEmail";
 import RegisterMethod from "../pages/onboarding/RegisterMethod";
 
@@ -73,8 +74,8 @@ const router = createBrowserRouter([
         element: <RegisterMethod />,
       },
       {
-        path: "onboarding/register-email",
-        element: <RegisterEmail />,
+        path: "companysetting/alarmsetting",
+        element: <AlarmSetting />,
       },
     ],
   },

@@ -8,7 +8,11 @@ function AlarmSetting() {
           알림 설정
         </span>
       </TopBar>
-      <div className="mx-[19px]"></div>
+      <div className="w-full px-[15px] pt-[60px]">
+        <span className="font-Pretendard text-ct-black-100">
+          시스템 알림 설정
+        </span>
+      </div>
     </div>
   );
 }
