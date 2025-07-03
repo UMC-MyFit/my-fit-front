@@ -5,8 +5,8 @@ function RegisterMethod() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full min-h-screen bg-ct-white flex justify-center items-center">
-      <div className="w-[375px] min-h-[812px] rounded-[15px] bg-white px-4 pt-[66px]">
+    <div className="w-full h-screen bg-ct-white ct-center overflow-hidden">
+      <div className="w-[375px] h-[812px] bg-white rounded-[15px] pt-[66px] px-4">
         {/* TopBar */}
         <TopBar>
           <span className="font-sans text-h2 text-ct-black-200">회원가입</span>
@@ -17,8 +17,10 @@ function RegisterMethod() {
           <div
             role="button"
             tabIndex={0}
-            onClick={() => navigate("/register-email")}
-            onKeyDown={(e) => e.key === "Enter" && navigate("/register-email")}
+            onClick={() => navigate("/onboarding/register-email")}
+            onKeyDown={(e) =>
+              e.key === "Enter" && navigate("/onboarding/register-email")
+            }
             className="w-fit py-[6px] border-b-[1px] border-ct-black-200 font-sans text-sub1 cursor-pointer"
           >
             이메일로 회원가입
