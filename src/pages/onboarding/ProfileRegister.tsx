@@ -1,46 +1,54 @@
 import BottomCTAButton from "../../components/common/BottomCTAButton";
-import ImageUploadBox from "../../components/common/ImageUploadBox";
 import TopBarContainer from "../../components/common/TopBarContainer";
-import InputField from "../../components/recruiting/InputField";
+import InputField from "../../components/onboarding/InputField";
 
 function ProfileRegister() {
   const TopBarContent = () => {
-    return (
-      <span className="text-h2 font-Pretendard text-ct-black-300">
-        공고 등록
-      </span>
-    );
+    return <span className="text-h2 font-sans text-ct-black-300">프로필</span>;
   };
   return (
     <TopBarContainer TopBarContent={<TopBarContent />}>
-      <div className="flex flex-col pt-[24px] mx-[19px]">
-        <InputField label="공고 제목" placeholder="입력해주세요" />
-        <InputField label="구인 직무" placeholder="입력해주세요" />
-        <InputField
-          label="근무 지역"
-          placeholder="추후 드롭다운 박스로 구현 예정"
-        />
-        <InputField label="지원 조건" placeholder="입력해주세요" />
-        <InputField label="급여" placeholder="추후 드롭다운 박스로 구현 예정" />
-        <InputField label="근무 형태" placeholder="선택" />
-        <InputField
-          label="마감 일자"
-          placeholder="추후 드롭다운 박스로 구현 예정"
-        />
-        <div className="flex flex-col gap-[13.15px] mt-[25px]">
-          <span className="pl-[7px] text-sub1 text-ct-black-200 font-Pretendard">
-            공고사진 첨부
-          </span>
-          <ImageUploadBox
-            className="w-[349px] h-[384px] rounded-[16px] bg-ct-gray-100"
-            textClassName="text-body2 font-Pretendard text-ct-gray-300"
-          />
+      <div className="relative flex flex-col pt-[24px] mx-[22px] border-t border-ct-gray-200">
+        {/* ✅ 스텝 인디케이터 */}
+        <div className="absolute top-[8px] right-0 flex items-center gap-[6px]">
+          {/* 스텝 아이콘 */}
+          <img src="/public/assets/onboarding/step1.svg" alt="현재 스텝 1" />
+          <img src="/public/assets/onboarding/nonestep.svg" alt="none" />
         </div>
-        <span className="mt-[25px] mb-[23.29px] text-body1 text-ct-gray-300 ">
-          등록된 공고는 ‘마이페이지’, ‘공고 관리’ 탭에서 확인 가능합니다.
-        </span>
+        <InputField
+          label="닉네임"
+          placeholder="입력해주세요(본인의 실명을 추천합니다!)"
+        />
+        <InputField
+          label="한줄 소개"
+          placeholder="50자 이내"
+          helperText={
+            <>
+              한줄로 나에 대해 나타내보세요! <br />
+              <span className="block">
+                EX. 저는 워라밸보다 연봉에 더 욕심이 있어요.
+              </span>
+            </>
+          }
+        />{" "}
+        <InputField label="나이" placeholder="생년월일 선택" />
+        <InputField
+          label="주 활동 지역"
+          placeholder="‘시/도’ 를 선택해주세요!"
+        />
+        <InputField
+          label="주 활동 세부 지역"
+          placeholder="세부 활동 지역을 선택해주세요"
+        />
+        <InputField label="현재 구인/구직 상태" placeholder="현재 구직중!" />
+        <InputField label="희망 직무" placeholder="선택" />
+        <InputField
+          label="최종 학력을 입력해주세요"
+          placeholder="예시) 마핏대학교, 마핏대학교 일반대학원"
+        />
+        <InputField label="재학/졸업 상태" placeholder="선택" />
         <div className="flex justify-center mb-[42px]">
-          <BottomCTAButton text="공고 등록하기" />
+          <BottomCTAButton text="다음 단계로 이동" />
         </div>
       </div>
     </TopBarContainer>
