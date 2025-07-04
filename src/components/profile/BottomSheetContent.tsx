@@ -45,8 +45,14 @@ function BottomSheetContent() {
         />
         <span className="text-sub2 text-ct-black-200 ml-[14px]">숨기기</span>
       </div>
-      <div></div>
-      <div></div>
+      <div>
+        <span className="text-ct-gray-400 text-sub2 border-b-[1px] border-ct-gray-400">
+          피드 삭제
+        </span>
+      </div>
+      <div className="bg-ct-main-blue-100 w-[147px] h-[46px] rounded-[10px] ct-center">
+        <span className="text-sub2 text-ct-white">저장하기</span>
+      </div>
     </div>
   );
 }
