@@ -4,6 +4,7 @@ import TopBarContainer from "../../components/common/TopBarContainer";
 import Modal from "../../components/ui/Modal";
 import BottomSheet from "../../components/ui/BottomSheet";
 import { useState } from "react";
+import BottomSheetContent from "../../components/profile/BottomSheetContent";
 
 const TopBarContent = () => {
   return (
@@ -32,9 +33,7 @@ function CardDetail() {
         ))}
       </div>
       <BottomSheet isOpen={isBottomSheetOpen} setIsOpen={setIsBottomSheetOpen}>
-        <div>
-          <span>Hello world</span>
-        </div>
+        <BottomSheetContent />
       </BottomSheet>
       <Modal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
         <div>
