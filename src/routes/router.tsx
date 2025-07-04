@@ -74,6 +74,10 @@ const router = createBrowserRouter([
         element: <RegisterMethod />,
       },
       {
+        path: "onboarding/register-email",
+        element: <RegisterEmail />,
+      },
+      {
         path: "companysetting/alarmsetting",
         element: <AlarmSetting />,
       },
