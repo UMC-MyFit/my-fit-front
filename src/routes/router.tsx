@@ -17,6 +17,7 @@ import RegisterEmail from "../pages/onboarding/RegisterEmail";
 import RegisterMethod from "../pages/onboarding/RegisterMethod";
 import VerifiedSettingPage from "../pages/setting/VerifiedSettingPage";
 import ProfileRegister from "../pages/onboarding/ProfileRegister";
+import ProfileCardRegister from "../pages/onboarding/ProfileCardRegister";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
       {
         path: "onboarding/profile-register",
         element: <ProfileRegister />,
+      },
+      {
+        path: "onboarding/profile-card-register",
+        element: <ProfileCardRegister />,
       },
       {
         path: "companysetting/alarmsetting",
