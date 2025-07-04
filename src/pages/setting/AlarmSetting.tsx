@@ -1,4 +1,5 @@
 import TopBar from "../../components/common/TopBar";
+import ToggleSwitch from "../../components/setting/ToggleSwitch";
 
 function AlarmSetting() {
   return (
@@ -8,10 +9,16 @@ function AlarmSetting() {
           알림 설정
         </span>
       </TopBar>
-      <div className="w-full px-[15px] pt-[60px]">
-        <span className="font-Pretendard text-ct-black-100">
+      <div className="w-full px-[15px] pt-[126px]">
+        <span className="font-Pretendard text-sub1 text-ct-black-100">
           시스템 알림 설정
         </span>
+        <div className="mt-[57px] flex gap-[179px]">
+          <span className="text-sub1 text-[#100F0F] font-Pretendard">
+            PUSH 알림 설정
+          </span>
+          <ToggleSwitch />
+        </div>
       </div>
     </div>
   );
