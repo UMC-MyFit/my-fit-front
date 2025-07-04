@@ -3,8 +3,10 @@ import CardTagContainer from "./CardTagContainer";
 
 function DetailCardItem({
   setIsBottomSheetOpen,
+  setIsModalOpen,
 }: {
   setIsBottomSheetOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
     <div className="w-full h-auto bg-ct-white rounded-[10px] p-[16px] flex flex-col gap-[10px] items-center">
@@ -13,7 +15,7 @@ function DetailCardItem({
         <img
           src="/assets/profile/settingIcon.svg"
           alt="설정"
-          onClick={() => setIsBottomSheetOpen(true)}
+          onClick={() => setIsModalOpen(true)}
         />
       </div>
       <img

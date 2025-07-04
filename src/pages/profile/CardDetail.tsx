@@ -5,6 +5,7 @@ import Modal from "../../components/ui/Modal";
 import BottomSheet from "../../components/ui/BottomSheet";
 import { useState } from "react";
 import BottomSheetContent from "../../components/profile/BottomSheetContent";
+import ModalContent from "../../components/profile/ModalContent";
 
 const TopBarContent = () => {
   return (
@@ -29,6 +30,7 @@ function CardDetail() {
           <DetailCardItem
             key={index}
             setIsBottomSheetOpen={setIsBottomSheetOpen}
+            setIsModalOpen={setIsModalOpen}
           />
         ))}
       </div>
@@ -36,9 +38,7 @@ function CardDetail() {
         <BottomSheetContent />
       </BottomSheet>
       <Modal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
-        <div>
-          <span>Hello world</span>
-        </div>
+        <ModalContent />
       </Modal>
     </TopBarContainer>
   );
