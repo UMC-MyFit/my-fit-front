@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface BottomSheetProps {
   isOpen: boolean;
@@ -24,17 +25,23 @@ function BottomSheet({ isOpen, setIsOpen, children }: BottomSheetProps) {
   if (!isOpen) return null;
 
   return (
-    <div
-      className="fixed inset-0 bg-ct-black-100/50 z-[9999]"
-      onClick={handleOutsideClick}
-    >
-      <div
-        ref={bottomSheetRef}
-        className="fixed bottom-0 left-0 right-0 min-h-[400px] rounded-t-[30px] bg-ct-white ct-center px-[30px] py-[45px]"
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 bg-ct-black-100/50 z-[9999]"
+        onClick={handleOutsideClick}
       >
-        {children}
-      </div>
-    </div>
+        <motion.div
+          ref={bottomSheetRef}
+          initial={{ y: "100%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "100%" }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          className="fixed bottom-0 left-0 right-0 min-h-[300px] rounded-t-[30px] bg-ct-white ct-center px-[30px] py-[45px]"
+        >
+          {children}
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 
