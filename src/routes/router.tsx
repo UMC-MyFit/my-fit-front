@@ -21,6 +21,7 @@ import ProfileCardRegister from "../pages/onboarding/ProfileCardRegister";
 import ProfilePreview from "../pages/onboarding/ProfilePreview";
 import CompanyProfileRegister from "../pages/onboarding/CompanyProfileRegister";
 import CompanyCardRegister from "../pages/onboarding/CompanyCardRegister";
+import CompanyPreview from "../pages/onboarding/CompanyPreview";
 
 const router = createBrowserRouter([
   {
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
       {
         path: "onboarding/company-card-register",
         element: <CompanyCardRegister />,
+      },
+      {
+        path: "onboarding/company-preview",
+        element: <CompanyPreview />,
       },
       {
         path: "companysetting/alarmsetting",

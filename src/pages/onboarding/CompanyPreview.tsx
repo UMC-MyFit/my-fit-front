@@ -1,6 +1,6 @@
 import TopBarContainer from "../../components/common/TopBarContainer";
 
-function ProfilePreview() {
+function CompanyPreview() {
   const TopBarContent = () => (
     <span className="text-h2 font-sans text-ct-black-300">미리보기</span>
   );
@@ -12,13 +12,14 @@ function ProfilePreview() {
         <div className="absolute top-[12px] right-0 flex items-center gap-[6px]">
           <img src="/public/assets/onboarding/nonestep.svg" alt="none" />
           <img src="/public/assets/onboarding/step2.svg" alt="현재 스텝 2" />
+          <img src="/public/assets/onboarding/nonestep.svg" alt="none" />
         </div>
 
         {/* 카드 미리보기 */}
         <div className="flex justify-center mt-[30px]">
           <div className="w-[302px] h-[541px]  rounded-[16px] shadow-md p-[18px] border border-ct-gray-100">
             <h2 className="text-h2 text-ct-black-300 w-full mb-[12px]">
-              퍼포먼스 마케터
+              회사/팀 이름
             </h2>
             <div className="flex flex-wrap gap-[6px] mb-[12px] w-full">
               {tags.map((tag, idx) => (
@@ -41,7 +42,7 @@ function ProfilePreview() {
           </div>
         </div>
 
-        <p className="text-center text-body2 text-ct-gray-300 mt-[20px] mb-[42px]">
+        <p className="text-center text-body2 text-ct-gray-300 mt-[20px] ">
           추후 마이페이지에서 카드에 대한 수정이 가능합니다.
         </p>
       </div>
@@ -49,4 +50,4 @@ function ProfilePreview() {
   );
 }
 
-export default ProfilePreview;
+export default CompanyPreview;
