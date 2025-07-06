@@ -16,7 +16,7 @@ function InputField({ label, placeholder, helperText }: InputFieldProps) {
         className="text-body1 font-sans placeholder:text-ct-gray-300 text-ct-black-200  w-full min-h-[44px] rounded-[10px] pl-[26px] bg-ct-gray-100"
       />
       {helperText && (
-        <p className="mt-[6px] text-body2 text-ct-gray-300  ">{helperText}</p>
+        <p className="mt-[12px] text-body2 text-ct-gray-300  ">{helperText}</p>
       )}
     </div>
   );
