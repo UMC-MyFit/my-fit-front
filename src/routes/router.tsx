@@ -26,6 +26,7 @@ import CompanyProfileRegister from "../pages/onboarding/CompanyProfileRegister";
 import CompanyCardRegister from "../pages/onboarding/CompanyCardRegister";
 import CompanyPreview from "../pages/onboarding/CompanyPreview";
 import CompanyVerification from "../pages/onboarding/CompanyVerification";
+import CompanyProfile from "../pages/setting/CompanyProfile";
 
 const router = createBrowserRouter([
   {
@@ -135,6 +136,10 @@ const router = createBrowserRouter([
       {
         path: "personalsetting/resetpassword",
         element: <ResetPasssword />,
+      },
+      {
+        path: "companysetting/profile",
+        element: <CompanyProfile />,
       },
     ],
   },
