@@ -16,7 +16,9 @@ import AlarmSetting from "../pages/setting/AlarmSetting";
 import RegisterEmail from "../pages/onboarding/RegisterEmail";
 import RegisterMethod from "../pages/onboarding/RegisterMethod";
 import VerifiedSettingPage from "../pages/setting/VerifiedSettingPage";
-<<<<<<< HEAD
+import Account from "../pages/setting/Account";
+import ResetPasssword from "../pages/setting/ResetPassword";
+import ProfileStatus from "../pages/profile/ProfileStatus";
 import ProfileRegister from "../pages/onboarding/ProfileRegister";
 import ProfileCardRegister from "../pages/onboarding/ProfileCardRegister";
 import ProfilePreview from "../pages/onboarding/ProfilePreview";
@@ -24,11 +26,6 @@ import CompanyProfileRegister from "../pages/onboarding/CompanyProfileRegister";
 import CompanyCardRegister from "../pages/onboarding/CompanyCardRegister";
 import CompanyPreview from "../pages/onboarding/CompanyPreview";
 import CompanyVerification from "../pages/onboarding/CompanyVerification";
-import ProfileStatus from "../pages/profile/ProfileStatus";
-=======
-import Account from "../pages/setting/Account";
-import ResetPasssword from "../pages/setting/ResetPassword";
->>>>>>> c19562a (beforerebase)
 
 const router = createBrowserRouter([
   {
