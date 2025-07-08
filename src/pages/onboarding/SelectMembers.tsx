@@ -1,6 +1,6 @@
 import { useState } from "react";
-import TopBarContainer from "../../components/common/TopBarContainer";
 import BottomCTAButton from "../../components/common/BottomCTAButton";
+import TopBarContainer from "../../components/common/TopBarContainer";
 
 type MemberType = "individual" | "team";
 
@@ -8,21 +8,23 @@ function SelectMembers() {
   const [selected, setSelected] = useState<MemberType | null>(null);
 
   const handleSelect = (type: MemberType) => setSelected(type);
-
   const handleNextStep = () => {
     if (!selected) return;
-    // navigate 로직 추가 예정
+    // navigate logic 추가
   };
 
   return (
     <TopBarContainer
       TopBarContent={
-        <span className="font-sans text-h2 text-ct-black-200">회원가입</span>
+        <span className="text-h2 font-sans text-ct-black-300">
+          회사인증(선택)
+        </span>
       }
     >
-      <div className="flex flex-col px-[25.26px] bg-ct-white justify-between">
+      {/* 공통 padding 적용: 버튼/카드 모두 w-full 일치 */}
+      <div className="flex flex-col px-[25.26px] justify-between bg-ct-white">
         {/* 카드 선택 영역 */}
-        <div className="flex flex-col items-center gap-[10px] mt-[118px] mb-[118px]">
+        <div className="mt-[108px] mb-[161px] flex flex-col gap-[24px]">
           {/* 개인 회원 카드 */}
           <div
             onClick={() => handleSelect("individual")}
@@ -67,14 +69,13 @@ function SelectMembers() {
             </div>
           </div>
         </div>
-        {/* CTA 버튼 */}
-        <div className="mt-[24px] mb-[42px] px-[0.74px]">
-          <BottomCTAButton
-            text="다음 단계로 이동"
-            onClick={handleNextStep}
-            disabled={!selected}
-          />
-        </div>{" "}
+
+        {/* CTA 버튼 (42px margin은 버튼 컴포넌트 내부에서 처리) */}
+        <BottomCTAButton
+          text="다음 단계로 이동"
+          onClick={handleNextStep}
+          disabled={!selected}
+        />
       </div>
     </TopBarContainer>
   );
