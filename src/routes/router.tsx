@@ -36,6 +36,7 @@ import CoffeeChatStorage from "../pages/chatting/CoffeeChatStorage";
 import CoffeChatModal from "../pages/chatting/CoffeeChatModal";
 import FeedPage from "../pages/feed/FeedPage";
 import FeedSearch from "../pages/feed/FeedSearch";
+import MyAlarm from "../pages/feed/MyAlarm";
 
 const router = createBrowserRouter([
   {
@@ -137,6 +138,10 @@ const router = createBrowserRouter([
       {
         path: "feed/feed-search",
         element: <FeedSearch />,
+      },
+      {
+        path: "feed/my-alarm",
+        element: <MyAlarm />,
       },
       {
         path: "companysetting/alarmsetting",
