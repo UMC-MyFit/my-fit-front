@@ -19,6 +19,15 @@ export const toYearMonthString = (dateObj: Date): string => {
   return `${year}-${month}`;
 };
 
+export const isToday = (dateObj: DateData): boolean => {
+  const today = new Date();
+  return (
+    dateObj.year === today.getFullYear() &&
+    dateObj.month === today.getMonth() + 1 &&
+    dateObj.date === today.getDate()
+  );
+};
+
 interface DateData {
   year: number;
   month: number;
