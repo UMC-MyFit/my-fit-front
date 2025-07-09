@@ -41,7 +41,7 @@ function FeedCard({ user, post }: { user: User; post: Post }) {
   }, [paginationRef]);
 
   return (
-    <div className="w-full bg-white rounded-[10px] p-[16px] flex flex-col gap-[12px]">
+    <div className="w-full bg-white rounded-[10px] flex flex-col gap-[12px]">
       {/* 사용자 정보 */}
       <div className="flex items-center gap-3">
         <img
@@ -77,15 +77,21 @@ function FeedCard({ user, post }: { user: User; post: Post }) {
         ))}
       </Swiper>
 
-      <div className="w-full h-[12px] relative">
+      {/* Swipper Icon 추가 */}
+      {/* Swiper 아래 swiper icon + pagination 함께 묶기 */}
+      <div className="relative h-[6px] flex justify-center items-center">
+        <img
+          src="/assets/feed/swipper.svg"
+          alt="스와이프 아이콘"
+          className="w-5 h-5 opacity-60"
+        />
         <div
           ref={paginationRef}
-          className="absolute left-1/2 -translate-x-1/2"
+          className="absolute left-1/2 bottom-0 -translate-x-1/2"
         />
       </div>
-
       {/* 좋아요 / 댓글 */}
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center px-3">
         <span className="text-sub2 text-ct-gray-200">{post.timeAgo}</span>
         <div className="flex gap-4">
           <div className="flex items-center gap-1">
@@ -110,10 +116,12 @@ function FeedCard({ user, post }: { user: User; post: Post }) {
       </div>
 
       {/* 본문 */}
-      <p className="text-body2 text-ct-black-300">{post.content}</p>
+      <p className="text-body2 text-ct-black-300 px-3">{post.content}</p>
 
       {/* 해시태그 */}
-      <FeedTagContainer tags={post.tags} />
+      <div className="px-3">
+        <FeedTagContainer tags={post.tags} />
+      </div>
     </div>
   );
 }
