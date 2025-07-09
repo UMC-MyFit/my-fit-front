@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 function CoffeeChatStorageBox() {
+  const nav = useNavigate();
   return (
     <div className="w-[338px] h-[71px] rounded-[10px] bg-[linear-gradient(90deg,_#004CE4_0%,_#0AF_100%)] flex items-center pl-[12px]">
       <div className="flex gap-[14px] items-center">
@@ -11,7 +14,12 @@ function CoffeeChatStorageBox() {
             커피챗 기록을 확인해보세요
           </span>
         </div>
-        <button className="w-[85px] h-[27px] ml-[25px] rounded-[100px] bg-white/40 backdrop-blur-[2px] text-ct-white text-[15px] font-[500] ">
+        <button
+          className="w-[85px] h-[27px] ml-[25px] rounded-[100px] bg-white/40 backdrop-blur-[2px] text-ct-white text-[15px] font-[500] "
+          onClick={() => {
+            nav("/chatting/coffeechatstorage");
+          }}
+        >
           바로가기
         </button>
       </div>

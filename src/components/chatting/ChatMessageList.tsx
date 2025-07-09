@@ -1,4 +1,5 @@
 import MessageBubble from "./MessageBubble";
+import RequestCoffeeChatBox from "./RequestCoffechatBox";
 
 interface Message {
   id: number;
@@ -29,15 +30,18 @@ function ChatMessageList({ messages, bottomRef }: Props) {
         const MarginTop = isSame ? "mt-[5px]" : "mt-[20px]";
 
         return (
-          <div
-            key={msg.id}
-            className={`flex ${
-              msg.sender === "me" ? "justify-end" : "justify-start"
-            } ${MarginTop}`}
-          >
-            <div className="flex flex-col gap-[5px]">
-              <MessageBubble text={msg.text} sender={msg.sender} />
+          <div className="flex flex-col">
+            <div
+              key={msg.id}
+              className={`flex ${
+                msg.sender === "me" ? "justify-end" : "justify-start"
+              } ${MarginTop}`}
+            >
+              <div className="flex flex-col gap-[5px]">
+                <MessageBubble text={msg.text} sender={msg.sender} />
+              </div>
             </div>
+            {/*<RequestCoffeeChatBox />*/}
           </div>
         );
       })}

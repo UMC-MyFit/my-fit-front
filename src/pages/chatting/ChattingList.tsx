@@ -8,11 +8,11 @@ function ChattingList() {
   return (
     <div className="flex flex-col">
       <div className="flex w-full h-[39px]">
-        <button className="flex-1 border-b-[3px] border-ct-main-blue-200">
+        <button className="flex-1 border-b-[3px] border-ct-main-blue-200 text-ct-black-300 text-[18px] font-[600]">
           대화
         </button>
         <button
-          className="flex-1 border-b-[3px] border-[#D9D9D9] "
+          className="flex-1 border-b-[3px] border-[#D9D9D9] text-ct-gray-200 text-[18px] font-[600]"
           onClick={() => nav("/chatting/coffeechatlist")}
         >
           커피챗

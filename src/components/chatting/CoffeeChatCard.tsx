@@ -3,7 +3,7 @@ import Modal from "../ui/Modal";
 import CancelModal from "./CancelModal";
 
 function CoffeeChatCard() {
-  const { isModalOpen, setIsModalOpen } = useModal();
+  const { setIsModalOpen } = useModal();
   return (
     <div className="w-[339px] rounded-[7.53px] flex flex-col bg-ct-white border border-[#E2E2E2] pl-[9px] py-[24px]">
       <div className="flex gap-[13px] pl-[7px]">

@@ -2,6 +2,7 @@ import TopBarContainer from "../../components/common/TopBarContainer";
 import ChatMessageList from "../../components/chatting/ChatMessageList";
 import ChatInputField from "../../components/chatting/ChatInputField";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Message {
   id: number;
@@ -11,12 +12,12 @@ interface Message {
 
 function Chatting() {
   const [messages, setMessages] = useState<Message[]>([]);
-
+  const nav = useNavigate();
   const handleSend = (text: string) => {
     const NewMessage: Message = {
       id: Date.now(),
       text,
-      sender: "me",
+      sender: "you",
     };
     setMessages((prev) => [...prev, NewMessage]);
   };
@@ -38,6 +39,7 @@ function Chatting() {
           src="/assets/chatting/calender.svg"
           alt="캘린더 아이콘"
           className="absolute right-[28px] "
+          onClick={() => nav("/coffeechat/request")}
         />
       </div>
     );

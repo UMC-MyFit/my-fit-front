@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import BottomNav from "../../components/layouts/BottomNav";
-import CoffeeChatCard from "../../components/chatting/CoffeChatCard";
+import CoffeeChatCard from "../../components/chatting/CoffeeChatCard";
 import CoffeeChatStorageBox from "../../components/chatting/CoffeeChatStorageBox";
 
 function CoffeeChatList() {
@@ -10,12 +10,12 @@ function CoffeeChatList() {
     <div className="flex flex-col">
       <div className="flex w-full h-[39px] fixed bg-ct-white">
         <button
-          className="flex-1 border-b-[3px] border-[#D9D9D9]"
+          className="flex-1 border-b-[3px] border-[#D9D9D9] text-ct-gray-200 text-[18px] font-[600]"
           onClick={() => nav("/chatting/chattinglist")}
         >
           대화
         </button>
-        <button className="flex-1 border-b-[3px] border-ct-main-blue-200">
+        <button className="flex-1 border-b-[3px] border-ct-main-blue-200 text-ct-black-300 text-[18px] font-[600]">
           커피챗
         </button>
       </div>

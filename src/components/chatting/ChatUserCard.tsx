@@ -1,6 +1,14 @@
+import { useNavigate } from "react-router-dom";
+
 function ChatUserCard() {
+  const nav = useNavigate();
   return (
-    <div className="h-[54px] flex gap-[10px] mb-[24px]">
+    <div
+      className="h-[54px] flex gap-[10px] mb-[24px]"
+      onClick={() => {
+        nav("/chatting");
+      }}
+    >
       <img
         src="/assets/chatting/manprofile.svg"
         alt="남성프로필"
