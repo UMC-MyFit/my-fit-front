@@ -4,6 +4,8 @@ import { CalendarDateData } from "../utils/date";
 interface CoffeeChatContextType {
   selectedDate: CalendarDateData;
   setSelectedDate: React.Dispatch<React.SetStateAction<CalendarDateData>>;
+  selectedTime: string;
+  setSelectedTime: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const CoffeeChatContext = createContext<CoffeeChatContextType | undefined>(
@@ -12,9 +14,12 @@ const CoffeeChatContext = createContext<CoffeeChatContextType | undefined>(
 
 export const CoffeeChatProvider = ({ children }: { children: ReactNode }) => {
   const [selectedDate, setSelectedDate] = useState<CalendarDateData>(null);
+  const [selectedTime, setSelectedTime] = useState<string>("");
 
   return (
-    <CoffeeChatContext.Provider value={{ selectedDate, setSelectedDate }}>
+    <CoffeeChatContext.Provider
+      value={{ selectedDate, setSelectedDate, selectedTime, setSelectedTime }}
+    >
       {children}
     </CoffeeChatContext.Provider>
   );
