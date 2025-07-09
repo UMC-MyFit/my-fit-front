@@ -35,6 +35,7 @@ import CoffeeChatList from "../pages/chatting/CoffeeChatList";
 import CoffeeChatStorage from "../pages/chatting/CoffeeChatStorage";
 import CoffeChatModal from "../pages/chatting/CoffeeChatModal";
 import FeedPage from "../pages/feed/FeedPage";
+import FeedSearch from "../pages/feed/FeedSearch";
 
 const router = createBrowserRouter([
   {
@@ -132,6 +133,10 @@ const router = createBrowserRouter([
       {
         path: "feed/feed-main",
         element: <FeedPage />,
+      },
+      {
+        path: "feed/feed-search",
+        element: <FeedSearch />,
       },
       {
         path: "companysetting/alarmsetting",
