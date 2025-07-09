@@ -1,26 +1,7 @@
+import { morningTimes, afternoonTimes } from "../../utils/date";
 import TimeBox from "./TimeBox";
 
 function TimePicker() {
-  const morningTimes = ["11:00", "11:30", "12:00", "12:30"];
-  const afternoonTimes = [
-    "1:00",
-    "1:30",
-    "2:00",
-    "2:30",
-    "3:00",
-    "3:30",
-    "4:00",
-    "4:30",
-    "5:00",
-    "5:30",
-    "6:00",
-    "6:30",
-    "7:00",
-    "7:30",
-    "8:00",
-    "8:30",
-  ];
-
   return (
     <div className="w-[330px]">
       <div className="mb-[10px]">

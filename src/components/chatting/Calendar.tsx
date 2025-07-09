@@ -6,8 +6,6 @@ function Calendar() {
   const [selectedMonth, setSelectedMonth] = useState<number>(0);
   const calendarData = getCalendarData();
   const monthArray = Array.from(calendarData.keys());
-  const [selectedDate, setSelectedDate] = useState<CalendarDateData>(null);
-  const [selectedTime, setSelectedTime] = useState<string>("");
 
   const handleChevronLeft = () => {
     setSelectedMonth((prev) => (prev === 0 ? 2 : prev - 1));
@@ -45,11 +43,7 @@ function Calendar() {
           onClick={handleChevronRight}
         />
       </div>
-      <Month
-        data={calendarData.get(monthArray[selectedMonth]) || []}
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
-      />
+      <Month data={calendarData.get(monthArray[selectedMonth]) || []} />
     </div>
   );
 }

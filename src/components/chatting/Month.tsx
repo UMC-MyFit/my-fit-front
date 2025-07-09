@@ -1,15 +1,7 @@
 import { CalendarDateData } from "../../utils/date";
 import Date from "./Date";
 
-function Month({
-  data,
-  selectedDate,
-  setSelectedDate,
-}: {
-  data: CalendarDateData[];
-  selectedDate: CalendarDateData;
-  setSelectedDate: (date: CalendarDateData) => void;
-}) {
+function Month({ data }: { data: CalendarDateData[] }) {
   const paddedData = [...data];
   const remainder = data.length % 7;
 
@@ -23,12 +15,7 @@ function Month({
   return (
     <div className="grid grid-cols-7 w-full">
       {paddedData.map((dateData, index) => (
-        <Date
-          key={index}
-          data={dateData}
-          selectedDate={selectedDate}
-          setSelectedDate={setSelectedDate}
-        />
+        <Date key={index} data={dateData} />
       ))}
     </div>
   );
