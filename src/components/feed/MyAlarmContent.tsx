@@ -88,13 +88,12 @@ function MyAlarmContent() {
 
   return unreadAlarms.length === 0 ? (
     <div className="flex flex-col items-center justify-center h-[calc(100vh-66px-89px)]">
-      {/* 이모지 이미지 (경로는 실제 이모지 리소스 위치에 따라 조정 필요) */}
       <img
-        src="/assets/alarm/empty-emoji.svg"
+        src="/public/assets/feed/alarm.svg"
         alt="빈 알림 이모지"
-        className="w-[60px] h-[60px] mb-4"
+        className="mb-4"
       />
-      <p className="text-body2 text-ct-gray-300">새로운 알림이 없습니다.</p>
+      <p className="text-sub2 text-ct-gray-200">새로운 알림이 없습니다.</p>
     </div>
   ) : (
     <ul className="mt-[10px]  space-y-[4px]">
