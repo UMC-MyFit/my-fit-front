@@ -17,7 +17,7 @@ function KeywordCategoryTabs({
   ];
 
   return (
-    <div className="flex gap-3 mx-3 w-full pl-2 border-b border-ct-gray-200 pb-3">
+    <div className="flex gap-3 ml-3 mr-[10px] border-b border-ct-gray-200 pb-3">
       {categories.map((category) => (
         <button
           key={category}

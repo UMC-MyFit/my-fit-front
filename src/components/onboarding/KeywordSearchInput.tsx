@@ -4,7 +4,7 @@ function KeywordSearchInput() {
   const [search, setSearch] = useState("");
 
   return (
-    <div className="relative w-full mt-4 mx-3">
+    <div className="relative w-full mt-4 pl-3 pr-2">
       <input
         type="text"
         placeholder="키워드를 검색해보세요!"
