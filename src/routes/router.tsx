@@ -37,6 +37,7 @@ import CoffeChatModal from "../pages/chatting/CoffeeChatModal";
 import FeedPage from "../pages/feed/FeedPage";
 import FeedSearch from "../pages/feed/FeedSearch";
 import MyAlarm from "../pages/feed/MyAlarm";
+import PostFeed from "../pages/feed/PostFeed";
 
 const router = createBrowserRouter([
   {
@@ -143,6 +144,11 @@ const router = createBrowserRouter([
         path: "feed/my-alarm",
         element: <MyAlarm />,
       },
+      {
+        path: "feed/post-feed",
+        element: <PostFeed />,
+      },
+
       {
         path: "companysetting/alarmsetting",
         element: <AlarmSetting />,
