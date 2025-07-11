@@ -23,7 +23,7 @@ function ProfileStatus() {
 
   const handleClick = (index: number) => {
     setIsSelected((prev) => {
-      return prev.map((item, idx) => (idx === index ? true : false));
+      return prev.map((_, idx) => (idx === index ? true : false));
     });
   };
 
