@@ -15,9 +15,7 @@ function SelectMembers() {
     if (!selected) return;
     localStorage.setItem("memberType", selected); // 새로고침 대비
     // navigate logic 추가
-    navigate("/onboarding/register-method", {
-      state: { memberType: selected },
-    });
+    navigate("/onboarding/register-method");
   };
 
   return (
