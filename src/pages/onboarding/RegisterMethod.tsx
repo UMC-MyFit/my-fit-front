@@ -1,12 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TopBarContainer from "../../components/common/TopBarContainer";
 
 function RegisterMethod() {
   const TopBarContent = () => (
     <span className="text-h2 font-sans text-ct-black-300">회사인증(선택)</span>
   );
-
   const navigate = useNavigate();
+  const location = useLocation();
+  // ✅ SelectMembers 에서 전달된 memberType (state or localStorage)
+  const memberType =
+    location.state?.memberType || localStorage.getItem("memberType");
+
+  // ✅ 안전장치: memberType 없을 경우 이전 화면으로 되돌림
+  if (!memberType) {
+    navigate("/onboarding/selectmembers");
+    return null;
+  }
 
   return (
     <TopBarContainer TopBarContent={<TopBarContent />}>
@@ -16,9 +25,16 @@ function RegisterMethod() {
         <div
           role="button"
           tabIndex={0}
-          onClick={() => navigate("/onboarding/register-email")}
+          onClick={() =>
+            navigate("/onboarding/register-email", {
+              state: { memberType }, // ✅ 다음 페이지로 memberType 전달
+            })
+          }
           onKeyDown={(e) =>
-            e.key === "Enter" && navigate("/onboarding/register-email")
+            e.key === "Enter" &&
+            navigate("/onboarding/register-email", {
+              state: { memberType },
+            })
           }
           className="w-fit py-[6px] border-b-[1px] border-ct-black-200 font-sans text-sub1 cursor-pointer"
         >

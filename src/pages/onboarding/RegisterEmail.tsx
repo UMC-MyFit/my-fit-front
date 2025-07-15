@@ -1,9 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BottomCTAButton from "../../components/common/BottomCTAButton";
 import TopBarContainer from "../../components/common/TopBarContainer";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function RegisterEmail() {
   const [authCode, setAuthCode] = useState("");
+
+  // ✅ Router 도구 불러오기
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // ✅ 회원 유형 가져오기: state or localStorage
+  const memberType =
+    location.state?.memberType || localStorage.getItem("memberType");
+  // ✅ 상태 보존 실패 시 강제 리디렉션
+  useEffect(() => {
+    if (!memberType) {
+      navigate("/onboarding/selectmembers");
+    }
+  }, [memberType, navigate]);
+
+  // ✅ 저장 후 다음 페이지로 이동
+  const handleSubmit = () => {
+    if (memberType === "individual") {
+      navigate("/onboarding/profile-register");
+    } else if (memberType === "team") {
+      navigate("/onboarding/company-profile-register");
+    }
+  };
+
   const TopBarContent = () => {
     return (
       <span className="text-h2 font-Pretendard text-ct-black-100">
@@ -130,7 +155,11 @@ function RegisterEmail() {
         </fieldset>
         {/* CTA 버튼 */}
         <div className="mt-[127px] ">
-          <BottomCTAButton text="저장하기" onClick={() => {}} disabled={true} />{" "}
+          <BottomCTAButton
+            text="저장하기"
+            onClick={handleSubmit}
+            disabled={true}
+          />{" "}
         </div>
       </div>
     </TopBarContainer>
