@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-function Introduction() {
+function Introduction({
+  setEditProfile,
+}: {
+  setEditProfile: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const certificated = true;
   const navigate = useNavigate();
 
@@ -10,6 +14,7 @@ function Introduction() {
         src="/assets/profile/setting.svg"
         alt="설정"
         className="w-[20px] h-[20px]"
+        onClick={() => setEditProfile(true)}
       />
       <div className="w-full flex justify-between items-center mt-4 h-[80px]">
         <img
