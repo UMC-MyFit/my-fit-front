@@ -6,13 +6,19 @@ import CreateItemButton from "../../components/profile/CreateItemButton";
 import NetworkingBar from "../../components/profile/NetworkingBar";
 import CompanyLink from "../../components/profile/CompanyLink";
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
+import EditProfile from "./EditProfile";
 
 function Profile() {
   const [selectedTab, setSelectedTab] = useState<"card" | "feed">("card");
+  const [editProfile, setEditProfile] = useState<boolean>(true);
 
   return (
     <BottomNavContainer>
-      <div className="w-full h-full ct-center flex-col mt-5">
+      <div
+        className={`w-full h-full ct-center flex-col mt-5 ${
+          editProfile ? "blur-sm" : null
+        }`}
+      >
         <Introduction />
         <div className="mt-[20px] w-[335px]">
           <span className="text-ct-black-100 text-body1">
@@ -59,6 +65,7 @@ function Profile() {
         </div>
         {selectedTab === "card" && <ProfileCardContainer />}
         {selectedTab === "feed" && <ProfileFeedContainer />}
+        {editProfile && <EditProfile />}
         <CreateItemButton />
       </div>
     </BottomNavContainer>
