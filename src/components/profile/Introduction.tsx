@@ -14,13 +14,13 @@ function Introduction({
         src="/assets/profile/setting.svg"
         alt="설정"
         className="w-[20px] h-[20px]"
-        onClick={() => setEditProfile(true)}
       />
       <div className="w-full flex justify-between items-center mt-4 h-[80px]">
         <img
           src="/assets/profile/profileImage.png"
           alt="프로필 이미지"
           className="w-[70px] h-[70px] rounded-full"
+          onClick={() => setEditProfile(true)}
         />
         <div className="w-[160px] h-full flex flex-col justify-between">
           <div className="h-[20px] flex items-center gap-1">
