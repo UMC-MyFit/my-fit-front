@@ -7,6 +7,7 @@ import NetworkingBar from "../../components/profile/NetworkingBar";
 import CompanyLink from "../../components/profile/CompanyLink";
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
 import EditProfile from "./EditProfile";
+import IntroductionSkeleton from "../../components/skeletons/mypage/IntroductionSkeleton";
 
 function ProfileItem({
   editProfile,
@@ -24,7 +25,8 @@ function ProfileItem({
           editProfile ? "blur-sm" : ""
         }`}
       >
-        <Introduction setEditProfile={setEditProfile} />
+        <IntroductionSkeleton />
+        {/* <Introduction setEditProfile={setEditProfile} /> */}
         <div className="mt-[20px] w-[335px]">
           <span className="text-ct-black-100 text-body1">
             성과로 증명하는 디지털 광고 전략가입니다. 🤩
