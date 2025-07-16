@@ -5,6 +5,7 @@ import Modal from "../../components/ui/Modal";
 import BottomSheet from "../../components/ui/BottomSheet";
 import BottomSheetContent from "../../components/profile/BottomSheetContent";
 import ModalContent from "../../components/profile/ModalContent";
+import { useEffect, useState } from "react";
 
 const TopBarContent = () => {
   return (
@@ -18,6 +19,13 @@ const TopBarContent = () => {
 
 function CardDetail() {
   const createList = Array.from({ length: 10 }, (_, i) => i + 1);
+  const [isReady, setIsReady] = useState<boolean>(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsReady(true);
+    }, 3000);
+  }, []);
 
   return (
     <TopBarContainer TopBarContent={<TopBarContent />}>
