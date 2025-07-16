@@ -11,6 +11,7 @@ import IntroductionSkeleton from "../../components/skeletons/mypage/Introduction
 import IntroductionDescriptionSkeleton from "../../components/skeletons/mypage/IntroductionDescriptionSkeleton";
 import CompanyLinkSkeleton from "../../components/skeletons/mypage/CompanyLinkSkeleton";
 import NetworkingBarSkeleton from "../../components/skeletons/mypage/NetworkingBarSkeleton";
+import ProfileCardSkeleton from "../../components/skeletons/mypage/ProfileCardSkeleton";
 
 function ProfileItem({
   editProfile,
@@ -91,8 +92,15 @@ function ProfileItem({
             )}
           </div>
         </div>
-        {selectedTab === "card" && <ProfileCardContainer />}
-        {selectedTab === "feed" && <ProfileFeedContainer />}
+        {selectedTab === "card" ? (
+          isReady ? (
+            <ProfileCardContainer />
+          ) : (
+            <ProfileCardSkeleton />
+          )
+        ) : (
+          <ProfileFeedContainer />
+        )}
         <CreateItemButton />
       </div>
       {editProfile && <EditProfile setEditProfile={setEditProfile} />}
