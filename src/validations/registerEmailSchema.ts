@@ -12,6 +12,8 @@ export const registerEmailSchema = z
       .regex(
         /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
         "유효한 도메인 형식이 아닙니다."
+        //domain은 최소 2글자 이상의 TLD를 포함해야 합니다.
+        //여기서 TLD는 Top-Level Domain의 약자로, 예를 들어 .com, .net, .org 등이 있습니다.
       ),
     authCode: z.string().min(1, "인증번호를 입력해주세요"),
     password: z.string().min(6, "비밀번호는 최소 6자 이상입니다."),
