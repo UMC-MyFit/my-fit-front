@@ -55,11 +55,16 @@ function ProfileRegister() {
 
   const TopBarContent = () => {
     return (
-      <div className="relative w-full ct-center">
-        <span className="text-ct-black-100 text-h1">미리보기 </span>
-        <div className="absolute right-[22px]">
-          <span className="text-sub2 text-ct-gray-200">완료</span>
-        </div>
+      <div className="flex ct-center">
+        <span className="text-h2 font-Pretendard text-ct-black-100">
+          프로필
+        </span>
+        <span
+          className="absolute right-[23px] text-sub2 text-ct-gray-300"
+          onClick={() => nav("/personalsetting")}
+        >
+          완료
+        </span>
       </div>
     );
   };

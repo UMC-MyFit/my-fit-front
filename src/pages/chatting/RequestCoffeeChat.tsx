@@ -2,22 +2,31 @@ import Calendar from "../../components/chatting/Calendar";
 import TimePicker from "../../components/chatting/TimePicker";
 import PlacePicker from "../../components/chatting/PlacePicker";
 import TopBarContainer from "../../components/common/TopBarContainer";
+import { useModal } from "../../contexts/ui/modalContext";
+import Modal from "../../components/ui/Modal";
+import RequestModal from "../../components/chatting/Modal/RequestModal";
 
 const TopBarContent = () => {
   return <span className="text-h2 text-ct-black-100">커피챗 요청</span>;
 };
-
 function RequestCoffeeChat() {
+  const { setIsModalOpen } = useModal();
   return (
     <TopBarContainer TopBarContent={<TopBarContent />}>
       <div className="w-full h-auto ct-center flex-col">
         <Calendar />
         <TimePicker />
         <PlacePicker />
-        <button className="mb-[57px] w-[168px] h-[42px] rounded-[100px] border-[1px] border-ct-main-blue-200 ct-center text-ct-black-100 text-sub1">
+        <button
+          className="mb-[57px] w-[168px] h-[42px] rounded-[100px] border-[1px] border-ct-main-blue-200 ct-center text-ct-black-100 text-sub1"
+          onClick={() => setIsModalOpen(true)}
+        >
           수락 요청
         </button>
       </div>
+      <Modal>
+        <RequestModal />
+      </Modal>
     </TopBarContainer>
   );
 }

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { CalendarDateData, getCalendarData } from "../../utils/date";
 import Month from "./Month";
+import { useCoffeeChat } from "../../contexts/coffeeChatContext";
 
 function Calendar() {
+  const { selectedTitle, setSelectedTitle } = useCoffeeChat();
   const [selectedMonth, setSelectedMonth] = useState<number>(0);
   const calendarData = getCalendarData();
   const monthArray = Array.from(calendarData.keys());
@@ -22,6 +24,8 @@ function Calendar() {
         <input
           className="w-full h-[40px] bg-ct-gray-100 rounded-[10px] px-[14px] py-[12px] placeholder-ct-gray-200 placeholder:text-body1"
           placeholder="자유롭게 작성해보세요!"
+          value={selectedTitle}
+          onChange={(e) => setSelectedTitle(e.target.value)}
         />
       </div>
       <div className="w-full h-auto ct-center gap-2 mb-[50px]">
