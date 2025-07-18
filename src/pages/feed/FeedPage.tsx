@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import FeedCard from "../../components/feed/FeedCard";
 import FixedHeader from "../../components/feed/FixedHeader";
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
+import FeedCardSkeleton from "../../components/skeletons/feed/FeedCardSkeleton";
 
 const dummyFeed = [
   {
@@ -10,7 +12,16 @@ const dummyFeed = [
       profileImage: "/assets/profile/profileImage.png",
     },
     post: {
-      images: ["/assets/feed/feed_main.svg"],
+      images: [
+        "/assets/feed/feed_main.svg",
+        "/assets/feed/feed_main.svg",
+        "/assets/feed/feed_main.svg",
+        "/assets/feed/feed_main.svg",
+        "/assets/feed/feed_main.svg",
+        "/assets/feed/feed_main.svg",
+        "/assets/feed/feed_main.svg",
+        "/assets/feed/feed_main.svg",
+      ],
       timeAgo: "30분 전",
       likes: 13,
       comments: 14,
@@ -54,14 +65,27 @@ const dummyFeed = [
 ];
 
 function FeedPage() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <BottomNavContainer>
       {/* 🧷 고정 헤더 삽입 */}
       <FixedHeader />
       <div className="pt-[66px] pb-[89px] px-[10px] bg-ct-white min-h-screen flex flex-col gap-6">
-        {dummyFeed.map((item, idx) => (
-          <FeedCard key={idx} user={item.user} post={item.post} />
-        ))}
+        {isLoading
+          ? Array.from({ length: dummyFeed.length }).map((_, idx) => (
+              <FeedCardSkeleton key={`skeleton-${idx}`} />
+            ))
+          : dummyFeed.map((item, idx) => (
+              <FeedCard key={idx} user={item.user} post={item.post} />
+            ))}{" "}
       </div>
     </BottomNavContainer>
   );

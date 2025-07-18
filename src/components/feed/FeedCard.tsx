@@ -38,7 +38,7 @@ function FeedCard({ user, post }: { user: User; post: Post }) {
     if (paginationRef.current) {
       setIsReady(true);
     }
-  }, [paginationRef]);
+  }, []);
 
   return (
     <div className="w-full bg-white rounded-[10px] flex flex-col gap-[12px]">
@@ -54,42 +54,35 @@ function FeedCard({ user, post }: { user: User; post: Post }) {
           <span className="text-sub2 text-ct-blue-gray-100">{user.job}</span>
         </div>
       </div>
-
       {/* 피드 이미지 (Swiper) */}
-      <Swiper
-        modules={[Pagination]}
-        pagination={{
-          el: paginationRef.current,
-          clickable: true,
-          dynamicBullets: true,
-          dynamicMainBullets: 3,
-        }}
-        className="w-full h-[360px]"
-      >
-        {post.images.map((img, index) => (
-          <SwiperSlide key={index}>
-            <img
-              src={img}
-              alt={`피드 이미지 ${index + 1}`}
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-      {/* Swipper Icon 추가 */}
-      {/* Swiper 아래 swiper icon + pagination 함께 묶기 */}
-      <div className="relative h-[6px] flex justify-center items-center">
-        <img
-          src="/assets/feed/swipper.svg"
-          alt="스와이프 아이콘"
-          className="w-5 h-5 opacity-60"
-        />
+      {isReady && (
+        <Swiper
+          modules={[Pagination]}
+          pagination={{
+            el: paginationRef.current,
+            clickable: true,
+            dynamicBullets: true,
+            dynamicMainBullets: 4,
+          }}
+          className="w-full h-[360px]"
+        >
+          {post.images.map((img, index) => (
+            <SwiperSlide key={index}>
+              <img
+                src={img}
+                alt={`피드 이미지 ${index + 1}`}
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
+      <div className="relative h-[20px] flex justify-center items-center">
         <div
           ref={paginationRef}
           className="absolute left-1/2 bottom-0 -translate-x-1/2"
         />
-      </div>
+      </div>{" "}
       {/* 좋아요 / 댓글 */}
       <div className="flex justify-between items-center px-3">
         <span className="text-sub2 text-ct-gray-200">{post.timeAgo}</span>
@@ -114,10 +107,8 @@ function FeedCard({ user, post }: { user: User; post: Post }) {
           </div>
         </div>
       </div>
-
       {/* 본문 */}
       <p className="text-body2 text-ct-black-300 px-3">{post.content}</p>
-
       {/* 해시태그 */}
       <div className="px-3">
         <FeedTagContainer tags={post.tags} />
