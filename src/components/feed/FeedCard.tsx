@@ -30,7 +30,17 @@ function FeedTagContainer({ tags }: { tags: string[] }) {
   );
 }
 
-function FeedCard({ user, post }: { user: User; post: Post }) {
+function FeedCard({
+  user,
+  post,
+  onCommentClick,
+  onLikeClick,
+}: {
+  user: User;
+  post: Post;
+  onCommentClick?: () => void;
+  onLikeClick?: () => void;
+}) {
   const paginationRef = useRef<HTMLDivElement>(null);
   const [isReady, setIsReady] = useState(false);
 
@@ -88,23 +98,27 @@ function FeedCard({ user, post }: { user: User; post: Post }) {
         <span className="text-sub2 text-ct-gray-200">{post.timeAgo}</span>
         <div className="flex gap-4">
           <div className="flex items-center gap-1">
-            <img
-              src="/assets/profile/heart.svg"
-              alt="좋아요"
-              className="w-5 h-5"
-            />
+            <button type="button" onClick={onLikeClick}>
+              <img
+                src="/assets/profile/heart.svg"
+                alt="좋아요"
+                className="w-5 h-5"
+              />
+            </button>
             <span className="text-body2 text-ct-black-300">{post.likes}</span>
           </div>
           <div className="flex items-center gap-1">
-            <img
-              src="/assets/profile/chat_white.svg"
-              alt="댓글"
-              className="w-5 h-5"
-            />
+            <button type="button" onClick={onCommentClick}>
+              <img
+                src="/assets/profile/chat_white.svg"
+                alt="댓글"
+                className="w-5 h-5"
+              />
+            </button>
             <span className="text-body2 text-ct-black-300">
               {post.comments}
             </span>
-          </div>
+          </div>{" "}
         </div>
       </div>
       {/* 본문 */}
