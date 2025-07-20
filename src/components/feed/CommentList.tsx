@@ -8,7 +8,11 @@ interface Props {
 
 function CommentList({ comments }: Props) {
   return (
+<<<<<<< HEAD
     <div className="flex flex-col gap-6">
+=======
+    <div className="flex flex-col gap-4">
+>>>>>>> 8f0f1a9 (before-rebase)
       {comments.map((comment) => (
         <CommentThread key={comment.id} comment={comment} />
       ))}
@@ -21,6 +25,7 @@ function CommentThread({ comment }: { comment: Comment }) {
   const hasReplies = comment.replies.length > 0;
 
   return (
+<<<<<<< HEAD
     <div className="flex flex-col gap-4 ">
       <CommentItem comment={comment} />
 
@@ -38,6 +43,18 @@ function CommentThread({ comment }: { comment: Comment }) {
           {/* 오른쪽 선 */}
           <div className="h-px basis-[20%] bg-gray-200" />
         </div>
+=======
+    <div className="flex flex-col gap-3">
+      <CommentItem comment={comment} />
+
+      {hasReplies && !isOpen && (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="ml-12 text-xs text-gray-500 hover:underline"
+        >
+          답글 {comment.replies.length}개 보기
+        </button>
+>>>>>>> 8f0f1a9 (before-rebase)
       )}
 
       {hasReplies && isOpen && (
@@ -45,6 +62,7 @@ function CommentThread({ comment }: { comment: Comment }) {
           {comment.replies.map((reply) => (
             <CommentItem key={reply.id} comment={reply} isReply />
           ))}
+<<<<<<< HEAD
 
           <div className="mt-2 flex items-center justify-center gap-2">
             <div className="h-px basis-[20%] bg-gray-200" />
@@ -56,6 +74,14 @@ function CommentThread({ comment }: { comment: Comment }) {
             </button>
             <div className="h-px basis-[20%] bg-gray-200" />
           </div>
+=======
+          <button
+            onClick={() => setIsOpen(false)}
+            className="ml-12 text-xs text-gray-500 hover:underline"
+          >
+            접기
+          </button>
+>>>>>>> 8f0f1a9 (before-rebase)
         </>
       )}
     </div>
