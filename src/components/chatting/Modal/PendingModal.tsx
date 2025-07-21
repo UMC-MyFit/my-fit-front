@@ -1,6 +1,12 @@
+import { useNavigate } from "react-router-dom";
+import { useCoffeeChatModal } from "../../../contexts/CoffeeChatModalContext";
 import InformationBox from "../InformationBox";
+import { useModal } from "../../../contexts/ui/modalContext";
 
 function PendingModal() {
+  const { setEditMode } = useCoffeeChatModal();
+  const { setIsModalOpen } = useModal();
+  const nav = useNavigate();
   return (
     <div className="w-full h-[498px] rounded-[15px] bg-ct-white flex flex-col items-center">
       <img
@@ -30,7 +36,14 @@ function PendingModal() {
       <button className="mt-[26px] w-[168px] h-[42px] rounded-[100px] border border-ct-main-blue-200 text-sub1 bg-ct-white text-ct-black-200">
         수락 대기중
       </button>
-      <button className="mt-[20px] w-[70px] h-[23px] border-b border-ct-gray-300 text-sub1 text-ct-gray-300">
+      <button
+        className="mt-[20px] w-[70px] h-[23px] border-b border-ct-gray-300 text-sub1 text-ct-gray-300"
+        onClick={() => {
+          setEditMode(true);
+          nav("/coffeechat/request");
+          setIsModalOpen(false);
+        }}
+      >
         변경 하기
       </button>
     </div>

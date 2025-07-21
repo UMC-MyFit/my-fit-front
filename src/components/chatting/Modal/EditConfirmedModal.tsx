@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
+import { useModal } from "../../../contexts/ui/modalContext";
 import InformationBox from "../InformationBox";
 
 function EditConfirmedModal() {
+  const { setIsModalOpen } = useModal();
+  const nav = useNavigate();
   return (
     <div className="w-full h-[498px] rounded-[15px] bg-ct-white flex flex-col items-center">
       <img
@@ -27,10 +31,16 @@ function EditConfirmedModal() {
           className="absolute top-[10px] right-[10px]"
         />
       </div>
-      <button className="mt-[26px] w-[168px] h-[42px] rounded-[100px] border border-ct-main-blue-200 text-sub1 bg-ct-main-blue-200 text-ct-white">
+      <button
+        className="mt-[26px] w-[168px] h-[42px] rounded-[100px] border border-ct-main-blue-200 text-sub1 bg-ct-main-blue-200 text-ct-white"
+        onClick={() => nav("/chatting")}
+      >
         변경 완료
       </button>
-      <button className="mt-[20px] w-[70px] h-[23px] border-b border-ct-gray-300 text-sub1 text-ct-gray-300">
+      <button
+        className="mt-[20px] w-[70px] h-[23px] border-b border-ct-gray-300 text-sub1 text-ct-gray-300"
+        onClick={() => setIsModalOpen(false)}
+      >
         다시 수정
       </button>
     </div>

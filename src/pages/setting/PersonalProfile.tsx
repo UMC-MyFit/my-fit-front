@@ -10,7 +10,7 @@ import RegionModal from "../../components/onboarding/RegionModal";
 import SubRegionModal from "../../components/onboarding/SubRegionModal";
 import { useLocation, useNavigate } from "react-router-dom";
 
-function ProfileRegister() {
+function PersonalProfile() {
   const { isModalOpen, setIsModalOpen } = useModal();
   const [nickname, setNickname] = useState("");
   const [shortIntro, setShortIntro] = useState("");
@@ -182,4 +182,4 @@ function ProfileRegister() {
     </TopBarContainer>
   );
 }
-export default ProfileRegister;
+export default PersonalProfile;
