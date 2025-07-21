@@ -16,9 +16,12 @@ interface CoffeeChatModalContextType {
 
   requestStatus: RequestStatus;
   setRequestStatus: (type: RequestStatus) => void;
+<<<<<<< HEAD
 
   editMode: boolean;
   setEditMode: (val: boolean) => void;
+=======
+>>>>>>> 351c1c4 (rebase)
 }
 
 const CoffeeChatModalContext = createContext<
@@ -32,7 +35,10 @@ export const CoffeeChatModalProvider = ({
 }) => {
   const [modalType, setModalType] = useState<ModalType>("none");
   const [requestStatus, setRequestStatus] = useState<RequestStatus>("none");
+<<<<<<< HEAD
   const [editMode, setEditMode] = useState<boolean>(false);
+=======
+>>>>>>> 351c1c4 (rebase)
 
   return (
     <CoffeeChatModalContext.Provider
@@ -41,8 +47,11 @@ export const CoffeeChatModalProvider = ({
         setModalType,
         requestStatus,
         setRequestStatus,
+<<<<<<< HEAD
         editMode,
         setEditMode,
+=======
+>>>>>>> 351c1c4 (rebase)
       }}
     >
       {children}
