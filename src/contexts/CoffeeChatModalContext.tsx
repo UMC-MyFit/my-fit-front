@@ -17,11 +17,17 @@ interface CoffeeChatModalContextType {
   requestStatus: RequestStatus;
   setRequestStatus: (type: RequestStatus) => void;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   editMode: boolean;
   setEditMode: (val: boolean) => void;
 =======
 >>>>>>> 351c1c4 (rebase)
+=======
+
+  editMode: boolean;
+  setEditMode: (val: boolean) => void;
+>>>>>>> cb5831e (feat:naigate 연결)
 }
 
 const CoffeeChatModalContext = createContext<
@@ -36,9 +42,13 @@ export const CoffeeChatModalProvider = ({
   const [modalType, setModalType] = useState<ModalType>("none");
   const [requestStatus, setRequestStatus] = useState<RequestStatus>("none");
 <<<<<<< HEAD
+<<<<<<< HEAD
   const [editMode, setEditMode] = useState<boolean>(false);
 =======
 >>>>>>> 351c1c4 (rebase)
+=======
+  const [editMode, setEditMode] = useState<boolean>(false);
+>>>>>>> cb5831e (feat:naigate 연결)
 
   return (
     <CoffeeChatModalContext.Provider
@@ -48,10 +58,15 @@ export const CoffeeChatModalProvider = ({
         requestStatus,
         setRequestStatus,
 <<<<<<< HEAD
+<<<<<<< HEAD
         editMode,
         setEditMode,
 =======
 >>>>>>> 351c1c4 (rebase)
+=======
+        editMode,
+        setEditMode,
+>>>>>>> cb5831e (feat:naigate 연결)
       }}
     >
       {children}

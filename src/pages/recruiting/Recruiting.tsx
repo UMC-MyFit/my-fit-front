@@ -4,9 +4,13 @@ import RecruitCard from "../../components/recruiting/RecruitCard";
 import { jobs } from "../../data/jobs";
 import { dummyRecruitList } from "../../data/dummyRecruitList";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 =======
 >>>>>>> 351c1c4 (rebase)
+=======
+import { useNavigate } from "react-router-dom";
+>>>>>>> cb5831e (feat:naigate 연결)
 
 function Recruiting() {
   const [selectedCategory, setSelectedCategory] = useState("기획/PM");
@@ -23,9 +27,13 @@ function Recruiting() {
     page * pageSize
   );
 <<<<<<< HEAD
+<<<<<<< HEAD
   const nav = useNavigate();
 =======
 >>>>>>> 351c1c4 (rebase)
+=======
+  const nav = useNavigate();
+>>>>>>> cb5831e (feat:naigate 연결)
 
   return (
     <div className="flex flex-col px-4 py-2 bg-white">
@@ -76,6 +84,7 @@ function Recruiting() {
         />
       </div>
       <div className="flex flex-col mt-[6px] gap-[11px] items-center mb-[89px]">
+<<<<<<< HEAD
 <<<<<<< HEAD
         {filterList.length === 0 ? (
           <div className="absolute top-[50%] text-sub2 text-ct-gray-200">
@@ -154,6 +163,50 @@ function Recruiting() {
             </button>
           </div>
 >>>>>>> 351c1c4 (rebase)
+=======
+        {filterList.length === 0 ? (
+          <div className="absolute top-[50%] text-sub2 text-ct-gray-200">
+            현재 업로드된 공고가 없습니다.
+          </div>
+        ) : (
+          <>
+            {" "}
+            {paginatedList.map((item) => (
+              <RecruitCard key={item.id} data={item} />
+            ))}
+            {totalPages > 1 && (
+              <div className="flex justify-center gap-2 mt-4">
+                <button
+                  disabled={page === 1}
+                  onClick={() => setPage((prev) => prev - 1)}
+                  className="px-3 py-1 text-sm rounded border disabled:text-ct-gray-200"
+                >
+                  {"<"}
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <button
+                    key={i + 1}
+                    onClick={() => setPage(i + 1)}
+                    className={`px-3 py-1 text-sm rounded border ${
+                      page === i + 1
+                        ? "bg-ct-main-blue-200 text-white"
+                        : "text-ct-black-200"
+                    }`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+                <button
+                  disabled={page === totalPages}
+                  onClick={() => setPage((prev) => prev + 1)}
+                  className="px-3 py-1 text-sm rounded border disabled:text-ct-gray-200"
+                >
+                  {">"}
+                </button>
+              </div>
+            )}
+          </>
+>>>>>>> cb5831e (feat:naigate 연결)
         )}
       </div>
       <BottomNav />
