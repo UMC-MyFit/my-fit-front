@@ -14,9 +14,7 @@ function FeedPage() {
   const [activePostId, setActivePostId] = useState<string | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    const timer = setTimeout(() => setIsLoading(false), 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -47,11 +45,9 @@ function FeedPage() {
             ))}
       </div>
 
-      {/* 댓글 모달 */}
       <AnimatePresence>
         {activePostId && (
           <>
-            {/* 오버레이: 뒷배경 흐림 처리 */}
             <motion.div
               className="fixed inset-0 bg-black/30 z-40"
               initial={{ opacity: 0 }}
