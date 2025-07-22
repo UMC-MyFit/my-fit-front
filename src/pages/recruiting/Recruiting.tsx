@@ -3,20 +3,15 @@ import BottomNav from "../../components/layouts/BottomNav";
 import RecruitCard from "../../components/recruiting/RecruitCard";
 import { jobs } from "../../data/jobs";
 import { dummyRecruitList } from "../../data/dummyRecruitList";
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
-=======
->>>>>>> 351c1c4 (rebase)
-=======
-import { useNavigate } from "react-router-dom";
->>>>>>> cb5831e (feat:naigate 연결)
 
 function Recruiting() {
   const [selectedCategory, setSelectedCategory] = useState("기획/PM");
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const pageSize = 10;
+  const nav = useNavigate();
+
   const currentCategory = jobs.find((j) => j.category === selectedCategory);
   const filterList = dummyRecruitList.filter(
     (item) => item.job === selectedSkill
@@ -26,14 +21,6 @@ function Recruiting() {
     (page - 1) * pageSize,
     page * pageSize
   );
-<<<<<<< HEAD
-<<<<<<< HEAD
-  const nav = useNavigate();
-=======
->>>>>>> 351c1c4 (rebase)
-=======
-  const nav = useNavigate();
->>>>>>> cb5831e (feat:naigate 연결)
 
   return (
     <div className="flex flex-col px-4 py-2 bg-white">
@@ -42,7 +29,7 @@ function Recruiting() {
           {jobs.map((item) => (
             <button
               key={item.category}
-              className={`h-[32px] text-h2  tracking-[-0.408px] px-[21px] pb-[10px] ${
+              className={`h-[32px] text-h2 tracking-[-0.408px] px-[21px] pb-[10px] ${
                 selectedCategory === item.category
                   ? "border-b-[4px] border-ct-gray-300 text-ct-black-300"
                   : "text-ct-gray-200"
@@ -76,23 +63,25 @@ function Recruiting() {
         >
           공고 등록
         </button>
-        <img
-          src="assets/recruit/bookmark(on).svg"
-          alt="bookmark"
-          className="w-[18px] h-[22px]"
+        <div
+          className="flex gap-[4px] w-[105px] h-[24px] bg-ct-gray-100 rounded-[5px] ct-center"
           onClick={() => nav("/recruit/savedannouncement")}
-        />
+        >
+          <span className="text-body1 text-ct-black-100">저장된 공고</span>
+          <img
+            src="assets/recruit/bookmark(on).svg"
+            alt="bookmark"
+            className="w-[10px] h-[12px]"
+          />
+        </div>
       </div>
       <div className="flex flex-col mt-[6px] gap-[11px] items-center mb-[89px]">
-<<<<<<< HEAD
-<<<<<<< HEAD
         {filterList.length === 0 ? (
           <div className="absolute top-[50%] text-sub2 text-ct-gray-200">
             현재 업로드된 공고가 없습니다.
           </div>
         ) : (
           <>
-            {" "}
             {paginatedList.map((item) => (
               <RecruitCard key={item.id} data={item} />
             ))}
@@ -128,89 +117,11 @@ function Recruiting() {
               </div>
             )}
           </>
-=======
-        {paginatedList.map((item) => (
-          <RecruitCard key={item.id} data={item} />
-        ))}
-        {totalPages > 1 && (
-          <div className="flex justify-center gap-2 mt-4">
-            <button
-              disabled={page === 1}
-              onClick={() => setPage((prev) => prev - 1)}
-              className="px-3 py-1 text-sm rounded border disabled:text-ct-gray-200"
-            >
-              {"<"}
-            </button>
-            {Array.from({ length: totalPages }, (_, i) => (
-              <button
-                key={i + 1}
-                onClick={() => setPage(i + 1)}
-                className={`px-3 py-1 text-sm rounded border ${
-                  page === i + 1
-                    ? "bg-ct-main-blue-200 text-white"
-                    : "text-ct-black-200"
-                }`}
-              >
-                {i + 1}
-              </button>
-            ))}
-            <button
-              disabled={page === totalPages}
-              onClick={() => setPage((prev) => prev + 1)}
-              className="px-3 py-1 text-sm rounded border disabled:text-ct-gray-200"
-            >
-              {">"}
-            </button>
-          </div>
->>>>>>> 351c1c4 (rebase)
-=======
-        {filterList.length === 0 ? (
-          <div className="absolute top-[50%] text-sub2 text-ct-gray-200">
-            현재 업로드된 공고가 없습니다.
-          </div>
-        ) : (
-          <>
-            {" "}
-            {paginatedList.map((item) => (
-              <RecruitCard key={item.id} data={item} />
-            ))}
-            {totalPages > 1 && (
-              <div className="flex justify-center gap-2 mt-4">
-                <button
-                  disabled={page === 1}
-                  onClick={() => setPage((prev) => prev - 1)}
-                  className="px-3 py-1 text-sm rounded border disabled:text-ct-gray-200"
-                >
-                  {"<"}
-                </button>
-                {Array.from({ length: totalPages }, (_, i) => (
-                  <button
-                    key={i + 1}
-                    onClick={() => setPage(i + 1)}
-                    className={`px-3 py-1 text-sm rounded border ${
-                      page === i + 1
-                        ? "bg-ct-main-blue-200 text-white"
-                        : "text-ct-black-200"
-                    }`}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
-                <button
-                  disabled={page === totalPages}
-                  onClick={() => setPage((prev) => prev + 1)}
-                  className="px-3 py-1 text-sm rounded border disabled:text-ct-gray-200"
-                >
-                  {">"}
-                </button>
-              </div>
-            )}
-          </>
->>>>>>> cb5831e (feat:naigate 연결)
         )}
       </div>
       <BottomNav />
     </div>
   );
 }
+
 export default Recruiting;
