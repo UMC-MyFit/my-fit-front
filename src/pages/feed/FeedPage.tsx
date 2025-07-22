@@ -1,4 +1,3 @@
-// FeedPage.tsx - 댓글을 모달(바텀시트 스타일)로 구현
 import { useEffect, useState } from "react";
 import FeedCard from "../../components/feed/FeedCard";
 import FixedHeader from "../../components/feed/FixedHeader";
@@ -10,14 +9,12 @@ import CommentModal from "../../components/feed/CommentModal";
 import { motion, AnimatePresence } from "framer-motion";
 import getTimeAgo from "../../utils/timeAgo";
 
-function FeedPage() {
+export default function FeedPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [activePostId, setActivePostId] = useState<string | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    const timer = setTimeout(() => setIsLoading(false), 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -26,9 +23,7 @@ function FeedPage() {
       <FixedHeader />
       <div className="pt-[66px] pb-[89px] px-[10px] bg-ct-white min-h-screen flex flex-col gap-6">
         {isLoading
-          ? Array.from({ length: mockFeeds.length }).map((_, idx) => (
-              <FeedCardSkeleton key={`skeleton-${idx}`} />
-            ))
+          ? mockFeeds.map((_, idx) => <FeedCardSkeleton key={idx} />)
           : mockFeeds.map((feed) => (
               <FeedCard
                 key={feed.feed_id}
@@ -50,11 +45,9 @@ function FeedPage() {
             ))}
       </div>
 
-      {/* 댓글 모달 */}
       <AnimatePresence>
         {activePostId && (
           <>
-            {/* 오버레이: 뒷배경 흐림 처리 */}
             <motion.div
               className="fixed inset-0 bg-black/30 z-40"
               initial={{ opacity: 0 }}
@@ -73,5 +66,3 @@ function FeedPage() {
     </BottomNavContainer>
   );
 }
-
-export default FeedPage;
