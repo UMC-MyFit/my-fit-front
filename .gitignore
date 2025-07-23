@@ -25,3 +25,6 @@ dev-dist
 *.sw?
 
 .env
+
+# Claude AI local guide
+CLAUDE.md
