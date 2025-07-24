@@ -21,11 +21,13 @@ function CommentSuggestions({ onSelect }: CommentSuggestionsProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
-    setCurrentIndex(prev => (prev - 1 + SUGGESTIONS.length) % SUGGESTIONS.length);
+    setCurrentIndex(
+      (prev) => (prev - 1 + SUGGESTIONS.length) % SUGGESTIONS.length
+    );
   };
 
   const goToNext = () => {
-    setCurrentIndex(prev => (prev + 1) % SUGGESTIONS.length);
+    setCurrentIndex((prev) => (prev + 1) % SUGGESTIONS.length);
   };
 
   const currentSuggestion = SUGGESTIONS[currentIndex];
@@ -38,8 +40,18 @@ function CommentSuggestions({ onSelect }: CommentSuggestionsProps) {
         onClick={goToPrevious}
         className="p-2 rounded-full text-blue-500 hover:bg-blue-50 hover:text-blue-700 transition"
       >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M15 19l-7-7 7-7"
+          />
         </svg>
       </button>
 
@@ -50,8 +62,14 @@ function CommentSuggestions({ onSelect }: CommentSuggestionsProps) {
           onClick={() => onSelect(currentSuggestion.label)}
           className="w-full border border-blue-500 rounded-full py-3 px-4 text-sm font-semibold flex items-center gap-3 hover:bg-blue-500 hover:text-white transition justify-center overflow-hidden"
         >
-          <img src={currentSuggestion.icon} alt={currentSuggestion.label} className="w-5 h-5 flex-shrink-0" />
-          <span className="whitespace-nowrap overflow-hidden text-ellipsis">{currentSuggestion.label}</span>
+          <img
+            src={currentSuggestion.icon}
+            alt={currentSuggestion.label}
+            className="w-5 h-5 flex-shrink-0"
+          />
+          <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+            {currentSuggestion.label}
+          </span>
         </button>
       </div>
 
@@ -61,8 +79,18 @@ function CommentSuggestions({ onSelect }: CommentSuggestionsProps) {
         onClick={goToNext}
         className="p-2 rounded-full text-blue-500 hover:bg-blue-50 hover:text-blue-700 transition"
       >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 5l7 7-7 7"
+          />
         </svg>
       </button>
 
@@ -72,7 +100,7 @@ function CommentSuggestions({ onSelect }: CommentSuggestionsProps) {
           <div
             key={index}
             className={`w-2 h-2 rounded-full transition ${
-              index === currentIndex ? 'bg-blue-500' : 'bg-gray-300'
+              index === currentIndex ? "bg-blue-500" : "bg-gray-300"
             }`}
           />
         ))}
