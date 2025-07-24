@@ -9,7 +9,7 @@ import CommentModal from "../../components/feed/CommentModal";
 import { motion, AnimatePresence } from "framer-motion";
 import getTimeAgo from "../../utils/timeAgo";
 
-function FeedPage() {
+export default function FeedPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [activePostId, setActivePostId] = useState<string | null>(null);
 
@@ -55,8 +55,8 @@ function FeedPage() {
               exit={{ opacity: 0 }}
               onClick={() => setActivePostId(null)}
             />
-            {/* 모달 */}
             <CommentModal
+              postId={activePostId}
               comments={mockComments}
               onClose={() => setActivePostId(null)}
             />
@@ -66,5 +66,3 @@ function FeedPage() {
     </BottomNavContainer>
   );
 }
-
-export default FeedPage;
