@@ -21,9 +21,7 @@ function CommentSuggestions({ onSelect }: CommentSuggestionsProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + SUGGESTIONS.length) % SUGGESTIONS.length
-    );
+    setCurrentIndex((prev) => (prev - 1 + SUGGESTIONS.length) % SUGGESTIONS.length);
   };
 
   const goToNext = () => {
