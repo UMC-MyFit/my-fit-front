@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+=======
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+>>>>>>> 4b52133 (refactor/recruit)
 import apiInstance from "../apiClient";
 import { useNavigate } from "react-router-dom";
 
@@ -163,7 +172,11 @@ export const subscribeRecruitment = async (
 
 export const useSubscribeRecruitmentMutation = (recruitment_id: string) => {
   const queryClient = useQueryClient();
+<<<<<<< HEAD
   return useMutation({
+=======
+  return useMutation<void, Error, void>({
+>>>>>>> 4b52133 (refactor/recruit)
     mutationFn: () => subscribeRecruitment(recruitment_id),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -174,7 +187,11 @@ export const useSubscribeRecruitmentMutation = (recruitment_id: string) => {
 };
 export const useUnSubscribeRecruitmentMutation = (recruitment_id: string) => {
   const queryClient = useQueryClient();
+<<<<<<< HEAD
   return useMutation({
+=======
+  return useMutation<void, Error, void>({
+>>>>>>> 4b52133 (refactor/recruit)
     mutationFn: () => unsubscribeRecruitment(recruitment_id),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -183,9 +200,13 @@ export const useUnSubscribeRecruitmentMutation = (recruitment_id: string) => {
     },
   });
 };
+<<<<<<< HEAD
 export const unsubscribeRecruitment = async (
   recruitment_id: string
 ): Promise<SubScribedResponse> => {
+=======
+export const unsubscribeRecruitment = async (recruitment_id: string) => {
+>>>>>>> 4b52133 (refactor/recruit)
   const response = await apiInstance.delete(
     `/api/recruitments/${recruitment_id}/subscribe`
   );
