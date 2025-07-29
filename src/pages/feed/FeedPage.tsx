@@ -5,6 +5,7 @@ import FixedHeader from "../../components/feed/FixedHeader";
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
 import FeedCardSkeleton from "../../components/skeletons/feed/FeedCardSkeleton";
 import { getFeedsWithCursor } from "../../apis/feed";
+import { FeedResponse } from "../../types/feed/feed";
 import { mockComments } from "../../mocks/comments";
 import CommentModal from "../../components/feed/CommentModal";
 import { motion, AnimatePresence } from "framer-motion";
@@ -22,13 +23,14 @@ export default function FeedPage() {
     error,
   } = useInfiniteQuery({
     queryKey: ['feeds'],
-    queryFn: ({ pageParam }) => getFeedsWithCursor(pageParam),
-    initialPageParam: undefined,
-    getNextPageParam: (lastPage) => 
-      lastPage.has_next ? lastPage.next_cursor : undefined,
+    queryFn: ({ pageParam }: { pageParam: number | undefined }) => 
+      getFeedsWithCursor(pageParam),
+    initialPageParam: undefined as number | undefined,
+    getNextPageParam: (lastPage: FeedResponse) => 
+      lastPage.result.pagination.has_next ? lastPage.result.pagination.next_cursor : undefined,
   });
 
-  const allFeeds = data?.pages.flatMap(page => page.feeds) || [];
+  const allFeeds = data?.pages.flatMap((page: FeedResponse) => page.result.feeds) || [];
 
   return (
     <BottomNavContainer showBottomNav={!activePostId}>
@@ -40,17 +42,19 @@ export default function FeedPage() {
               <FeedCard
                 key={feed.feed_id}
                 user={{
-                  name: feed.user.name,
-                  job: feed.user.sector,
-                  profileImage: feed.user.profile_img,
+                  name: feed.user?.name || "알 수 없음",
+                  job: feed.user?.sector || "알 수 없음",
+                  profileImage: feed.user?.profile_img || "",
                 }}
                 post={{
-                  images: feed.images,
+                  images: feed.images || [],
                   timeAgo: getTimeAgo(feed.created_at),
-                  likes: feed.heart,
-                  comments: feed.comment_count,
-                  content: feed.feed_text,
-                  tags: feed.hashtags.map((tag) => tag.replace("#", "")),
+                  likes: feed.heart || 0,
+                  comments: feed.comment_count || 0,
+                  content: feed.feed_text || "",
+                  tags: Array.isArray(feed.hashtags) 
+                    ? feed.hashtags.map((tag: string) => tag.replace("#", ""))
+                    : [],
                 }}
                 onCommentClick={() => setActivePostId(feed.feed_id.toString())}
               />

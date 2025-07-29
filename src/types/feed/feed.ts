@@ -16,7 +16,11 @@ export interface FeedItem {
 }
 
 export interface FeedResponse {
-  feeds: FeedItem[];
-  next_cursor: number | null;
-  has_next: boolean;
+  result: {
+    feeds: FeedItem[];
+    pagination: {
+      next_cursor: number | null;
+      has_next: boolean;
+    };
+  };
 }

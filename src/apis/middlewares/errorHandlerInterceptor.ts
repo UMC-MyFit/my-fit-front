@@ -27,10 +27,12 @@ export function applyErrorHandlerInterceptor(apiInstance: AxiosInstance): void {
 
         case 401: // Unauthorized
           console.error("HTTP 401 Unauthorized: Session expired or invalid.");
-          alert(
-            "세션이 만료되었거나 인증에 실패했습니다. 다시 로그인해주세요."
-          );
-          window.location.href = "/login";
+          console.error("🔍 [디버깅] 401 에러 상세:", error.response?.data);
+          // 임시로 alert와 리다이렉트 비활성화 (디버깅용)
+          // alert(
+          //   "세션이 만료되었거나 인증에 실패했습니다. 다시 로그인해주세요."
+          // );
+          // window.location.href = "/login";
           return Promise.reject(error);
 
         case 403: // Forbidden
