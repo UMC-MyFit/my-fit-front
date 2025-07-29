@@ -178,7 +178,7 @@ const router = createBrowserRouter([
         element: <PersonalProfile />,
       },
       {
-        path: "chatting",
+        path: "chatting/:chattingRoomId",
         element: <Chatting />,
       },
       {
