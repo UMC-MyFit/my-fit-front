@@ -1,19 +1,11 @@
-import {
-  QueryClient,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import apiInstance from "../apiClient";
-
-type Sector = {
-  category: string;
-  skills: string[];
-};
+import { useNavigate } from "react-router-dom";
 
 export interface RegisterRecruitRequest {
   title: string;
-  sectors: Sector[];
+  high_sector: string[];
+  low_sector: string[];
   area: string;
   require: string;
   salary: string;
@@ -59,16 +51,18 @@ export interface UserInfo {
   profile_img: string;
 }
 export interface recruitmentDetailResponse {
-  recruitment_id: number;
-  title: string;
-  low_sector: string;
-  area: string;
-  require: string;
-  salary: string;
-  work_type: string;
-  dead_line: string;
-  recruiting_img: string;
-  writer: UserInfo;
+  result: {
+    recruitment_id: number;
+    title: string;
+    low_sector: string;
+    area: string;
+    require: string;
+    salary: string;
+    work_type: string;
+    dead_line: string;
+    recruiting_img: string;
+    writer: UserInfo;
+  };
 }
 export interface SubscribedRecruitment {
   recruitment_id: number;
@@ -79,9 +73,12 @@ export interface SubscribedRecruitment {
   writer: UserInfo;
 }
 export interface SubscribeRecruitmentResponse {
-  recruitments: SubscribedRecruitment[];
-  next_cursor: number;
-  has_next: boolean;
+  result: {
+    subscribedRecruitments: SubscribedRecruitment[];
+    pagination: {
+      total_page: number;
+    };
+  };
 }
 
 export const RegisterRecruitPost = async (
@@ -89,6 +86,17 @@ export const RegisterRecruitPost = async (
 ): Promise<RegisterRecruitResponse> => {
   const response = await apiInstance.post("/api/recruitments", data);
   return response.data;
+};
+
+export const useRegisterRecruitPost = () => {
+  const nav = useNavigate();
+  return useMutation({
+    mutationFn: (data: RegisterRecruitRequest) => RegisterRecruitPost(data),
+    onSuccess: () => {
+      alert("공고가 성공적으로 등록되었습니다.");
+      nav("/recruits");
+    },
+  });
 };
 
 export const getRecruitments = async (
@@ -172,11 +180,17 @@ export const unsubscribeRecruitment = async (recruitment_id: string) => {
   return response.data;
 };
 export const getSubscribedRecruitment = async (
-  cursor?: number,
-  limit: number = 10
+  total_page: number
 ): Promise<SubscribeRecruitmentResponse> => {
   const response = await apiInstance.get("/api/recruitments/subscribe", {
-    params: { cursor, limit },
+    params: { total_page },
   });
   return response.data;
+};
+
+export const useGetSubscribedRecruitment = (total_page: number) => {
+  return useQuery({
+    queryKey: ["subscribedRecruitment", total_page],
+    queryFn: () => getSubscribedRecruitment(total_page),
+  });
 };
