@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TopBarContainer from "../../components/common/TopBarContainer";
 import BottomNav from "../../components/layouts/BottomNav";
+<<<<<<< HEAD
 import RecruitCard from "../../components/recruiting/RecruitCard";
 import {
   SubscribedRecruitment,
@@ -22,6 +23,35 @@ function SavedAnnouncement() {
   if (isLoading) return <div>로딩 중...</div>;
   if (isError) return <div>저장된 공고를 불러오는 중 오류가 발생했습니다.</div>;
 
+=======
+<<<<<<< HEAD
+import RecruitCardSkeleton from "../../components/skeletons/recruiting/RecruitCardSkeleton";
+=======
+import RecruitCard from "../../components/recruiting/RecruitCard";
+import {
+  getSubscribedRecruitment,
+  SubscribedRecruitment,
+} from "../../apis/recruiting/recruiting";
+>>>>>>> 94e21e5 (beforerebase)
+
+function SavedAnnouncement() {
+  const [recruitment, SetRecruitment] = useState<SubscribedRecruitment[]>([]);
+  const [cursor, setCursor] = useState<number | undefined>(undefined);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { recruitments, next_cursor } = await getSubscribedRecruitment(
+          cursor
+        );
+        SetRecruitment(recruitments);
+        setCursor(next_cursor);
+      } catch (error) {
+        console.log("공고 불러오기 실패", error);
+      }
+    };
+    fetchData();
+  }, [cursor]);
+>>>>>>> db105ae (afterrebase)
   const TopBarContent = () => {
     return (
       <span className="text-h2 font-Pretendard text-ct-black-300">

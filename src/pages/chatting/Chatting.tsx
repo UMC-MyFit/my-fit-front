@@ -6,10 +6,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useChatting } from "../../contexts/ChattingContext";
 import { useCoffeeChatModal } from "../../contexts/CoffeeChatModalContext";
 import { useCoffeeChat } from "../../contexts/coffeeChatContext";
+<<<<<<< HEAD
 import {
   sendChatMessage,
   useSendChatMessageMutation,
 } from "../../apis/chatting/chatting";
+=======
+import { sendChatMessage } from "../../apis/chatting/chatting";
+>>>>>>> db105ae (afterrebase)
 
 function Chatting() {
   const { messages, addMessage, prependMessages } = useChatting();
@@ -19,6 +23,11 @@ function Chatting() {
   const nav = useNavigate();
   const { chattingRoomId } = useParams();
   const numericRoomId = Number(chattingRoomId);
+<<<<<<< HEAD
+=======
+  const handleSend = async (text: string) => {};
+  const bottomRef = useRef<HTMLDivElement>(null);
+>>>>>>> db105ae (afterrebase)
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const { mutate: sendMessage, isPending } =

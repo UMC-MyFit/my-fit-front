@@ -70,6 +70,31 @@ function RegisterAnnouncement() {
     });
   };
 
+  const handleSubmit = async () => {
+    if (!imageFile) {
+      alert("이미지를 선택해주세요.");
+      return;
+    }
+    const data = {
+      title: title,
+      sectors: selectedSkills,
+      area: locationText,
+      require,
+      salary,
+      work_type: workType,
+      dead_line: formatedDate,
+      recruiting_img: imageFile,
+    };
+    try {
+      const response = await RegisterRecruitPost(data);
+      alert("공고가 성공적으로 등록되었습니다!");
+      nav("/recruit"); // 예시: 등록 후 공고 목록 페이지로 이동
+    } catch (error) {
+      console.error("공고 등록 실패:", error);
+      alert("공고 등록에 실패했습니다.");
+    }
+  };
+
   const openModal = (type: "salary" | "calendar") => {
     setModalType(type);
     setIsModalOpen(true);
@@ -102,8 +127,13 @@ function RegisterAnnouncement() {
                   require,
                   salary,
                   workType,
+<<<<<<< HEAD
                   deadline: formattedDate,
                   recruiting_img: imageUrl,
+=======
+                  deadline: formatedDate,
+                  recruiting_img: imageFile,
+>>>>>>> db105ae (afterrebase)
                 },
                 high_sector: highSector,
                 low_sector: lowSector,
@@ -145,6 +175,7 @@ function RegisterAnnouncement() {
           <span className="pl-[7px] text-sub1 text-ct-black-200">
             공고사진 첨부
           </span>
+<<<<<<< HEAD
           <ImageUploadBox
             className="w-[349px] h-[384px] rounded-[16px] bg-ct-gray-100"
             textClassName="text-body2 text-ct-gray-300"
@@ -152,16 +183,30 @@ function RegisterAnnouncement() {
             onUploadSuccess={(url) => setImageUrl(url)}
             S3Folder="recruit"
           />
+=======
+          <div className="flex items-center">
+            <ImageUploadBox
+              className="w-[349px] h-[384px] rounded-[16px] bg-ct-gray-100"
+              textClassName="text-body2 text-ct-gray-300"
+              initialPreview={imageFile}
+              onFileSelected={(file) => setImageFile(file)}
+            />
+          </div>
+>>>>>>> db105ae (afterrebase)
         </div>
         <span className="mt-[25px] mb-[23.29px] text-body1 text-ct-gray-300">
           등록된 공고는 ‘마이페이지’, ‘공고 관리’ 탭에서 확인 가능합니다.
         </span>
         <div className="flex justify-center mb-[42px]">
+<<<<<<< HEAD
           <BottomCTAButton
             text={isPending ? "등록 중..." : "공고 등록하기"}
             disabled={isPending}
             onClick={handleSubmit}
           />
+=======
+          <BottomCTAButton text="공고 등록하기" onClick={handleSubmit} />
+>>>>>>> db105ae (afterrebase)
         </div>
       </div>
       <Modal>
