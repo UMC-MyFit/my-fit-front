@@ -3,84 +3,37 @@ import ImageDisplay from "../../components/common/ImageDisplay";
 import TopBarContainer from "../../components/common/TopBarContainer";
 import BottomNav from "../../components/layouts/BottomNav";
 import {
-  getRecruitmentDetail,
   subscribeRecruitment,
   unsubscribeRecruitment,
+  usegetRecruitmentDetailQuery,
+  useSubscribeRecruitmentMutation,
+  useUnSubscribeRecruitmentMutation,
 } from "../../apis/recruiting/recruiting";
 import { useParams } from "react-router-dom";
 
 function RecruitAnnouncement() {
   const { recruitmentId } = useParams();
   const recruitment_id = String(recruitmentId);
-  const [name, setName] = useState("");
-  const [deadline, setDeadline] = useState("");
-  const [title, setTitle] = useState("");
-  const [lowsector, setLowsector] = useState("");
-  const [area, setArea] = useState("");
-  const [require, setRequire] = useState("");
-  const [salary, setSalary] = useState("");
-  const [workType, setWorkType] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getRecruitmentDetail(recruitment_id);
-        setName(response.writer.name);
-        setDeadline(response.dead_line);
-        setTitle(response.title);
-        setLowsector(response.low_sector);
-        setArea(response.area);
-        setRequire(response.require);
-        setSalary(response.salary);
-        setWorkType(response.work_type);
-        setImgUrl(response.recruiting_img);
-      } catch (error) {
-        console.error("공고 불러오기 실패:", error);
-        alert("공고 불러오기에 실패했습니다.");
-      }
-    };
-    fetchData();
-  }, [recruitment_id]);
-  const handleSubscribe = async () => {
-    try {
-      const res = await subscribeRecruitment(recruitment_id);
-      alert(res.message);
-      setIsSubscribed(true);
-    } catch (error: any) {
-      if (error.response?.status === 409) {
-        alert("이미 구독한 공고입니다.");
-      } else if (error.response?.status === 401) {
-        alert("로그인이 필요한 요청입니다.");
-      } else {
-        alert("구독 중 오류가 발생했습니다.");
-      }
-    }
+  const { data, isLoading, isError } =
+    usegetRecruitmentDetailQuery(recruitment_id);
+  const { mutate: subscribe, isPending } =
+    useSubscribeRecruitmentMutation(recruitment_id);
+  const { mutate: unsubscribe } =
+    useUnSubscribeRecruitmentMutation(recruitment_id);
+  const handleSubscribe = () => {
+    subscribe();
   };
-  const handleUnSubscribe = async () => {
-    try {
-      const res = await unsubscribeRecruitment(recruitment_id);
-      alert(res.message);
-      setIsSubscribed(false);
-    } catch (error: any) {
-      if (error.response?.status === 400) {
-        alert("해당 공고를 구독한 내역이 없습니다.");
-      } else if (error.response?.status === 401) {
-        alert("로그인이 필요한 요청입니다.");
-      } else if (error.response?.status === 404) {
-        alert("해당 공고를 찾을 수 없습니다.");
-      } else {
-        alert("서버에 오류가 발생했습니다.");
-      }
-    }
+  const handleUnSubscribe = () => {
+    unsubscribe();
   };
   const TopBarContent = () => {
     return (
       <div className="flex items-center gap-[6px]">
         <div className="w-[24px] h-[24px] bg-[#d9d9d9] rounded-[10px]" />
         <span className="text-h1 font-Pretendard text-ct-black-100 tracking-[-0.31px]">
-          {name}
+          {data?.writer.name}
         </span>
       </div>
     );
@@ -89,7 +42,7 @@ function RecruitAnnouncement() {
     <TopBarContainer TopBarContent={<TopBarContent />}>
       <div className="flex flex-col px-[19px]">
         <div className="text-sub2 px-[5px] text-ct-main-blue-100">
-          {deadline}
+          {data?.dead_line}
         </div>
         <ul className="flex flex-col mt-[12.5px]">
           <li className="flex gap-[24px] px-[5px] py-[13px] border-y border-ct-gray-200">
@@ -97,7 +50,7 @@ function RecruitAnnouncement() {
               공고 제목
             </p>
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
-              {title}
+              {data?.title}
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px] border-b border-ct-gray-200">
@@ -105,7 +58,7 @@ function RecruitAnnouncement() {
               구인 직무
             </p>
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
-              {lowsector}
+              {data?.low_sector}
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px] border-b border-ct-gray-200">
@@ -113,7 +66,7 @@ function RecruitAnnouncement() {
               근무 지역
             </p>
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
-              {area}
+              {data?.area}
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px] border-b border-ct-gray-200">
@@ -121,7 +74,7 @@ function RecruitAnnouncement() {
               지원 조건
             </p>
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
-              {require}
+              {data?.require}
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px] border-b border-ct-gray-200">
@@ -129,7 +82,7 @@ function RecruitAnnouncement() {
               급여
             </p>
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
-              {salary}
+              {data?.salary}
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px]">
@@ -137,19 +90,19 @@ function RecruitAnnouncement() {
               근무 형태
             </p>
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
-              {workType}
+              {data?.work_type}
             </p>
           </li>
         </ul>
-        {imgUrl && (
+        {data?.recruiting_img && (
           <ImageDisplay
-            imageUrl={imgUrl}
+            imageUrl={data?.recruiting_img}
             alt="팀 상세 페이지"
             className="h-[397px] w-[349px] rounded-[16px] "
           />
         )}
         <div className="mt-[26px] flex justify-between">
-          {isSubscribed ? (
+          {isPending ? (
             <img
               src="/assets/recruit/bookmark(on).svg"
               alt="bookmark"

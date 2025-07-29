@@ -4,34 +4,34 @@ import RecruitCard from "../../components/recruiting/RecruitCard";
 import { jobs } from "../../data/jobs";
 import { useNavigate } from "react-router-dom";
 import {
-  getRecruitments,
   RecruitmentItem,
+  useGetRecruitmentsQuery,
 } from "../../apis/recruiting/recruiting";
 
 function Recruiting() {
   const [selectedCategory, setSelectedCategory] = useState("기획/PM");
-  const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+  const [selectedSkill, setSelectedSkill] = useState<string>(
+    selectedCategory[0]
+  );
   const [recruitList, setRecruitList] = useState<RecruitmentItem[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
   const nav = useNavigate();
 
+  const { data, isLoading, isError } = useGetRecruitmentsQuery(
+    selectedCategory,
+    selectedSkill,
+    page
+  );
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await getRecruitments(
-          selectedCategory,
-          selectedSkill ?? undefined,
-          page
-        );
-        setRecruitList(result.result.recruitments);
-        setTotalPages(Math.ceil(result.result.pagination.total_page));
-      } catch (error) {
-        console.error("공고 불러오기 실패:", error);
-      }
-    };
-    fetchData();
-  }, [selectedCategory, selectedSkill, page]);
+    if (data) {
+      setRecruitList(data.result.recruitments);
+      setTotalPages(Math.ceil(data.result.pagination.total_page));
+    }
+  }, [data]);
+  if (isLoading) return <div>로딩 중...</div>;
+  if (isError) return <div>공고 데이터를 불러오는 중 오류가 발생했습니다.</div>;
+
   const currentCategory = jobs.find((j) => j.category === selectedCategory);
   return (
     <div className="flex flex-col px-4 py-2 bg-white">

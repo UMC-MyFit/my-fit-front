@@ -1,3 +1,9 @@
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import apiInstance from "../apiClient";
 
 type Sector = {
@@ -102,11 +108,32 @@ export const getRecruitments = async (
   return response.data;
 };
 
+export const useGetRecruitmentsQuery = (
+  highSector: string,
+  lowSector?: string,
+  page?: number
+) => {
+  return useQuery({
+    queryKey: ["recruitments", highSector, lowSector, page],
+    queryFn: () => getRecruitments(highSector, lowSector, page),
+    staleTime: 1000 * 60,
+    enabled: !!highSector,
+  });
+};
+
 export const getRecruitmentDetail = async (
   recruitment_id: string
 ): Promise<recruitmentDetailResponse> => {
   const response = await apiInstance.get(`/api/recruitments/${recruitment_id}`);
   return response.data;
+};
+export const usegetRecruitmentDetailQuery = (recruitment_id: string) => {
+  return useQuery({
+    queryKey: ["recruitmentDetail", recruitment_id],
+    queryFn: () => getRecruitmentDetail(recruitment_id),
+    staleTime: 1000 * 60,
+    enabled: !!recruitment_id,
+  });
 };
 
 export const subscribeRecruitment = async (recruitment_id: string) => {
@@ -114,6 +141,29 @@ export const subscribeRecruitment = async (recruitment_id: string) => {
     `/api/recruitments/${recruitment_id}/subscribe`
   );
   return response.data;
+};
+
+export const useSubscribeRecruitmentMutation = (recruitment_id: string) => {
+  const queryClient = useQueryClient();
+  return useMutation<void, Error, void>({
+    mutationFn: () => subscribeRecruitment(recruitment_id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["recruitmentDetail", recruitment_id],
+      });
+    },
+  });
+};
+export const useUnSubscribeRecruitmentMutation = (recruitment_id: string) => {
+  const queryClient = useQueryClient();
+  return useMutation<void, Error, void>({
+    mutationFn: () => unsubscribeRecruitment(recruitment_id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["recruitmentDetail", recruitment_id],
+      });
+    },
+  });
 };
 export const unsubscribeRecruitment = async (recruitment_id: string) => {
   const response = await apiInstance.delete(
