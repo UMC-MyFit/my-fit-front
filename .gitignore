@@ -23,18 +23,8 @@ dev-dist
 *.njsproj
 *.sln
 *.sw?
-<<<<<<< HEAD
 
 .env
-<<<<<<< HEAD
 
 # Claude AI local guide
 CLAUDE.md
-
-# Environment variables
-.env
-=======
-=======
-.env
->>>>>>> 94e21e5 (beforerebase)
->>>>>>> fd68401 (rebase)

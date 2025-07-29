@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useChatMessageQuery } from "../../apis/chatting/chatting";
 import { useChatting } from "../../contexts/ChattingContext";
+import { useCoffeeChatModal } from "../../contexts/CoffeeChatModalContext";
 import { useUser } from "../../contexts/UserContext";
+import { ChatBoxStatus } from "../../types/chatting/ChatBoxStatus";
 import MessageBubble from "./MessageBubble";
 import RequestCoffeeChatBox from "./RequestCoffechatBox";
 
@@ -10,16 +12,11 @@ interface Props {
 }
 
 function ChatMessageList({ bottomRef }: Props) {
-<<<<<<< HEAD
-  const { messages } = useChatting();
-  const { name } = useUser();
-=======
   const { messages, prependMessages, roomId } = useChatting();
   const { requestStatus } = useCoffeeChatModal();
   const { myId, senderId, name } = useUser();
   const { data } = useChatMessageQuery(roomId);
   const [statusMap, setStatusMap] = useState<Record<number, ChatBoxStatus>>({});
->>>>>>> 94e21e5 (beforerebase)
 
   useEffect(() => {
     if (data?.messages) prependMessages(data.messages);
@@ -61,7 +58,7 @@ function ChatMessageList({ bottomRef }: Props) {
         return (
           <div className="flex flex-col">
             <div
-              key={msg.message_id}
+              key={msg.id}
               className={`flex ${
                 msg.sender_id === 1 ? "justify-end" : "justify-start" // 세션에서 myid 를 불러와서 같은거 확인해야할듯
               } ${MarginTop}`}

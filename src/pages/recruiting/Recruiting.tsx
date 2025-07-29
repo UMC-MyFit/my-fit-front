@@ -14,7 +14,6 @@ function Recruiting() {
   const [recruitList, setRecruitList] = useState<RecruitmentItem[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
-  const pageSize = 10;
   const nav = useNavigate();
 
   useEffect(() => {

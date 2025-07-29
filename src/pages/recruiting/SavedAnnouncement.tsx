@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import TopBarContainer from "../../components/common/TopBarContainer";
 import BottomNav from "../../components/layouts/BottomNav";
-<<<<<<< HEAD
-import RecruitCardSkeleton from "../../components/skeletons/recruiting/RecruitCardSkeleton";
-=======
 import RecruitCard from "../../components/recruiting/RecruitCard";
 import {
   getSubscribedRecruitment,
   SubscribedRecruitment,
 } from "../../apis/recruiting/recruiting";
->>>>>>> 94e21e5 (beforerebase)
 
 function SavedAnnouncement() {
   const [recruitment, SetRecruitment] = useState<SubscribedRecruitment[]>([]);
