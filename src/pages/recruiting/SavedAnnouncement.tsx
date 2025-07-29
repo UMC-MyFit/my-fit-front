@@ -32,14 +32,18 @@ import RecruitCardSkeleton from "../../components/skeletons/recruiting/RecruitCa
 >>>>>>> 1c1dd6c (afterrebase)
 import RecruitCard from "../../components/recruiting/RecruitCard";
 import {
-  getSubscribedRecruitment,
   SubscribedRecruitment,
+  useGetSubscribedRecruitment,
 } from "../../apis/recruiting/recruiting";
 
 function SavedAnnouncement() {
-  const [recruitment, SetRecruitment] = useState<SubscribedRecruitment[]>([]);
-  const [cursor, setCursor] = useState<number | undefined>(undefined);
+  const [recruitment, setRecruitment] = useState<SubscribedRecruitment[]>([]);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const { data, isLoading, isError } = useGetSubscribedRecruitment(page);
+
   useEffect(() => {
+<<<<<<< HEAD
     const fetchData = async () => {
       try {
         const { recruitments, next_cursor } = await getSubscribedRecruitment(
@@ -54,6 +58,16 @@ function SavedAnnouncement() {
     fetchData();
   }, [cursor]);
 >>>>>>> db105ae (afterrebase)
+=======
+    if (data) {
+      setRecruitment(data.result.subscribedRecruitments);
+      setTotalPage(data.result.pagination.total_page);
+    }
+  }, [data]);
+  if (isLoading) return <div>로딩 중...</div>;
+  if (isError) return <div>저장된 공고를 불러오는 중 오류가 발생했습니다.</div>;
+
+>>>>>>> 34e8bff (refactor/imageuploadBox)
   const TopBarContent = () => {
     return (
       <span className="text-h2 font-Pretendard text-ct-black-300">

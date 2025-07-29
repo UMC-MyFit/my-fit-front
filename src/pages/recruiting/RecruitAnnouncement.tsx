@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
 import ImageDisplay from "../../components/common/ImageDisplay";
 import TopBarContainer from "../../components/common/TopBarContainer";
 import BottomNav from "../../components/layouts/BottomNav";
 import {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   usegetRecruitmentDetailQuery,
@@ -16,6 +16,8 @@ import {
 =======
   subscribeRecruitment,
   unsubscribeRecruitment,
+=======
+>>>>>>> 34e8bff (refactor/imageuploadBox)
   usegetRecruitmentDetailQuery,
   useSubscribeRecruitmentMutation,
   useUnSubscribeRecruitmentMutation,
@@ -24,6 +26,7 @@ import {
 import { useParams } from "react-router-dom";
 
 function RecruitAnnouncement() {
+<<<<<<< HEAD
 <<<<<<< HEAD
   const { recruitment_id } = useParams();
   const recruitmentId = String(recruitment_id);
@@ -56,13 +59,17 @@ function RecruitAnnouncement() {
   const { recruitmentId } = useParams();
   const recruitment_id = String(recruitmentId);
   const [isSubscribed, setIsSubscribed] = useState(false);
+=======
+  const { recruitment_id } = useParams();
+  const recruitmentId = String(recruitment_id);
+>>>>>>> 34e8bff (refactor/imageuploadBox)
 
   const { data, isLoading, isError } =
-    usegetRecruitmentDetailQuery(recruitment_id);
+    usegetRecruitmentDetailQuery(recruitmentId);
   const { mutate: subscribe, isPending } =
-    useSubscribeRecruitmentMutation(recruitment_id);
+    useSubscribeRecruitmentMutation(recruitmentId);
   const { mutate: unsubscribe } =
-    useUnSubscribeRecruitmentMutation(recruitment_id);
+    useUnSubscribeRecruitmentMutation(recruitmentId);
   const handleSubscribe = () => {
     subscribe();
   };
@@ -77,6 +84,7 @@ function RecruitAnnouncement() {
         <span className="text-h1 font-Pretendard text-ct-black-100 tracking-[-0.31px]">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           {data?.result.recruitment.writer.name}
 =======
           {name}
@@ -84,6 +92,9 @@ function RecruitAnnouncement() {
 =======
           {data?.writer.name}
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+          {data?.result.writer.name}
+>>>>>>> 34e8bff (refactor/imageuploadBox)
         </span>
       </div>
     );
@@ -95,6 +106,7 @@ function RecruitAnnouncement() {
         <div className="text-sub2 px-[5px] text-ct-main-blue-100">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           {data?.result.recruitment.dead_line}
 =======
           {deadline}
@@ -102,6 +114,9 @@ function RecruitAnnouncement() {
 =======
           {data?.dead_line}
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+          {data?.result.dead_line}
+>>>>>>> 34e8bff (refactor/imageuploadBox)
         </div>
         <ul className="flex flex-col mt-[12.5px]">
           <li className="flex gap-[24px] px-[5px] py-[13px] border-y border-ct-gray-200">
@@ -111,6 +126,7 @@ function RecruitAnnouncement() {
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               {data?.result.recruitment.title}
 =======
               {title}
@@ -118,6 +134,9 @@ function RecruitAnnouncement() {
 =======
               {data?.title}
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+              {data?.result.title}
+>>>>>>> 34e8bff (refactor/imageuploadBox)
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px] border-b border-ct-gray-200">
@@ -127,6 +146,7 @@ function RecruitAnnouncement() {
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               {data?.result.recruitment.low_sector}
 =======
               {lowsector}
@@ -134,6 +154,9 @@ function RecruitAnnouncement() {
 =======
               {data?.low_sector}
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+              {data?.result.low_sector}
+>>>>>>> 34e8bff (refactor/imageuploadBox)
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px] border-b border-ct-gray-200">
@@ -143,6 +166,7 @@ function RecruitAnnouncement() {
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               {data?.result.recruitment.area}
 =======
               {area}
@@ -150,6 +174,9 @@ function RecruitAnnouncement() {
 =======
               {data?.area}
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+              {data?.result.area}
+>>>>>>> 34e8bff (refactor/imageuploadBox)
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px] border-b border-ct-gray-200">
@@ -159,6 +186,7 @@ function RecruitAnnouncement() {
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               {data?.result.recruitment.require}
 =======
               {require}
@@ -166,6 +194,9 @@ function RecruitAnnouncement() {
 =======
               {data?.require}
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+              {data?.result.require}
+>>>>>>> 34e8bff (refactor/imageuploadBox)
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px] border-b border-ct-gray-200">
@@ -175,6 +206,7 @@ function RecruitAnnouncement() {
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               {data?.result.recruitment.salary}
 =======
               {salary}
@@ -182,6 +214,9 @@ function RecruitAnnouncement() {
 =======
               {data?.salary}
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+              {data?.result.salary}
+>>>>>>> 34e8bff (refactor/imageuploadBox)
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px]">
@@ -189,6 +224,7 @@ function RecruitAnnouncement() {
               근무 형태
             </p>
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
               {data?.result.recruitment.work_type}
@@ -204,17 +240,24 @@ function RecruitAnnouncement() {
 =======
               {data?.work_type}
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+              {data?.result.work_type}
+>>>>>>> 34e8bff (refactor/imageuploadBox)
             </p>
           </li>
         </ul>
-        {data?.recruiting_img && (
+        {data?.result.recruiting_img && (
           <ImageDisplay
+<<<<<<< HEAD
 <<<<<<< HEAD
             imageUrl={imgUrl}
 >>>>>>> db105ae (afterrebase)
 =======
             imageUrl={data?.recruiting_img}
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+            imageUrl={data?.result.recruiting_img}
+>>>>>>> 34e8bff (refactor/imageuploadBox)
             alt="팀 상세 페이지"
             className="w-full max-w-[349px] max-h-[300px] object-contain rounded-[16px] mx-auto"
           />

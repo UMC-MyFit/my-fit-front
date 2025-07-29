@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 =======
 import {
@@ -8,6 +9,9 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+>>>>>>> 34e8bff (refactor/imageuploadBox)
 import apiInstance from "../apiClient";
 import { useNavigate } from "react-router-dom";
 
@@ -61,6 +65,7 @@ export interface UserInfo {
 }
 export interface recruitmentDetailResponse {
   result: {
+<<<<<<< HEAD
     recruitment: {
       recruitment_id: number;
       title: string;
@@ -73,6 +78,18 @@ export interface recruitmentDetailResponse {
       recruiting_img: string;
       writer: UserInfo;
     };
+=======
+    recruitment_id: number;
+    title: string;
+    low_sector: string;
+    area: string;
+    require: string;
+    salary: string;
+    work_type: string;
+    dead_line: string;
+    recruiting_img: string;
+    writer: UserInfo;
+>>>>>>> 34e8bff (refactor/imageuploadBox)
   };
 }
 export interface SubscribedRecruitment {
@@ -90,12 +107,15 @@ export interface SubscribeRecruitmentResponse {
       total_page: number;
     };
   };
+<<<<<<< HEAD
 }
 export interface SubScribedResponse {
   message: string;
   result: {
     is_subscribed: boolean;
   };
+=======
+>>>>>>> 34e8bff (refactor/imageuploadBox)
 }
 
 export const RegisterRecruitPost = async (

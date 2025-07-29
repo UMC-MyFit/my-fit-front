@@ -9,12 +9,8 @@ interface ImageUploadBoxProps {
   textClassName?: string;
   disabled?: boolean;
   initialPreview?: string | null;
-<<<<<<< HEAD
   onUploadSuccess?: (fileUrl: string) => void;
   S3Folder?: string | null;
-=======
-  onFileSelected?: (base64: string) => void;
->>>>>>> db105ae (afterrebase)
 }
 
 function ImageUploadBox({
@@ -22,7 +18,6 @@ function ImageUploadBox({
   textClassName = "",
   disabled = false,
   initialPreview,
-<<<<<<< HEAD
   onUploadSuccess,
   S3Folder = "",
 }: ImageUploadBoxProps) {
@@ -32,17 +27,6 @@ function ImageUploadBox({
 
   useEffect(() => {
     if (initialPreview) setPreview(initialPreview);
-=======
-  onFileSelected,
-}: ImageUploadBoxProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [preview, setPreview] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (initialPreview) {
-      setPreview(initialPreview);
-    }
->>>>>>> db105ae (afterrebase)
   }, [initialPreview]);
 
   const handleBoxClick = () => {
@@ -52,7 +36,6 @@ function ImageUploadBox({
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-<<<<<<< HEAD
 
     if (!(file instanceof File)) {
       alert("파일 형식이 잘못되었습니다.");
@@ -97,15 +80,6 @@ function ImageUploadBox({
       setIsUploading(false);
       e.target.value = "";
     }
-=======
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      const base64 = reader.result as string;
-      setPreview(base64);
-      onFileSelected?.(base64);
-    };
->>>>>>> db105ae (afterrebase)
   };
 
   return (

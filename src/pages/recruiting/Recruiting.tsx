@@ -11,12 +11,16 @@ import {
 function Recruiting() {
   const [selectedCategory, setSelectedCategory] = useState("기획/PM");
 <<<<<<< HEAD
+<<<<<<< HEAD
   const [selectedSkill, setSelectedSkill] = useState<string>("서비스 기획자");
 =======
   const [selectedSkill, setSelectedSkill] = useState<string>(
     selectedCategory[0]
   );
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+  const [selectedSkill, setSelectedSkill] = useState<string>("서비스 기획자");
+>>>>>>> 34e8bff (refactor/imageuploadBox)
   const [recruitList, setRecruitList] = useState<RecruitmentItem[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);

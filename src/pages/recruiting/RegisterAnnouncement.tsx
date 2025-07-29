@@ -51,6 +51,7 @@ function RegisterAnnouncement() {
   }, [state]);
 
   const selectedSkillLabel = lowSector.join(", ");
+<<<<<<< HEAD
 
   const handleSubmit = () => {
     if (!imageUrl) {
@@ -69,30 +70,25 @@ function RegisterAnnouncement() {
       recruiting_img: imageUrl,
     });
   };
+=======
+>>>>>>> 34e8bff (refactor/imageuploadBox)
 
-  const handleSubmit = async () => {
-    if (!imageFile) {
+  const handleSubmit = () => {
+    if (!imageUrl) {
       alert("이미지를 선택해주세요.");
       return;
     }
-    const data = {
-      title: title,
-      sectors: selectedSkills,
-      area: locationText,
+    registerPost({
+      title,
+      high_sector: highSector,
+      low_sector: lowSector,
+      area,
       require,
       salary,
       work_type: workType,
-      dead_line: formatedDate,
-      recruiting_img: imageFile,
-    };
-    try {
-      const response = await RegisterRecruitPost(data);
-      alert("공고가 성공적으로 등록되었습니다!");
-      nav("/recruit"); // 예시: 등록 후 공고 목록 페이지로 이동
-    } catch (error) {
-      console.error("공고 등록 실패:", error);
-      alert("공고 등록에 실패했습니다.");
-    }
+      dead_line: formattedDate,
+      recruiting_img: imageUrl,
+    });
   };
 
   const openModal = (type: "salary" | "calendar") => {
@@ -128,12 +124,17 @@ function RegisterAnnouncement() {
                   salary,
                   workType,
 <<<<<<< HEAD
+<<<<<<< HEAD
                   deadline: formattedDate,
                   recruiting_img: imageUrl,
 =======
                   deadline: formatedDate,
                   recruiting_img: imageFile,
 >>>>>>> db105ae (afterrebase)
+=======
+                  deadline: formattedDate,
+                  recruiting_img: imageUrl,
+>>>>>>> 34e8bff (refactor/imageuploadBox)
                 },
                 high_sector: highSector,
                 low_sector: lowSector,
@@ -176,6 +177,9 @@ function RegisterAnnouncement() {
             공고사진 첨부
           </span>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 34e8bff (refactor/imageuploadBox)
           <ImageUploadBox
             className="w-[349px] h-[384px] rounded-[16px] bg-ct-gray-100"
             textClassName="text-body2 text-ct-gray-300"
@@ -183,6 +187,7 @@ function RegisterAnnouncement() {
             onUploadSuccess={(url) => setImageUrl(url)}
             S3Folder="recruit"
           />
+<<<<<<< HEAD
 =======
           <div className="flex items-center">
             <ImageUploadBox
@@ -193,20 +198,28 @@ function RegisterAnnouncement() {
             />
           </div>
 >>>>>>> db105ae (afterrebase)
+=======
+>>>>>>> 34e8bff (refactor/imageuploadBox)
         </div>
         <span className="mt-[25px] mb-[23.29px] text-body1 text-ct-gray-300">
           등록된 공고는 ‘마이페이지’, ‘공고 관리’ 탭에서 확인 가능합니다.
         </span>
         <div className="flex justify-center mb-[42px]">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 34e8bff (refactor/imageuploadBox)
           <BottomCTAButton
             text={isPending ? "등록 중..." : "공고 등록하기"}
             disabled={isPending}
             onClick={handleSubmit}
           />
+<<<<<<< HEAD
 =======
           <BottomCTAButton text="공고 등록하기" onClick={handleSubmit} />
 >>>>>>> db105ae (afterrebase)
+=======
+>>>>>>> 34e8bff (refactor/imageuploadBox)
         </div>
       </div>
       <Modal>
