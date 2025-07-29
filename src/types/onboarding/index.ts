@@ -1,4 +1,3 @@
-export * from "./signin";
 export * from "./sendCode";
 export * from "./businessAuth";
 export * from "./oauth";

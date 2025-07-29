@@ -28,3 +28,6 @@ dev-dist
 
 # Claude AI local guide
 CLAUDE.md
+
+# Environment variables
+.env
