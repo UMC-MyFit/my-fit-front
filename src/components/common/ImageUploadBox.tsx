@@ -39,7 +39,7 @@ function ImageUploadBox({
 
     if (!(file instanceof File)) {
       alert("파일 형식이 잘못되었습니다.");
-      e.target.value = ""; // <- 동일 파일 재선택을 허용하기 위해 리셋
+      e.target.value = "";
       return;
     }
 

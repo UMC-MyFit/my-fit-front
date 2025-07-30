@@ -8,7 +8,6 @@ import {
   useUnSubscribeRecruitmentMutation,
 } from "../../apis/recruiting/recruiting";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 
 function RecruitAnnouncement() {
   const { recruitment_id } = useParams();
