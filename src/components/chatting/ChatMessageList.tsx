@@ -58,7 +58,7 @@ function ChatMessageList({ bottomRef }: Props) {
         return (
           <div className="flex flex-col">
             <div
-              key={msg.id}
+              key={msg.message_id}
               className={`flex ${
                 msg.sender_id === 1 ? "justify-end" : "justify-start" // 세션에서 myid 를 불러와서 같은거 확인해야할듯
               } ${MarginTop}`}

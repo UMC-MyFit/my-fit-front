@@ -99,7 +99,7 @@ function RecruitAnnouncement() {
           />
         )}
         <div className="mt-[26px] flex justify-between">
-          {isPending ? (
+          {isSubscribed ? (
             <img
               src="/assets/recruit/bookmark(on).svg"
               alt="bookmark"
