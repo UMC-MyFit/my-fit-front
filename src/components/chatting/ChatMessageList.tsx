@@ -12,23 +12,11 @@ interface Props {
 }
 
 function ChatMessageList({ bottomRef }: Props) {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-  const { messages } = useChatting();
-  const { name } = useUser();
-=======
->>>>>>> db105ae (afterrebase)
   const { messages, prependMessages, roomId } = useChatting();
   const { requestStatus } = useCoffeeChatModal();
   const { myId, senderId, name } = useUser();
   const { data } = useChatMessageQuery(roomId);
   const [statusMap, setStatusMap] = useState<Record<number, ChatBoxStatus>>({});
-<<<<<<< HEAD
-=======
->>>>>>> 94e21e5 (beforerebase)
->>>>>>> db105ae (afterrebase)
-
   useEffect(() => {
     if (data?.messages) prependMessages(data.messages);
   }, [data]);
