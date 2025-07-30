@@ -97,7 +97,7 @@ function RegisterAnnouncement() {
   };
 
   const TopBarContent = () => (
-    <span className="text-h2 font-Pretendard text-ct-black-300">공고 등록</span>
+    <span className="text-h2 text-ct-black-300">공고 등록</span>
   );
 
   return (
@@ -181,7 +181,7 @@ function RegisterAnnouncement() {
 =======
 >>>>>>> 34e8bff (refactor/imageuploadBox)
           <ImageUploadBox
-            className="w-[349px] h-[384px] rounded-[16px] bg-ct-gray-100"
+            className="w-auto h-[384px] rounded-[16px] bg-ct-gray-100"
             textClassName="text-body2 text-ct-gray-300"
             initialPreview={imageUrl}
             onUploadSuccess={(url) => setImageUrl(url)}

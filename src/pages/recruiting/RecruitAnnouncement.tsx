@@ -25,7 +25,7 @@ import {
 >>>>>>> 4b52133 (refactor/recruit)
 } from "../../apis/recruiting/recruiting";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import RecruitAnnouncementSkeleton from "../../components/skeletons/recruiting/RecruitAnnouncementSkeleton";
 
 function RecruitAnnouncement() {
 <<<<<<< HEAD
@@ -41,6 +41,7 @@ function RecruitAnnouncement() {
     useUnSubscribeRecruitmentMutation(recruitmentId);
 
   const [isSubscribed, setIsSubscribed] = useState<boolean | null>(null);
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
   const handleSubscribe = () => {
     subscribe(undefined, {
@@ -58,6 +59,7 @@ function RecruitAnnouncement() {
     });
   };
 
+<<<<<<< HEAD
 =======
   const { recruitmentId } = useParams();
   const recruitment_id = String(recruitmentId);
@@ -98,6 +100,34 @@ function RecruitAnnouncement() {
 =======
 
 >>>>>>> 4a75838 (before rebase)
+=======
+  useEffect(() => {
+    if (!isLoading) {
+      const timeout = setTimeout(() => {
+        setShowSkeleton(false);
+      }, 300);
+      return () => clearTimeout(timeout);
+    } else {
+      setShowSkeleton(true);
+    }
+  }, [isLoading]);
+
+  const formattedDeadLine = data?.result.recruitment.dead_line.split("T")[0];
+
+  if (isLoading || showSkeleton) {
+    return (
+      <TopBarContainer
+        TopBarContent={
+          <div className="w-[100px] h-[24px] bg-gray-200 rounded" />
+        }
+      >
+        <RecruitAnnouncementSkeleton />
+        <BottomNav />
+      </TopBarContainer>
+    );
+  }
+
+>>>>>>> ec2d7e9 (beforerebase)
   const TopBarContent = () => {
     return (
       <div className="flex items-center gap-[6px]">
@@ -127,6 +157,7 @@ function RecruitAnnouncement() {
 
   return (
     <TopBarContainer TopBarContent={<TopBarContent />}>
+<<<<<<< HEAD
       <div className="flex flex-col px-[19px] overflow-y-scroll">
         <div className="text-sub2 px-[5px] text-ct-main-blue-100">
 <<<<<<< HEAD
@@ -146,6 +177,11 @@ function RecruitAnnouncement() {
 =======
           {data?.result.recruitment.dead_line}
 >>>>>>> 4a75838 (before rebase)
+=======
+      <div className="flex flex-col px-[19px] pb-[100px] overflow-y-auto">
+        <div className="text-sub2 px-[5px] text-ct-main-blue-100 mt-[10px]">
+          마감일자 : {formattedDeadLine}
+>>>>>>> ec2d7e9 (beforerebase)
         </div>
         <ul className="flex flex-col mt-[12.5px]">
           <li className="flex gap-[24px] px-[5px] py-[13px] border-y border-ct-gray-200">
@@ -317,16 +353,17 @@ function RecruitAnnouncement() {
             imageUrl={data?.result.recruitment.recruiting_img}
 >>>>>>> 4a75838 (before rebase)
             alt="팀 상세 페이지"
-            className="w-full max-w-[349px] max-h-[300px] object-contain rounded-[16px] mx-auto"
+            className="w-full max-w-[349px] mt-[15px] rounded-[16px] mx-auto"
           />
         )}
 
         <div className="mt-[26px] flex justify-between">
-          {isSubscribed ? (
+          {data?.result.recruitment.is_subscribed ? (
             <img
               src="/assets/recruit/bookmark(on).svg"
               alt="bookmark"
               onClick={handleUnSubscribe}
+              className="ml-[19px]"
             />
           ) : (
             <img

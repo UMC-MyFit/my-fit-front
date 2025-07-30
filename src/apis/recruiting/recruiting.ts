@@ -79,6 +79,7 @@ export interface recruitmentDetailResponse {
       work_type: string;
       dead_line: string;
       recruiting_img: string;
+      is_subscribed: boolean;
       writer: UserInfo;
     };
 <<<<<<< HEAD
@@ -143,7 +144,7 @@ export const useRegisterRecruitPost = () => {
     mutationFn: (data: RegisterRecruitRequest) => RegisterRecruitPost(data),
     onSuccess: () => {
       alert("공고가 성공적으로 등록되었습니다.");
-      nav("/recruits");
+      nav("/recruit");
     },
   });
 };
