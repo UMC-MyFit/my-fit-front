@@ -52,16 +52,18 @@ export interface UserInfo {
 }
 export interface recruitmentDetailResponse {
   result: {
-    recruitment_id: number;
-    title: string;
-    low_sector: string;
-    area: string;
-    require: string;
-    salary: string;
-    work_type: string;
-    dead_line: string;
-    recruiting_img: string;
-    writer: UserInfo;
+    recruitment: {
+      recruitment_id: number;
+      title: string;
+      low_sector: string[];
+      area: string;
+      require: string;
+      salary: string;
+      work_type: string;
+      dead_line: string;
+      recruiting_img: string;
+      writer: UserInfo;
+    };
   };
 }
 export interface SubscribedRecruitment {
@@ -78,6 +80,12 @@ export interface SubscribeRecruitmentResponse {
     pagination: {
       total_page: number;
     };
+  };
+}
+export interface SubScribedResponse {
+  message: string;
+  result: {
+    is_subscribed: boolean;
   };
 }
 
@@ -144,7 +152,9 @@ export const usegetRecruitmentDetailQuery = (recruitment_id: string) => {
   });
 };
 
-export const subscribeRecruitment = async (recruitment_id: string) => {
+export const subscribeRecruitment = async (
+  recruitment_id: string
+): Promise<SubScribedResponse> => {
   const response = await apiInstance.post(
     `/api/recruitments/${recruitment_id}/subscribe`
   );
@@ -153,7 +163,7 @@ export const subscribeRecruitment = async (recruitment_id: string) => {
 
 export const useSubscribeRecruitmentMutation = (recruitment_id: string) => {
   const queryClient = useQueryClient();
-  return useMutation<void, Error, void>({
+  return useMutation({
     mutationFn: () => subscribeRecruitment(recruitment_id),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -164,7 +174,7 @@ export const useSubscribeRecruitmentMutation = (recruitment_id: string) => {
 };
 export const useUnSubscribeRecruitmentMutation = (recruitment_id: string) => {
   const queryClient = useQueryClient();
-  return useMutation<void, Error, void>({
+  return useMutation({
     mutationFn: () => unsubscribeRecruitment(recruitment_id),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -173,7 +183,9 @@ export const useUnSubscribeRecruitmentMutation = (recruitment_id: string) => {
     },
   });
 };
-export const unsubscribeRecruitment = async (recruitment_id: string) => {
+export const unsubscribeRecruitment = async (
+  recruitment_id: string
+): Promise<SubScribedResponse> => {
   const response = await apiInstance.delete(
     `/api/recruitments/${recruitment_id}/subscribe`
   );
