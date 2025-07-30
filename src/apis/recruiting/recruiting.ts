@@ -66,6 +66,9 @@ export interface UserInfo {
 export interface recruitmentDetailResponse {
   result: {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4a75838 (before rebase)
     recruitment: {
       recruitment_id: number;
       title: string;
@@ -78,6 +81,7 @@ export interface recruitmentDetailResponse {
       recruiting_img: string;
       writer: UserInfo;
     };
+<<<<<<< HEAD
 =======
     recruitment_id: number;
     title: string;
@@ -90,6 +94,8 @@ export interface recruitmentDetailResponse {
     recruiting_img: string;
     writer: UserInfo;
 >>>>>>> 34e8bff (refactor/imageuploadBox)
+=======
+>>>>>>> 4a75838 (before rebase)
   };
 }
 export interface SubscribedRecruitment {
@@ -116,6 +122,12 @@ export interface SubScribedResponse {
   };
 =======
 >>>>>>> 34e8bff (refactor/imageuploadBox)
+}
+export interface SubScribedResponse {
+  message: string;
+  result: {
+    is_subscribed: boolean;
+  };
 }
 
 export const RegisterRecruitPost = async (
@@ -193,10 +205,14 @@ export const subscribeRecruitment = async (
 export const useSubscribeRecruitmentMutation = (recruitment_id: string) => {
   const queryClient = useQueryClient();
 <<<<<<< HEAD
+<<<<<<< HEAD
   return useMutation({
 =======
   return useMutation<void, Error, void>({
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+  return useMutation({
+>>>>>>> 4a75838 (before rebase)
     mutationFn: () => subscribeRecruitment(recruitment_id),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -208,10 +224,14 @@ export const useSubscribeRecruitmentMutation = (recruitment_id: string) => {
 export const useUnSubscribeRecruitmentMutation = (recruitment_id: string) => {
   const queryClient = useQueryClient();
 <<<<<<< HEAD
+<<<<<<< HEAD
   return useMutation({
 =======
   return useMutation<void, Error, void>({
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+  return useMutation({
+>>>>>>> 4a75838 (before rebase)
     mutationFn: () => unsubscribeRecruitment(recruitment_id),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -221,12 +241,18 @@ export const useUnSubscribeRecruitmentMutation = (recruitment_id: string) => {
   });
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 export const unsubscribeRecruitment = async (
   recruitment_id: string
 ): Promise<SubScribedResponse> => {
 =======
 export const unsubscribeRecruitment = async (recruitment_id: string) => {
 >>>>>>> 4b52133 (refactor/recruit)
+=======
+export const unsubscribeRecruitment = async (
+  recruitment_id: string
+): Promise<SubScribedResponse> => {
+>>>>>>> 4a75838 (before rebase)
   const response = await apiInstance.delete(
     `/api/recruitments/${recruitment_id}/subscribe`
   );

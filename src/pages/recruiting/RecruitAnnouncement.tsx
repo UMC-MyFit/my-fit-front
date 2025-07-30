@@ -25,6 +25,7 @@ import {
 >>>>>>> 4b52133 (refactor/recruit)
 } from "../../apis/recruiting/recruiting";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 function RecruitAnnouncement() {
 <<<<<<< HEAD
@@ -35,6 +36,7 @@ function RecruitAnnouncement() {
   const { data, isLoading, isError } =
     usegetRecruitmentDetailQuery(recruitmentId);
   const { mutate: subscribe } = useSubscribeRecruitmentMutation(recruitmentId);
+<<<<<<< HEAD
   const { mutate: unsubscribe } =
     useUnSubscribeRecruitmentMutation(recruitmentId);
 
@@ -69,20 +71,39 @@ function RecruitAnnouncement() {
     usegetRecruitmentDetailQuery(recruitmentId);
   const { mutate: subscribe, isPending } =
     useSubscribeRecruitmentMutation(recruitmentId);
+=======
+>>>>>>> 4a75838 (before rebase)
   const { mutate: unsubscribe } =
     useUnSubscribeRecruitmentMutation(recruitmentId);
+
+  const [isSubscribed, setIsSubscribed] = useState<boolean | null>(null);
+
   const handleSubscribe = () => {
-    subscribe();
+    subscribe(undefined, {
+      onSuccess: (res: any) => {
+        setIsSubscribed(res?.is_subscribed ?? true);
+      },
+    });
   };
+
   const handleUnSubscribe = () => {
-    unsubscribe();
+    unsubscribe(undefined, {
+      onSuccess: (res: any) => {
+        setIsSubscribed(res?.is_subscribed ?? false);
+      },
+    });
   };
+<<<<<<< HEAD
 >>>>>>> db105ae (afterrebase)
+=======
+
+>>>>>>> 4a75838 (before rebase)
   const TopBarContent = () => {
     return (
       <div className="flex items-center gap-[6px]">
         <div className="w-[24px] h-[24px] bg-[#d9d9d9] rounded-[10px]" />
         <span className="text-h1 font-Pretendard text-ct-black-100 tracking-[-0.31px]">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -96,6 +117,9 @@ function RecruitAnnouncement() {
 =======
           {data?.result.writer.name}
 >>>>>>> 34e8bff (refactor/imageuploadBox)
+=======
+          {data?.result.recruitment.writer.name}
+>>>>>>> 4a75838 (before rebase)
         </span>
       </div>
     );
@@ -105,6 +129,7 @@ function RecruitAnnouncement() {
     <TopBarContainer TopBarContent={<TopBarContent />}>
       <div className="flex flex-col px-[19px] overflow-y-scroll">
         <div className="text-sub2 px-[5px] text-ct-main-blue-100">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -118,6 +143,9 @@ function RecruitAnnouncement() {
 =======
           {data?.result.dead_line}
 >>>>>>> 34e8bff (refactor/imageuploadBox)
+=======
+          {data?.result.recruitment.dead_line}
+>>>>>>> 4a75838 (before rebase)
         </div>
         <ul className="flex flex-col mt-[12.5px]">
           <li className="flex gap-[24px] px-[5px] py-[13px] border-y border-ct-gray-200">
@@ -125,6 +153,7 @@ function RecruitAnnouncement() {
               공고 제목
             </p>
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -138,6 +167,9 @@ function RecruitAnnouncement() {
 =======
               {data?.result.title}
 >>>>>>> 34e8bff (refactor/imageuploadBox)
+=======
+              {data?.result.recruitment.title}
+>>>>>>> 4a75838 (before rebase)
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px] border-b border-ct-gray-200">
@@ -145,6 +177,7 @@ function RecruitAnnouncement() {
               구인 직무
             </p>
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -158,6 +191,9 @@ function RecruitAnnouncement() {
 =======
               {data?.result.low_sector}
 >>>>>>> 34e8bff (refactor/imageuploadBox)
+=======
+              {data?.result.recruitment.low_sector}
+>>>>>>> 4a75838 (before rebase)
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px] border-b border-ct-gray-200">
@@ -165,6 +201,7 @@ function RecruitAnnouncement() {
               근무 지역
             </p>
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -178,6 +215,9 @@ function RecruitAnnouncement() {
 =======
               {data?.result.area}
 >>>>>>> 34e8bff (refactor/imageuploadBox)
+=======
+              {data?.result.recruitment.area}
+>>>>>>> 4a75838 (before rebase)
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px] border-b border-ct-gray-200">
@@ -185,6 +225,7 @@ function RecruitAnnouncement() {
               지원 조건
             </p>
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -198,6 +239,9 @@ function RecruitAnnouncement() {
 =======
               {data?.result.require}
 >>>>>>> 34e8bff (refactor/imageuploadBox)
+=======
+              {data?.result.recruitment.require}
+>>>>>>> 4a75838 (before rebase)
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px] border-b border-ct-gray-200">
@@ -205,6 +249,7 @@ function RecruitAnnouncement() {
               급여
             </p>
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -218,6 +263,9 @@ function RecruitAnnouncement() {
 =======
               {data?.result.salary}
 >>>>>>> 34e8bff (refactor/imageuploadBox)
+=======
+              {data?.result.recruitment.salary}
+>>>>>>> 4a75838 (before rebase)
             </p>
           </li>
           <li className="flex gap-[24px] px-[5px] py-[13px]">
@@ -225,6 +273,7 @@ function RecruitAnnouncement() {
               근무 형태
             </p>
             <p className="text-body1 text-ct-black-200 whitespace-pre-line">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -244,11 +293,16 @@ function RecruitAnnouncement() {
 =======
               {data?.result.work_type}
 >>>>>>> 34e8bff (refactor/imageuploadBox)
+=======
+              {data?.result.recruitment.work_type}
+>>>>>>> 4a75838 (before rebase)
             </p>
           </li>
         </ul>
-        {data?.result.recruiting_img && (
+
+        {data?.result.recruitment.recruiting_img && (
           <ImageDisplay
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             imageUrl={imgUrl}
@@ -259,13 +313,16 @@ function RecruitAnnouncement() {
 =======
             imageUrl={data?.result.recruiting_img}
 >>>>>>> 34e8bff (refactor/imageuploadBox)
+=======
+            imageUrl={data?.result.recruitment.recruiting_img}
+>>>>>>> 4a75838 (before rebase)
             alt="팀 상세 페이지"
             className="w-full max-w-[349px] max-h-[300px] object-contain rounded-[16px] mx-auto"
           />
         )}
 
         <div className="mt-[26px] flex justify-between">
-          {isPending ? (
+          {isSubscribed ? (
             <img
               src="/assets/recruit/bookmark(on).svg"
               alt="bookmark"
