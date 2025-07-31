@@ -5,8 +5,7 @@ import { useAuth } from "../../contexts/AuthContext";
 
 function Splash() {
   const navigate = useNavigate();
-  const { setIsLoggedIn, setUser } = useAuth();
-
+  const { login: authLogin } = useAuth();
   // 폼 상태
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,13 +25,12 @@ function Splash() {
       const response = await login({ email, password });
 
       if (response.isSuccess) {
-        // 로그인 성공
-        setUser({
+        // 로그인 성공 - 세션 기반 인증이므로 사용자 정보만 저장
+        authLogin({
           id: response.result.service_id,
           username: response.result.name,
           email: response.result.email,
         });
-        setIsLoggedIn(true);
         navigate("/feed/feed-main"); // 메인 페이지로 이동
       }
     } catch (apiError) {

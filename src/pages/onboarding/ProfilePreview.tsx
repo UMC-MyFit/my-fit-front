@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import TopBarContainer from "../../components/common/TopBarContainer";
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
 import CardPreview from "../../components/onboarding/CardPreview";
@@ -6,7 +6,6 @@ import { useSignup } from "../../contexts/SignupContext";
 
 function CompanyPreview() {
   const location = useLocation();
-  const navigate = useNavigate();
   const { signupData } = useSignup();
   
   // ProfileCardRegister에서 전달된 데이터
@@ -25,16 +24,8 @@ function CompanyPreview() {
   
   const TopBarContent = () => {
     return (
-      <div className="relative w-full ct-center">
-        <span className="text-ct-black-100 text-h1">미리보기 </span>
-        <div className="absolute right-[22px]">
-          <button 
-            onClick={() => navigate(-1)} // 이전 페이지로 돌아가기
-            className="text-sub2 text-ct-main-blue-100 cursor-pointer"
-          >
-            완료
-          </button>
-        </div>
+      <div className="flex ct-center">
+        <span className="text-ct-black-100 text-h1">미리보기</span>
       </div>
     );
   };
