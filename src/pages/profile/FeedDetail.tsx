@@ -19,16 +19,13 @@ const TopBarContent = () => {
 function FeedDetail() {
   const { user } = useAuth();
 
-  const { data: feed, isLoading } = useGetFeeds({
-    service_id: user?.id.toString() || "",
-  });
-
-  const allFeeds = feed?.pages.flatMap((page) => page.result.feeds);
+  const isFetching = false;
+  // const allFeeds = feed?.pages.flatMap((page) => page.result.feeds);
 
   return (
     <TopBarContainer TopBarContent={<TopBarContent />}>
       <div className="w-full h-full bg-ct-gray-100 flex flex-col gap-[7px]">
-        {isLoading ? (
+        {isFetching ? (
           <>
             <DetailIntroductionSkeleton />
             <DetailFeedItemSkeleton />
@@ -36,9 +33,9 @@ function FeedDetail() {
         ) : (
           <>
             <DetailIntroduction />
-            {allFeeds?.map((feed) => (
+            {/* {allFeeds?.map((feed) => (
               <DetailFeedItem key={feed.feed_id} item={feed} />
-            ))}
+            ))} */}
           </>
         )}
       </div>

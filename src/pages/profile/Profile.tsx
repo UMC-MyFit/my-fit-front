@@ -12,7 +12,8 @@ import IntroductionDescriptionSkeleton from "../../components/skeletons/mypage/I
 import CompanyLinkSkeleton from "../../components/skeletons/mypage/CompanyLinkSkeleton";
 import NetworkingBarSkeleton from "../../components/skeletons/mypage/NetworkingBarSkeleton";
 import ProfileCardSkeleton from "../../components/skeletons/mypage/ProfileCardSkeleton";
-import { useGetProfile } from "../../hooks/mypageQueries";
+import { useGetFeeds, useGetProfile } from "../../hooks/mypageQueries";
+import { useAuth } from "../../contexts/AuthContext";
 
 function ProfileItem({
   editProfile,
@@ -23,7 +24,9 @@ function ProfileItem({
 }) {
   const [selectedTab, setSelectedTab] = useState<"card" | "feed">("card");
 
-  const { data: profile, isLoading } = useGetProfile();
+  const { user } = useAuth();
+
+  const isLoading = false;
 
   return (
     <>
@@ -44,12 +47,12 @@ function ProfileItem({
             <Introduction setEditProfile={setEditProfile} />
             <div className="mt-[20px] w-[335px]">
               <span className="text-ct-black-100 text-body1">
-                {profile?.result.user.one_line_profile}
+                {/* {profile?.result.user.one_line_profile} */}
               </span>
             </div>
-            {profile?.result.user.link && (
+            {/* {profile?.result.user.link && (
               <CompanyLink link={profile?.result.user.link} />
-            )}
+            )} */}
             <NetworkingBar />
           </>
         )}

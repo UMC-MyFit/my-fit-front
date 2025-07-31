@@ -150,6 +150,10 @@ export interface CardItem {
 export interface GetCardsResponse extends BaseResponse {
   result: {
     cards: CardItem[];
+    pagination: {
+      hasMore: boolean;
+      nextCursorId: string;
+    };
   };
 }
 export const getCards = async ({

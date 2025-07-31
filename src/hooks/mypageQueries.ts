@@ -1,5 +1,5 @@
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
-import { getProfile, getFeeds } from "../apis/mypageAPI";
+import { getProfile, getFeeds, getCards } from "../apis/mypageAPI";
 
 export const useGetProfile = () => {
   return useQuery({
@@ -25,5 +25,16 @@ export const useGetFeeds = ({ service_id }: { service_id: string }) => {
 };
 
 export const useGetCards = ({ service_id }: { service_id: string }) => {
-  return;
+  return useInfiniteQuery({
+    queryKey: ["cards", service_id],
+    queryFn: ({ pageParam = "0" }) =>
+      getCards({ service_id, cursor: pageParam }),
+    staleTime: 1000 * 60,
+    initialPageParam: "0",
+    getNextPageParam: (lastPage) => {
+      if (!lastPage.result.pagination.hasMore) return undefined;
+      return lastPage.result.pagination.nextCursorId;
+    },
+    enabled: !!service_id,
+  });
 };
