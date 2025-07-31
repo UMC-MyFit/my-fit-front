@@ -22,7 +22,11 @@ function RequestCoffeeChat() {
     hour: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
     minute: ["00", "10", "20", "30", "40", "50"],
   };
-  const [pickerValue, setPickerValue] = useState({
+  const [pickerValue, setPickerValue] = useState<{
+    time: string;
+    hour: string;
+    minute: string;
+  }>({
     time: "AM",
     hour: "1",
     minute: "00",
@@ -44,26 +48,71 @@ function RequestCoffeeChat() {
       <div className="w-full h-auto ct-center flex-col">
         <Calendar />
         <div className="w-full my-10">
-          <Picker value={pickerValue} onChange={setPickerValue} height={100}>
-            {Object.keys(selections).map((name) => (
-              <Picker.Column key={name} name={name}>
-                {selections[name as keyof typeof selections].map((option) => (
-                  <Picker.Item key={option} value={option}>
-                    {({ selected }) => (
-                      <div
-                        className={
-                          selected
-                            ? "text-ct-main-blue-200 font-semibold"
-                            : "text-ct-gray-400"
-                        }
-                      >
-                        {option}
-                      </div>
-                    )}
-                  </Picker.Item>
-                ))}
-              </Picker.Column>
-            ))}
+          <Picker
+            value={pickerValue}
+            onChange={(newValue) =>
+              setPickerValue((prev) => ({ ...prev, ...newValue }))
+            }
+            height={100}
+            style={{ padding: "0 40px" }}
+          >
+            <Picker.Column name={"time"} style={{ flex: 1 }}>
+              {selections["time"].map((option) => (
+                <Picker.Item key={option} value={option}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? "text-ct-main-blue-200 font-semibold"
+                          : "text-ct-gray-400"
+                      }
+                    >
+                      {option}
+                    </div>
+                  )}
+                </Picker.Item>
+              ))}
+            </Picker.Column>
+            <Picker.Column name={"hour"} style={{ flex: 3 }}>
+              {selections["hour"].map((option) => (
+                <Picker.Item key={option} value={option}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? "text-ct-main-blue-200 font-semibold"
+                          : "text-ct-gray-400"
+                      }
+                    >
+                      {option}
+                    </div>
+                  )}
+                </Picker.Item>
+              ))}
+            </Picker.Column>
+            <div className="h-[100px] flex items-center">
+              <span>시</span>
+            </div>
+            <Picker.Column name={"minute"} style={{ flex: 3 }}>
+              {selections["minute"].map((option) => (
+                <Picker.Item key={option} value={option}>
+                  {({ selected }) => (
+                    <div
+                      className={
+                        selected
+                          ? "text-ct-main-blue-200 font-semibold"
+                          : "text-ct-gray-400"
+                      }
+                    >
+                      {option}
+                    </div>
+                  )}
+                </Picker.Item>
+              ))}
+            </Picker.Column>
+            <div className="h-[100px] flex items-center">
+              <span>분</span>
+            </div>
           </Picker>
         </div>
         <PlacePicker />
