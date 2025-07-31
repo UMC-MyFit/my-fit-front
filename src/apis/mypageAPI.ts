@@ -8,18 +8,26 @@ export interface BaseResponse {
 
 export interface GetProfileResponse extends BaseResponse {
   result: {
-    id: string;
-    name: string;
-    one_line_profile: string;
-    birth_data: string;
-    Highest_grade: string;
-    link: string;
-    division: string;
-    grade_status: string;
-    created_at: string;
-    updated_at: string;
-    is_profile_completed: boolean;
-  } | null;
+    service: {
+      id: number;
+      recruiting_status: string;
+      profile_img: string;
+      high_sector: string;
+      low_sector: string;
+    };
+    user: {
+      id: number;
+      name: string;
+      one_line_profile: string;
+      Highest_grade: string | null;
+      link: string | null;
+      inc_AuthN_file: string | null;
+      division: string;
+      grade_status: string;
+      industry: string | null;
+      team_division: string | null;
+    };
+  };
 }
 export const getProfile = async (): Promise<GetProfileResponse> => {
   try {
@@ -37,7 +45,7 @@ export interface UpdateProfileImageResponse extends BaseResponse {
   result: {
     user_id: string;
     profile_img: string;
-  } | null;
+  };
 }
 export const updateProfileImage = async ({
   profile_img,
@@ -61,7 +69,7 @@ export interface UpdateProfileStatusResponse extends BaseResponse {
     user_id: string;
     service_id: string;
     recruiting_status: string;
-  } | null;
+  };
 }
 export const updateProfileStatus = async ({
   recruiting_status,
