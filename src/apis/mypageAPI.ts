@@ -1,6 +1,6 @@
 import apiClient from "./apiClient";
 
-export interface BaseResponse {
+interface BaseResponse {
   isSuccess: boolean;
   code: number;
   message: string;
