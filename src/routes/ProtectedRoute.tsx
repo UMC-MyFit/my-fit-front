@@ -9,7 +9,7 @@ function ProtectedRoute() {
     return <div>로딩 중...</div>;
   }
 
-  return isLoggedIn ? <Outlet /> : <Navigate to="/login" replace />;
+  return isLoggedIn ? <Outlet /> : <Navigate to="/onboarding" replace />;
 }
 
 export default ProtectedRoute;

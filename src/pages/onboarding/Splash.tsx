@@ -1,16 +1,25 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { login } from "../../apis/auth";
 import { useAuth } from "../../contexts/AuthContext";
 
 function Splash() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login: authLogin } = useAuth();
   // 폼 상태
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  // 카드 등록 완료 후 전달된 메시지 표시
+  useEffect(() => {
+    if (location.state?.message) {
+      setSuccessMessage(location.state.message);
+    }
+  }, [location.state]);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -101,6 +110,13 @@ function Splash() {
           onKeyDown={(e) => e.key === "Enter" && handleLogin()}
           className="w-full px-4 py-3 mb-2 rounded-md bg-transparent border border-ct-white text-ct-white placeholder:text-ct-white disabled:opacity-50"
         />
+
+        {/* 성공 메시지 */}
+        {successMessage && (
+          <p className="w-full text-green-400 text-body2 mb-4 text-center">
+            {successMessage}
+          </p>
+        )}
 
         {/* 에러 메시지 */}
         {error && (

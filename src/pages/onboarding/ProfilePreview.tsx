@@ -11,7 +11,7 @@ function CompanyPreview() {
   // ProfileCardRegister에서 전달된 데이터
   const cardData = location.state?.cardData || {};
   const {
-    localImagePreview = "/assets/profile/profileImage.png", // 기본 이미지
+    cardImageUrl = "/assets/profile/profileImage.png", // 기본 이미지
     oneLineIntro = "기본 한줄 소개",
     detailedDescription = "기본 상세 설명",
     link = "",
@@ -44,7 +44,7 @@ function CompanyPreview() {
           </div>
           {/* 카드 미리보기 */}
           <CardPreview
-            profileImage={localImagePreview} // 로컬 이미지 사용
+            profileImage={cardImageUrl} // S3 업로드된 이미지 사용
             companyName={userName} // SignupContext에서 가져온 사용자 이름
             badge={userJobTitle} // SignupContext의 희망직무 또는 첫 번째 키워드
             summary={oneLineIntro} // 전달된 한줄 소개
