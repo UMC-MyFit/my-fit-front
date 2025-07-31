@@ -23,7 +23,7 @@ function ProfileItem({
 }) {
   const [selectedTab, setSelectedTab] = useState<"card" | "feed">("card");
 
-  const { data, isLoading } = useGetProfile();
+  const { data: profile, isLoading } = useGetProfile();
 
   return (
     <>
@@ -33,25 +33,26 @@ function ProfileItem({
         }`}
       >
         {isLoading ? (
-          <IntroductionSkeleton />
+          <>
+            <IntroductionSkeleton />
+            <IntroductionDescriptionSkeleton />
+            <CompanyLinkSkeleton />
+            <NetworkingBarSkeleton />
+          </>
         ) : (
-          <Introduction setEditProfile={setEditProfile} />
+          <>
+            <Introduction setEditProfile={setEditProfile} />
+            <div className="mt-[20px] w-[335px]">
+              <span className="text-ct-black-100 text-body1">
+                {profile?.result.user.one_line_profile}
+              </span>
+            </div>
+            {profile?.result.user.link && (
+              <CompanyLink link={profile?.result.user.link} />
+            )}
+            <NetworkingBar />
+          </>
         )}
-        {isLoading ? (
-          <div className="mt-[20px] w-[335px]">
-            <span className="text-ct-black-100 text-body1">
-              성과로 증명하는 디지털 광고 전략가입니다. 🤩
-            </span>
-          </div>
-        ) : (
-          <IntroductionDescriptionSkeleton />
-        )}
-        {isLoading ? (
-          <CompanyLinkSkeleton />
-        ) : (
-          <CompanyLink link="www.injaecompany.com" />
-        )}
-        {isLoading ? <NetworkingBarSkeleton /> : <NetworkingBar />}
         <div className="w-full h-[40px] bg-ct-gray-100 flex sticky top-0 mt-[17px] mb-[17px]">
           <div
             className="flex-1 ct-center relative"

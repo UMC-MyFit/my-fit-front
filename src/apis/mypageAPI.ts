@@ -94,10 +94,11 @@ export interface FeedItem {
   user: {
     id: string;
     name: string;
+    sector: string;
     profile_img: string;
   };
   created_at: string;
-  image: string[];
+  images: string[];
   feed_text: string;
   hashtags: string;
   heart: number;
@@ -115,11 +116,9 @@ export interface GetFeedsResponse extends BaseResponse {
 export const getFeeds = async ({
   service_id,
   cursor,
-  limit = "10",
 }: {
   service_id: string;
   cursor: string;
-  limit: string;
 }): Promise<GetFeedsResponse> => {
   try {
     const { data } = await apiClient.get<GetFeedsResponse>(
@@ -127,7 +126,7 @@ export const getFeeds = async ({
       {
         params: {
           cursor,
-          limit,
+          limit: "10",
         },
       }
     );
@@ -156,11 +155,9 @@ export interface GetCardsResponse extends BaseResponse {
 export const getCards = async ({
   service_id,
   cursor,
-  limit = "10",
 }: {
   service_id: string;
   cursor: string;
-  limit: string;
 }): Promise<GetCardsResponse> => {
   try {
     const { data } = await apiClient.get<GetCardsResponse>(
@@ -168,7 +165,7 @@ export const getCards = async ({
       {
         params: {
           cursor,
-          limit,
+          limit: "10",
         },
       }
     );
