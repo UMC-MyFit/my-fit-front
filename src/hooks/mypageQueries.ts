@@ -1,5 +1,16 @@
-import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
-import { getProfile, getFeeds, getCards } from "../apis/mypageAPI";
+import {
+  useQuery,
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
+import {
+  getProfile,
+  getFeeds,
+  getCards,
+  updateProfileImage,
+  updateProfileStatus,
+} from "../apis/mypageAPI";
 
 export const useGetProfile = () => {
   return useQuery({
@@ -36,5 +47,35 @@ export const useGetCards = ({ service_id }: { service_id: string }) => {
       return lastPage.result.pagination.nextCursorId;
     },
     enabled: !!service_id,
+  });
+};
+
+export const useUpdateProfileImage = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ profile_img }: { profile_img: string }) =>
+      updateProfileImage({ profile_img }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
+    },
+    onError: (error) => {
+      console.error("Failed to update profile image:", error);
+    },
+  });
+};
+
+export const useUpdateProfileStatus = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ recruiting_status }: { recruiting_status: string }) =>
+      updateProfileStatus({ recruiting_status }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
+    },
+    onError: (error) => {
+      console.error("Failed to update profile status:", error);
+    },
   });
 };

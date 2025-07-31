@@ -25,8 +25,18 @@ function ProfileItem({
   const [selectedTab, setSelectedTab] = useState<"card" | "feed">("card");
 
   const { user } = useAuth();
+  const { data: profile, isLoading } = useGetProfile();
 
-  const isLoading = false;
+  if (isLoading) {
+    return (
+      <>
+        <IntroductionSkeleton />
+        <IntroductionDescriptionSkeleton />
+        <CompanyLinkSkeleton />
+        <NetworkingBarSkeleton />
+      </>
+    );
+  }
 
   return (
     <>
@@ -35,27 +45,16 @@ function ProfileItem({
           editProfile ? "blur-sm" : ""
         }`}
       >
-        {isLoading ? (
-          <>
-            <IntroductionSkeleton />
-            <IntroductionDescriptionSkeleton />
-            <CompanyLinkSkeleton />
-            <NetworkingBarSkeleton />
-          </>
-        ) : (
-          <>
-            <Introduction setEditProfile={setEditProfile} />
-            <div className="mt-[20px] w-[335px]">
-              <span className="text-ct-black-100 text-body1">
-                {/* {profile?.result.user.one_line_profile} */}
-              </span>
-            </div>
-            {/* {profile?.result.user.link && (
+        <Introduction setEditProfile={setEditProfile} />
+        <div className="mt-[20px] w-[335px]">
+          <span className="text-ct-black-100 text-body1">
+            {/* {profile?.result.user.one_line_profile} */}
+          </span>
+        </div>
+        {/* {profile?.result.user.link && (
               <CompanyLink link={profile?.result.user.link} />
             )} */}
-            <NetworkingBar />
-          </>
-        )}
+        <NetworkingBar />
         <div className="w-full h-[40px] bg-ct-gray-100 flex sticky top-0 mt-[17px] mb-[17px]">
           <div
             className="flex-1 ct-center relative"
@@ -103,7 +102,12 @@ function ProfileItem({
         )}
         <CreateItemButton />
       </div>
-      {editProfile && <EditProfile setEditProfile={setEditProfile} />}
+      {editProfile && profile && (
+        <EditProfile
+          setEditProfile={setEditProfile}
+          imageUrl={profile.result.service.profile_img}
+        />
+      )}
     </>
   );
 }
