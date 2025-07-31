@@ -32,7 +32,7 @@ export interface GetProfileResponse extends BaseResponse {
 export const getProfile = async (): Promise<GetProfileResponse> => {
   try {
     const { data } = await apiClient.get<GetProfileResponse>(
-      `mypage/profile_info`
+      `api/mypage/profile_info`
     );
     return data;
   } catch (error) {

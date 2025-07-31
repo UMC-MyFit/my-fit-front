@@ -12,6 +12,7 @@ import IntroductionDescriptionSkeleton from "../../components/skeletons/mypage/I
 import CompanyLinkSkeleton from "../../components/skeletons/mypage/CompanyLinkSkeleton";
 import NetworkingBarSkeleton from "../../components/skeletons/mypage/NetworkingBarSkeleton";
 import ProfileCardSkeleton from "../../components/skeletons/mypage/ProfileCardSkeleton";
+import { useGetProfile } from "../../hooks/mypageQueries";
 
 function ProfileItem({
   editProfile,
@@ -21,13 +22,8 @@ function ProfileItem({
   setEditProfile: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [selectedTab, setSelectedTab] = useState<"card" | "feed">("card");
-  const [isReady, setIsReady] = useState<boolean>(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsReady(true);
-    }, 3000);
-  }, []);
+  const { data, isLoading } = useGetProfile();
 
   return (
     <>
@@ -36,12 +32,12 @@ function ProfileItem({
           editProfile ? "blur-sm" : ""
         }`}
       >
-        {isReady ? (
-          <Introduction setEditProfile={setEditProfile} />
-        ) : (
+        {isLoading ? (
           <IntroductionSkeleton />
+        ) : (
+          <Introduction setEditProfile={setEditProfile} />
         )}
-        {isReady ? (
+        {isLoading ? (
           <div className="mt-[20px] w-[335px]">
             <span className="text-ct-black-100 text-body1">
               성과로 증명하는 디지털 광고 전략가입니다. 🤩
@@ -50,12 +46,12 @@ function ProfileItem({
         ) : (
           <IntroductionDescriptionSkeleton />
         )}
-        {isReady ? (
-          <CompanyLink link="www.injaecompany.com" />
-        ) : (
+        {isLoading ? (
           <CompanyLinkSkeleton />
+        ) : (
+          <CompanyLink link="www.injaecompany.com" />
         )}
-        {isReady ? <NetworkingBar /> : <NetworkingBarSkeleton />}
+        {isLoading ? <NetworkingBarSkeleton /> : <NetworkingBar />}
         <div className="w-full h-[40px] bg-ct-gray-100 flex sticky top-0 mt-[17px] mb-[17px]">
           <div
             className="flex-1 ct-center relative"
@@ -93,10 +89,10 @@ function ProfileItem({
           </div>
         </div>
         {selectedTab === "card" ? (
-          isReady ? (
-            <ProfileCardContainer />
-          ) : (
+          isLoading ? (
             <ProfileCardSkeleton />
+          ) : (
+            <ProfileCardContainer />
           )
         ) : (
           <ProfileFeedContainer />
