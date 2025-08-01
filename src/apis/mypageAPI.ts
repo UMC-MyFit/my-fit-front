@@ -6,10 +6,6 @@ interface BaseResponse {
   message: string;
 }
 
-export interface UserAreaType {
-  high_area: string;
-  low_area: string;
-}
 export interface GetProfileResponse extends BaseResponse {
   result: {
     service: {
@@ -18,7 +14,10 @@ export interface GetProfileResponse extends BaseResponse {
       profile_img: string;
       high_sector: string;
       low_sector: string;
-      userAreas: UserAreaType[];
+      userAreas: {
+        high_area: string;
+        low_area: string;
+      };
     };
     user: {
       id: number;
@@ -32,6 +31,8 @@ export interface GetProfileResponse extends BaseResponse {
       industry: string | null;
       team_division: string | null;
     };
+    interest_count: number;
+    network_count: number;
   };
 }
 export const getProfile = async ({

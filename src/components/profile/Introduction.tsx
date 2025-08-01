@@ -7,7 +7,6 @@ function Introduction({
 }: {
   setEditProfile: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const certificated = true;
   const navigate = useNavigate();
   const { user } = useAuth();
   const { data: profile, isLoading } = useGetProfile({
@@ -46,10 +45,14 @@ function Introduction({
             )}
           </div>
           <div className="flex flex-col h-[50px]">
-            <span className="text-body1 text-ct-gray-300">수원</span>
-            <span className="text-body1 text-ct-sub-blue-300">광고마케터</span>
+            <span className="text-body1 text-ct-gray-300">
+              {`${profile?.result.service.userAreas.high_area} ${profile?.result.service.userAreas.low_area}`}
+            </span>
+            <span className="text-body1 text-ct-sub-blue-300">
+              {profile?.result.service.low_sector}
+            </span>
             <span className="text-body1 text-ct-black-100 whitespace-nowrap">
-              광운대학교 4학년 2학기 재학
+              {`${profile?.result.user.Highest_grade} ${profile?.result.user.grade_status}`}
             </span>
           </div>
         </div>
@@ -58,7 +61,9 @@ function Introduction({
             className="w-full h-[29px] rounded-[3px] ct-center bg-ct-main-blue-200"
             onClick={() => navigate("/mypage/status")}
           >
-            <span className="text-ct-white text-body1">구직중</span>
+            <span className="text-ct-white text-body1">
+              {profile?.result.service.recruiting_status}
+            </span>
           </div>
           <div className="w-full h-[40px] flex flex-col justify-between">
             <div className="flex justify-end items-center gap-2 h-[20px]">
@@ -67,7 +72,9 @@ function Introduction({
                 alt="네트워킹"
                 className="w-[20px] h-[20px]"
               />
-              <span className="text-ct-gray-300 text-body2">70</span>
+              <span className="text-ct-gray-300 text-body2">
+                {profile?.result.network_count}
+              </span>
             </div>
             <div className="flex items-center gap-2 justify-end h-[16px]">
               <img
@@ -75,7 +82,9 @@ function Introduction({
                 alt="팔로우"
                 className="w-[11px] h-[11px]"
               />
-              <span className="text-ct-gray-300 text-body2">177</span>
+              <span className="text-ct-gray-300 text-body2">
+                {profile?.result.interest_count}
+              </span>
             </div>
           </div>
         </div>
