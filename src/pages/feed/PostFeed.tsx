@@ -38,7 +38,7 @@ function PostFeed() {
       alert("게시글이 작성되었습니다!");
       // 피드 목록 새로고침
       queryClient.invalidateQueries({ queryKey: ['feeds'] });
-      navigate("/feed/feed-main");
+      navigate("/feed");
     },
     onError: (error) => {
       console.error("❌ [PostFeed] 피드 작성 실패:", error);
