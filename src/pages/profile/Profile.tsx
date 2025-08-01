@@ -1,9 +1,8 @@
 import Introduction from "../../components/profile/Introduction";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ProfileCardContainer from "../../components/profile/ProfileCardContainer";
 import ProfileFeedContainer from "../../components/profile/ProfileFeedContainer";
 import CreateItemButton from "../../components/profile/CreateItemButton";
-import NetworkingBar from "../../components/profile/NetworkingBar";
 import CompanyLink from "../../components/profile/CompanyLink";
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
 import EditProfile from "./EditProfile";
@@ -54,7 +53,6 @@ function ProfileItem({
         {/* {profile?.result.user.link && (
               <CompanyLink link={profile?.result.user.link} />
             )} */}
-        <NetworkingBar />
         <div className="w-full h-[40px] bg-ct-gray-100 flex sticky top-0 mt-[17px] mb-[17px]">
           <div
             className="flex-1 ct-center relative"
