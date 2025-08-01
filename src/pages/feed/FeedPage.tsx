@@ -22,14 +22,12 @@ import CommentModal from "../../components/feed/CommentModal";
 import { motion, AnimatePresence } from "framer-motion";
 import getTimeAgo from "../../utils/timeAgo";
 import { useAuth } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 export default function FeedPage() {
   const [activePostId, setActivePostId] = useState<string | null>(null);
   const queryClient = useQueryClient();
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const { user } = useAuth(); // 현재 사용자 정보
-  const navigate = useNavigate();
 
   // 좋아요 추가 mutation
   const addLikeMutation = useMutation({
