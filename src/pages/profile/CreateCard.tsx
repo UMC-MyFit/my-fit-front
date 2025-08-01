@@ -38,7 +38,9 @@ function CreateCard() {
   }, [location.state]);
 
   const TopBarContent = () => {
-    return <span className="text-h2 font-sans text-ct-black-300">프로필</span>;
+    return (
+      <span className="text-h2 font-sans text-ct-black-300">카드 추가</span>
+    );
   };
 
   const handleSubmit = async () => {
@@ -113,18 +115,7 @@ function CreateCard() {
   return (
     <TopBarContainer TopBarContent={<TopBarContent />}>
       <div className="relative flex flex-col pt-[24px] mx-[22px] border-t border-ct-gray-200">
-        {/* ✅ 스텝 인디케이터 */}
-        <div className="absolute top-[8px] right-0 flex items-center gap-[6px]">
-          {/* 스텝 아이콘 */}
-          <img src="/public/assets/onboarding/nonestep.svg" alt="none" />
-          <img src="/public/assets/onboarding/step2.svg" alt="현재 스텝 2" />
-        </div>
         <div className="flex flex-col mt-[25px] mb-[31px]">
-          {/* 안내 텍스트 */}
-          <p className="text-sub2 text-ct-gray-300  mb-[17px]">
-            첫 이력/활동 카드를 등록해보세요. <br />
-            '일'과 관련된 것이라면 무엇이든 좋아요.
-          </p>
           <ImageUploadBox
             className="w-full h-[407.5px] rounded-[5px] bg-ct-gray-100"
             textClassName="text-body2 font-Pretendard text-ct-gray-300"
@@ -160,8 +151,8 @@ function CreateCard() {
           showCounter={true}
           helperText={
             <span>
-              카드 클릭 시 상세 설명이 표시됩니다. <br />
-              300자 이내로 내용을 입력해주세요!
+              카드 클릭 시 상세 설명이 표시됩니다. 300자 이내로 내용을
+              입력해주세요!
             </span>
           }
         />{" "}
@@ -170,7 +161,7 @@ function CreateCard() {
           value={link}
           onChange={(e) => setLink(e.target.value)}
           helperText={
-            <span>나를 소개할 수 있는 링크가 있다면 공유해주세요!</span>
+            <span>카드에 대해 소개할 수 있는 링크가 있다면 공유해주세요!</span>
           }
         />
         <div className="flex flex-col items-start  mb-[24px]">
@@ -182,7 +173,7 @@ function CreateCard() {
             <button
               type="button"
               onClick={() =>
-                navigate("/onboarding/keyword-selector", {
+                navigate("/mypage/keyword-selector", {
                   state: {
                     from: "company-card-register",
                     currentData: {

@@ -46,7 +46,7 @@ function Introduction({
           </div>
           <div className="flex flex-col h-[50px]">
             <span className="text-body1 text-ct-gray-300">
-              {`${profile?.result.service.userAreas.high_area} ${profile?.result.service.userAreas.low_area}`}
+              {`${profile?.result.service.userArea.high_area} ${profile?.result.service.userArea.low_area}`}
             </span>
             <span className="text-body1 text-ct-sub-blue-300">
               {profile?.result.service.low_sector}

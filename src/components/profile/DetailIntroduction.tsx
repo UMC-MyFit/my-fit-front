@@ -23,7 +23,7 @@ function DetailIntroduction() {
           {profile?.result.user.name}
         </span>
         <span className="text-sub2 text-ct-blue-gray-100">
-          {profile?.result.user.industry}
+          {profile?.result.service.low_sector}
         </span>
       </div>
       <div className="w-full h-[61px]" />

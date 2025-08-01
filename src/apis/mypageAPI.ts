@@ -14,7 +14,7 @@ export interface GetProfileResponse extends BaseResponse {
       profile_img: string;
       high_sector: string;
       low_sector: string;
-      userAreas: {
+      userArea: {
         high_area: string;
         low_area: string;
       };

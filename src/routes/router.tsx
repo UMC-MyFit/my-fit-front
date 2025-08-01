@@ -48,6 +48,7 @@ import FeedContainer from "../pages/outlets/FeedContainer";
 import ChattingContainer from "../pages/outlets/ChattingContainer";
 import RecruitingContainer from "../pages/outlets/RecruitingContainer";
 import CreateCard from "../pages/profile/CreateCard";
+import CardKeyword from "../pages/profile/CardKeyword";
 import { ChattingProvider } from "../contexts/ChattingContext";
 import ChattingWrapper from "../pages/chatting/ChattingWrapper";
 
@@ -105,6 +106,7 @@ const router = createBrowserRouter([
               { path: "networking", element: <Networking /> },
               { path: "setting", element: <MypageSetting /> },
               { path: "create-card", element: <CreateCard /> },
+              { path: "keyword-selector", element: <CardKeyword /> },
             ],
           },
 
