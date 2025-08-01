@@ -1,18 +1,25 @@
-import Introduction from "../../components/profile/Introduction";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProfileCardContainer from "../../components/profile/ProfileCardContainer";
 import ProfileFeedContainer from "../../components/profile/ProfileFeedContainer";
 import CreateItemButton from "../../components/profile/CreateItemButton";
 import NetworkingBar from "../../components/profile/NetworkingBar";
+import CompanyLink from "../../components/profile/CompanyLink";
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
 import IntroductionSkeleton from "../../components/skeletons/mypage/IntroductionSkeleton";
 import IntroductionDescriptionSkeleton from "../../components/skeletons/mypage/IntroductionDescriptionSkeleton";
 import CompanyLinkSkeleton from "../../components/skeletons/mypage/CompanyLinkSkeleton";
 import NetworkingBarSkeleton from "../../components/skeletons/mypage/NetworkingBarSkeleton";
 import ProfileCardSkeleton from "../../components/skeletons/mypage/ProfileCardSkeleton";
-import { useGetProfile } from "../../hooks/mypageQueries";
+import { useGetFeeds, useGetProfile } from "../../hooks/mypageQueries";
+import FeedIntroduction from "../../components/feed/FeedIntroduction";
 
-function ProfileItem() {
+function ProfileItem({
+  editProfile,
+  setEditProfile,
+}: {
+  editProfile: boolean;
+  setEditProfile: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [selectedTab, setSelectedTab] = useState<"card" | "feed">("card");
 
   const { data: profile, isLoading } = useGetProfile();
@@ -30,8 +37,12 @@ function ProfileItem() {
 
   return (
     <>
-      <div className={`w-full h-full ct-center flex-col mt-5`}>
-        {/* <Introduction /> */}
+      <div
+        className={`w-full h-full ct-center flex-col mt-5 ${
+          editProfile ? "blur-sm" : ""
+        }`}
+      >
+        <FeedIntroduction />
         <div className="mt-[20px] w-[335px]">
           <span className="text-ct-black-100 text-body1">
             {/* {profile?.result.user.one_line_profile} */}
@@ -94,15 +105,12 @@ function ProfileItem() {
 
 function FeedProfile() {
   const [editProfile, setEditProfile] = useState<boolean>(false);
-  return null;
 
-  // return editProfile ? (
-  //   <ProfileItem editProfile={editProfile} setEditProfile={setEditProfile} />
-  // ) : (
-  //   <BottomNavContainer>
-  //     <ProfileItem editProfile={editProfile} setEditProfile={setEditProfile} />
-  //   </BottomNavContainer>
-  // );
+  return (
+    <BottomNavContainer>
+      <ProfileItem editProfile={editProfile} setEditProfile={setEditProfile} />
+    </BottomNavContainer>
+  );
 }
 
 export default FeedProfile;
