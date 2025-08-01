@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CardItem } from "../../apis/mypageAPI";
 
-function ProfileCardItem() {
+function ProfileCardItem({ card }: { card: CardItem }) {
   const [isHighlight, _] = useState(true);
 
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/mypage/card");
+    navigate(`/mypage/card`);
   };
 
   return (
@@ -19,7 +20,7 @@ function ProfileCardItem() {
         />
       )}
       <img
-        src="/assets/profile/card.jpg"
+        src={card.card_img}
         alt="카드 이미지"
         className="w-full h-full object-cover rounded-[5px]"
       />

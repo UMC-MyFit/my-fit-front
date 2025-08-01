@@ -10,16 +10,10 @@ import IntroductionDescriptionSkeleton from "../../components/skeletons/mypage/I
 import CompanyLinkSkeleton from "../../components/skeletons/mypage/CompanyLinkSkeleton";
 import NetworkingBarSkeleton from "../../components/skeletons/mypage/NetworkingBarSkeleton";
 import ProfileCardSkeleton from "../../components/skeletons/mypage/ProfileCardSkeleton";
-import { useGetFeeds, useGetProfile } from "../../hooks/mypageQueries";
 import FeedIntroduction from "../../components/feed/FeedIntroduction";
+import { useGetProfile } from "../../hooks/mypageQueries";
 
-function ProfileItem({
-  editProfile,
-  setEditProfile,
-}: {
-  editProfile: boolean;
-  setEditProfile: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+function ProfileItem() {
   const [selectedTab, setSelectedTab] = useState<"card" | "feed">("card");
 
   const { data: profile, isLoading } = useGetProfile();
@@ -37,11 +31,7 @@ function ProfileItem({
 
   return (
     <>
-      <div
-        className={`w-full h-full ct-center flex-col mt-5 ${
-          editProfile ? "blur-sm" : ""
-        }`}
-      >
+      <div className={`w-full h-full ct-center flex-col mt-5`}>
         <FeedIntroduction />
         <div className="mt-[20px] w-[335px]">
           <span className="text-ct-black-100 text-body1">
@@ -104,11 +94,9 @@ function ProfileItem({
 }
 
 function FeedProfile() {
-  const [editProfile, setEditProfile] = useState<boolean>(false);
-
   return (
     <BottomNavContainer>
-      <ProfileItem editProfile={editProfile} setEditProfile={setEditProfile} />
+      <ProfileItem />
     </BottomNavContainer>
   );
 }
