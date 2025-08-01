@@ -1,13 +1,15 @@
 import ProfileFeedItem from "./ProfileFeedItem";
-import { useGetProfile, useGetFeeds } from "../../hooks/mypageQueries";
+import { useGetFeeds } from "../../hooks/mypageQueries";
+import { useAuth } from "../../contexts/AuthContext";
 
 function ProfileFeedContainer() {
-  const { data: profile, isLoading: profileLoading } = useGetProfile();
+  const { user } = useAuth();
+
   const { data: feeds, isLoading: feedsLoading } = useGetFeeds({
-    service_id: profile?.result.service.id.toString() || "",
+    service_id: user?.id?.toString() || "",
   });
 
-  if (profileLoading || feedsLoading) {
+  if (feedsLoading) {
     return null;
   }
 

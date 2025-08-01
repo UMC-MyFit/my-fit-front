@@ -12,10 +12,10 @@ import {
   updateProfileStatus,
 } from "../apis/mypageAPI";
 
-export const useGetProfile = () => {
+export const useGetProfile = ({ service_id }: { service_id: string }) => {
   return useQuery({
-    queryKey: ["profile"],
-    queryFn: getProfile,
+    queryKey: ["profile", service_id],
+    queryFn: () => getProfile({ service_id }),
     staleTime: 1000 * 60,
   });
 };
@@ -28,8 +28,9 @@ export const useGetFeeds = ({ service_id }: { service_id: string }) => {
     staleTime: 1000 * 60,
     initialPageParam: "0",
     getNextPageParam: (lastPage) => {
-      if (!lastPage.result.pagination.hasMore) return undefined;
-      return lastPage.result.pagination.nextCursorId;
+      console.log("lastPage", lastPage);
+      if (!lastPage.result.pagination.has_next) return undefined;
+      return lastPage.result.pagination.next_cursor;
     },
     enabled: !!service_id,
   });
@@ -43,8 +44,8 @@ export const useGetCards = ({ service_id }: { service_id: string }) => {
     staleTime: 1000 * 60,
     initialPageParam: "0",
     getNextPageParam: (lastPage) => {
-      if (!lastPage.result.pagination.hasMore) return undefined;
-      return lastPage.result.pagination.nextCursorId;
+      if (!lastPage.result.pagination.has_next) return undefined;
+      return lastPage.result.pagination.next_cursor;
     },
     enabled: !!service_id,
   });

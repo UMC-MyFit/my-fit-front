@@ -34,10 +34,14 @@ export interface GetProfileResponse extends BaseResponse {
     };
   };
 }
-export const getProfile = async (): Promise<GetProfileResponse> => {
+export const getProfile = async ({
+  service_id,
+}: {
+  service_id: string;
+}): Promise<GetProfileResponse> => {
   try {
     const { data } = await apiClient.get<GetProfileResponse>(
-      `api/mypage/profile_info`
+      `/api/mypage/${service_id}/profile_info`
     );
     return data;
   } catch (error) {
@@ -59,7 +63,7 @@ export const updateProfileImage = async ({
 }): Promise<UpdateProfileImageResponse> => {
   try {
     const { data } = await apiClient.patch<UpdateProfileImageResponse>(
-      `api/mypage/profile_pic`,
+      `/api/mypage/profile_pic`,
       { profile_img }
     );
     return data;
@@ -83,7 +87,7 @@ export const updateProfileStatus = async ({
 }): Promise<UpdateProfileStatusResponse> => {
   try {
     const { data } = await apiClient.patch<UpdateProfileStatusResponse>(
-      `api/mypage/recruiting_status`,
+      `/api/mypage/recruiting_status`,
       { recruiting_status }
     );
     return data;
@@ -113,8 +117,8 @@ export interface GetFeedsResponse extends BaseResponse {
   result: {
     feeds: FeedItem[];
     pagination: {
-      hasMore: boolean;
-      nextCursorId: string;
+      has_next: boolean;
+      next_cursor: string;
     };
   };
 }
@@ -127,11 +131,11 @@ export const getFeeds = async ({
 }): Promise<GetFeedsResponse> => {
   try {
     const { data } = await apiClient.get<GetFeedsResponse>(
-      `api/mypage/${service_id}/feeds`,
+      `/api/mypage/${service_id}/feeds`,
       {
         params: {
-          cursor,
           limit: "10",
+          cursor,
         },
       }
     );
@@ -156,8 +160,8 @@ export interface GetCardsResponse extends BaseResponse {
   result: {
     cards: CardItem[];
     pagination: {
-      hasMore: boolean;
-      nextCursorId: string;
+      has_next: boolean;
+      next_cursor: string;
     };
   };
 }
@@ -170,7 +174,7 @@ export const getCards = async ({
 }): Promise<GetCardsResponse> => {
   try {
     const { data } = await apiClient.get<GetCardsResponse>(
-      `api/mypage/${service_id}/cards`,
+      `/api/mypage/${service_id}/cards`,
       {
         params: {
           cursor,

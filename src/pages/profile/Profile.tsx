@@ -24,7 +24,9 @@ function ProfileItem({
   const [selectedTab, setSelectedTab] = useState<"card" | "feed">("card");
 
   const { user } = useAuth();
-  const { data: profile, isLoading } = useGetProfile();
+  const { data: profile, isLoading } = useGetProfile({
+    service_id: user?.id?.toString() || "",
+  });
 
   if (isLoading) {
     return (

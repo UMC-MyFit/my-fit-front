@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { FeedItem } from "../../apis/mypageAPI";
 
 function ProfileFeedItem({ feed }: { feed: FeedItem }) {
-  // navigate
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/mypage/feed#${feed.feed_id}`);

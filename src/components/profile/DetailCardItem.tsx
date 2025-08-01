@@ -1,8 +1,9 @@
 import CompanyLink from "./CompanyLink";
 import CardTagContainer from "./CardTagContainer";
 import { useBottomSheet } from "../../contexts/ui/bottomSheetContext";
+import { CardItem } from "../../apis/mypageAPI";
 
-function DetailCardItem() {
+function DetailCardItem({ item }: { item: CardItem }) {
   const { setIsBottomSheetOpen } = useBottomSheet();
 
   return (

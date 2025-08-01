@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useGetProfile } from "../../hooks/mypageQueries";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Introduction({
   setEditProfile,
@@ -8,8 +9,10 @@ function Introduction({
 }) {
   const certificated = true;
   const navigate = useNavigate();
-
-  const { data: profile, isLoading } = useGetProfile();
+  const { user } = useAuth();
+  const { data: profile, isLoading } = useGetProfile({
+    service_id: user?.id?.toString() || "",
+  });
 
   if (isLoading) {
     return null;

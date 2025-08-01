@@ -18,9 +18,11 @@ const TopBarContent = () => {
 
 function FeedDetail() {
   const { user } = useAuth();
+  const { data: feed, isFetching } = useGetFeeds({
+    service_id: user?.id?.toString() || "",
+  });
 
-  const isFetching = false;
-  // const allFeeds = feed?.pages.flatMap((page) => page.result.feeds);
+  const feedsData = feed?.pages.flatMap((page) => page.result.feeds);
 
   return (
     <TopBarContainer TopBarContent={<TopBarContent />}>
@@ -33,9 +35,9 @@ function FeedDetail() {
         ) : (
           <>
             <DetailIntroduction />
-            {/* {allFeeds?.map((feed) => (
+            {feedsData?.map((feed) => (
               <DetailFeedItem key={feed.feed_id} item={feed} />
-            ))} */}
+            ))}
           </>
         )}
       </div>

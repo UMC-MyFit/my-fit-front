@@ -1,13 +1,15 @@
 import ProfileCardItem from "./ProfileCardItem";
-import { useGetProfile, useGetCards } from "../../hooks/mypageQueries";
+import { useGetCards } from "../../hooks/mypageQueries";
+import { useAuth } from "../../contexts/AuthContext";
 
 function ProfileCardContainer() {
-  const { data: profile, isLoading: profileLoading } = useGetProfile();
+  const { user } = useAuth();
+
   const { data: cards, isLoading: cardsLoading } = useGetCards({
-    service_id: profile?.result.service.id.toString() || "",
+    service_id: user?.id?.toString() || "",
   });
 
-  if (profileLoading || cardsLoading) {
+  if (cardsLoading) {
     return null;
   }
 
