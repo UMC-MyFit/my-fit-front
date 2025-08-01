@@ -64,7 +64,7 @@ function Chatting() {
             onClick={() => {
               resetSelections();
               setEditMode(false);
-              nav(`/coffeechatrequest/${numericRoomId}`);
+              nav(`/chatting/coffeechatrequest/${numericRoomId}`);
             }}
           />
         </div>

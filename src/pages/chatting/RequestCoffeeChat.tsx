@@ -9,6 +9,7 @@ import { useCoffeeChatModal } from "../../contexts/CoffeeChatModalContext";
 import Picker from "react-mobile-picker";
 import { useEffect, useState } from "react";
 import { useCoffeeChat } from "../../contexts/coffeeChatContext";
+import { useParams } from "react-router-dom";
 
 const TopBarContent = () => {
   return <span className="text-h2 text-ct-black-100">커피챗 요청</span>;
@@ -18,6 +19,7 @@ function RequestCoffeeChat() {
   const { setIsModalOpen } = useModal();
   const { editMode, modalType, setModalType } = useCoffeeChatModal();
   const { setSelectedTime } = useCoffeeChat();
+  const { chattingRoomId } = useParams();
 
   const selections = {
     time: ["AM", "PM"],

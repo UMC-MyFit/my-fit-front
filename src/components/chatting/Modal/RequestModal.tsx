@@ -17,8 +17,8 @@ function RequestModal() {
   const { selectedTitle, selectedDate, selectedTime, selectedPlace } =
     useCoffeeChat();
   const { setRequestStatus } = useCoffeeChatModal();
-  const { chatting_room_id } = useParams();
-  const numericRoomId = Number(chatting_room_id);
+  const { chattingRoomId } = useParams();
+  const numericRoomId = Number(chattingRoomId);
 
   const formattedDate = selectedDate
     ? formatDateWithDay(
