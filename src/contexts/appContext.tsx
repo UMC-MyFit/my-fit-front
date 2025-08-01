@@ -5,7 +5,6 @@ import { ProfileImgModalProvider } from "./ui/profileImgModalContext";
 import { CoffeeChatProvider } from "./coffeeChatContext";
 import { CoffeeChatModalProvider } from "./CoffeeChatModalContext";
 import { UserProvider } from "./UserContext";
-import { ChattingProvider } from "./ChattingContext";
 import { AuthProvider } from "./AuthContext";
 import { SignupProvider } from "./SignupContext";
 import { ItemContextProvider } from "./ItemContext";
