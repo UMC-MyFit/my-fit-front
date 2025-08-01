@@ -1,6 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import apiInstance from "../apiClient";
-import { useNavigate } from "react-router-dom";
 
 export interface RegisterRecruitRequest {
   title: string;
@@ -56,6 +54,7 @@ export interface recruitmentDetailResponse {
       recruitment_id: number;
       title: string;
       low_sector: string[];
+      is_subscribed: boolean;
       area: string;
       require: string;
       salary: string;
@@ -96,17 +95,6 @@ export const RegisterRecruitPost = async (
   return response.data;
 };
 
-export const useRegisterRecruitPost = () => {
-  const nav = useNavigate();
-  return useMutation({
-    mutationFn: (data: RegisterRecruitRequest) => RegisterRecruitPost(data),
-    onSuccess: () => {
-      alert("공고가 성공적으로 등록되었습니다.");
-      nav("/recruits");
-    },
-  });
-};
-
 export const getRecruitments = async (
   highSector: string,
   lowSector?: string,
@@ -124,32 +112,11 @@ export const getRecruitments = async (
   return response.data;
 };
 
-export const useGetRecruitmentsQuery = (
-  highSector: string,
-  lowSector?: string,
-  page?: number
-) => {
-  return useQuery({
-    queryKey: ["recruitments", highSector, lowSector, page],
-    queryFn: () => getRecruitments(highSector, lowSector, page),
-    staleTime: 1000 * 60,
-    enabled: !!highSector,
-  });
-};
-
 export const getRecruitmentDetail = async (
   recruitment_id: string
 ): Promise<recruitmentDetailResponse> => {
   const response = await apiInstance.get(`/api/recruitments/${recruitment_id}`);
   return response.data;
-};
-export const usegetRecruitmentDetailQuery = (recruitment_id: string) => {
-  return useQuery({
-    queryKey: ["recruitmentDetail", recruitment_id],
-    queryFn: () => getRecruitmentDetail(recruitment_id),
-    staleTime: 1000 * 60,
-    enabled: !!recruitment_id,
-  });
 };
 
 export const subscribeRecruitment = async (
@@ -161,28 +128,6 @@ export const subscribeRecruitment = async (
   return response.data;
 };
 
-export const useSubscribeRecruitmentMutation = (recruitment_id: string) => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: () => subscribeRecruitment(recruitment_id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["recruitmentDetail", recruitment_id],
-      });
-    },
-  });
-};
-export const useUnSubscribeRecruitmentMutation = (recruitment_id: string) => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: () => unsubscribeRecruitment(recruitment_id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["recruitmentDetail", recruitment_id],
-      });
-    },
-  });
-};
 export const unsubscribeRecruitment = async (
   recruitment_id: string
 ): Promise<SubScribedResponse> => {
@@ -198,11 +143,4 @@ export const getSubscribedRecruitment = async (
     params: { total_page },
   });
   return response.data;
-};
-
-export const useGetSubscribedRecruitment = (total_page: number) => {
-  return useQuery({
-    queryKey: ["subscribedRecruitment", total_page],
-    queryFn: () => getSubscribedRecruitment(total_page),
-  });
 };

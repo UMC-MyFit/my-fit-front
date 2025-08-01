@@ -1,5 +1,11 @@
-import { createContext, useContext, useState, ReactNode } from "react";
-import { Message } from "../types/chatting/Message";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
+import socket from "../libs/socket";
 import { ChatMessage } from "../apis/chatting/chatting";
 
 interface ChattingContextType {
@@ -9,6 +15,8 @@ interface ChattingContextType {
   addMessage: (msg: ChatMessage) => void;
   prependMessages: (msgs: ChatMessage[]) => void;
   clearMessages: () => void;
+  replaceMessage: (tempId: number, newMsg: ChatMessage) => void;
+  removeMessage: (tempId: number) => void;
 }
 
 const ChattingContext = createContext<ChattingContextType | undefined>(
@@ -23,12 +31,30 @@ export const ChattingProvider = ({ children }: { children: ReactNode }) => {
     setMessages((prev) => [...prev, msg]);
   };
 
+  useEffect(() => {
+    if (!roomId) return;
+    socket.emit("join", roomId);
+    socket.on("receiveMessage", (msg: ChatMessage) => {
+      setMessages((prev) => [...prev, msg]);
+    });
+  }, []);
+
   const prependMessages = (msgs: ChatMessage[]) => {
     setMessages((prev) => [...msgs, ...prev]);
   };
 
   const clearMessages = () => {
     setMessages([]);
+  };
+
+  const replaceMessage = (tempId: number, newMsg: ChatMessage) => {
+    setMessages((prev) =>
+      prev.map((msg) => (msg.id === tempId ? newMsg : msg))
+    );
+  };
+
+  const removeMessage = (tempId: number) => {
+    setMessages((prev) => prev.filter((msg) => msg.id !== tempId));
   };
 
   return (
@@ -40,6 +66,8 @@ export const ChattingProvider = ({ children }: { children: ReactNode }) => {
         addMessage,
         prependMessages,
         clearMessages,
+        replaceMessage,
+        removeMessage,
       }}
     >
       {children}

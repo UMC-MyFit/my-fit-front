@@ -7,7 +7,8 @@ import RequestModal from "../../components/chatting/Modal/RequestModal";
 import EditConfirmedModal from "../../components/chatting/Modal/EditConfirmedModal";
 import { useCoffeeChatModal } from "../../contexts/CoffeeChatModalContext";
 import Picker from "react-mobile-picker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCoffeeChat } from "../../contexts/coffeeChatContext";
 
 const TopBarContent = () => {
   return <span className="text-h2 text-ct-black-100">커피챗 요청</span>;
@@ -16,6 +17,7 @@ const TopBarContent = () => {
 function RequestCoffeeChat() {
   const { setIsModalOpen } = useModal();
   const { editMode, modalType, setModalType } = useCoffeeChatModal();
+  const { setSelectedTime } = useCoffeeChat();
 
   const selections = {
     time: ["AM", "PM"],
@@ -31,6 +33,10 @@ function RequestCoffeeChat() {
     hour: "1",
     minute: "00",
   });
+  useEffect(() => {
+    const formattedTime = `${pickerValue.time} ${pickerValue.hour}:${pickerValue.minute}`;
+    setSelectedTime(formattedTime);
+  }, [pickerValue]);
 
   const handleClick = () => {
     if (editMode) {

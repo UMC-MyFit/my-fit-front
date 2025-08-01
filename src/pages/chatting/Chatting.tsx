@@ -7,22 +7,34 @@ import { useChatting } from "../../contexts/ChattingContext";
 import { useCoffeeChatModal } from "../../contexts/CoffeeChatModalContext";
 import { useCoffeeChat } from "../../contexts/coffeeChatContext";
 import {
-  sendChatMessage,
+  useChatMessageInfiniteQuery,
   useSendChatMessageMutation,
-} from "../../apis/chatting/chatting";
+} from "../../hooks/chatting/chatting";
 
 function Chatting() {
-  const { messages, addMessage, prependMessages } = useChatting();
+  const { messages, addMessage, prependMessages, clearMessages } =
+    useChatting();
   const { setEditMode } = useCoffeeChatModal();
   const { resetSelections } = useCoffeeChat();
-  const { setRoomId } = useChatting();
   const nav = useNavigate();
-  const { chattingRoomId } = useParams();
-  const numericRoomId = Number(chattingRoomId);
-
+  const { chatting_room_id } = useParams();
+  const numericRoomId = Number(chatting_room_id);
   const bottomRef = useRef<HTMLDivElement>(null);
-  const { mutate: sendMessage, isPending } =
-    useSendChatMessageMutation(numericRoomId);
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useChatMessageInfiniteQuery(numericRoomId);
+
+  useEffect(() => {
+    if (data) {
+      const allMessages = data.pages
+        .flatMap((page) =>
+          Array.isArray(page.result.messages) ? page.result.messages : []
+        )
+        .reverse();
+      clearMessages();
+      prependMessages(allMessages);
+    }
+  }, [data]);
+  const { mutate: sendMessage } = useSendChatMessageMutation(numericRoomId);
 
   const handleSend = (text: string) => {
     sendMessage({
@@ -33,15 +45,6 @@ function Chatting() {
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
-  useEffect(() => {
-    if (!isNaN(numericRoomId)) {
-      setRoomId(numericRoomId);
-    }
-    return () => {
-      setRoomId(null);
-    };
-  }, [chattingRoomId]);
 
   const TopBarContent = () => {
     return (
@@ -61,7 +64,7 @@ function Chatting() {
             onClick={() => {
               resetSelections();
               setEditMode(false);
-              nav("/coffeechat/request");
+              nav(`/coffeechatrequest/${numericRoomId}`);
             }}
           />
         </div>

@@ -3,11 +3,9 @@ import TopBarContainer from "../../components/common/TopBarContainer";
 import BottomNav from "../../components/layouts/BottomNav";
 import RecruitCard from "../../components/recruiting/RecruitCard";
 import RecruitCardSkeleton from "../../components/skeletons/recruiting/RecruitCardSkeleton";
-import {
-  SubscribedRecruitment,
-  useGetSubscribedRecruitment,
-} from "../../apis/recruiting/recruiting";
+import { SubscribedRecruitment } from "../../apis/recruiting/recruiting";
 import { useNavigate } from "react-router-dom";
+import { useGetSubscribedRecruitment } from "../../hooks/recruiting/recruiting";
 
 function SavedAnnouncement() {
   const [recruitment, setRecruitment] = useState<SubscribedRecruitment[]>([]);

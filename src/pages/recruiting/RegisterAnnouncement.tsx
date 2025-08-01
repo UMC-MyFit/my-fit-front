@@ -9,7 +9,7 @@ import SalaryModal from "../../components/recruiting/SalaryModal";
 import CalendarModal from "../../components/recruiting/CalandarModal";
 import { useCoffeeChat } from "../../contexts/coffeeChatContext";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRegisterRecruitPost } from "../../apis/recruiting/recruiting";
+import { useRegisterRecruitPost } from "../../hooks/recruiting/recruiting";
 
 function RegisterAnnouncement() {
   const { state } = useLocation();

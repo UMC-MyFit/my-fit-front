@@ -6,7 +6,7 @@ import {
   usegetRecruitmentDetailQuery,
   useSubscribeRecruitmentMutation,
   useUnSubscribeRecruitmentMutation,
-} from "../../apis/recruiting/recruiting";
+} from "../../hooks/recruiting/recruiting";
 import { useParams } from "react-router-dom";
 
 function RecruitAnnouncement() {
@@ -50,9 +50,9 @@ function RecruitAnnouncement() {
 
   return (
     <TopBarContainer TopBarContent={<TopBarContent />}>
-      <div className="flex flex-col px-[19px] overflow-y-scroll">
-        <div className="text-sub2 px-[5px] text-ct-main-blue-100">
-          {data?.result.recruitment.dead_line}
+      <div className="flex flex-col px-[19px] overflow-y-scroll pb-[100px]">
+        <div className="text-sub2 px-[5px] text-ct-main-blue-100 mt-[10px]">
+          마감일자 : {data?.result.recruitment.dead_line.split("T")[0]}
         </div>
         <ul className="flex flex-col mt-[12.5px]">
           <li className="flex gap-[24px] px-[5px] py-[13px] border-y border-ct-gray-200">
@@ -109,22 +109,24 @@ function RecruitAnnouncement() {
           <ImageDisplay
             imageUrl={data?.result.recruitment.recruiting_img}
             alt="팀 상세 페이지"
-            className="w-full max-w-[349px] max-h-[300px] object-contain rounded-[16px] mx-auto"
+            className="w-full object-contain rounded-[16px] mx-auto mt-[17px]"
           />
         )}
 
         <div className="mt-[26px] flex justify-between">
-          {isSubscribed ? (
+          {data?.result.recruitment.is_subscribed ? (
             <img
               src="/assets/recruit/bookmark(on).svg"
               alt="bookmark"
               onClick={handleUnSubscribe}
+              className="ml-[11px] h-[24px] w-[24px]"
             />
           ) : (
             <img
               src="/assets/recruit/bookmark(off).svg"
               alt="bookmark"
               onClick={handleSubscribe}
+              className="ml-[10px] h-[25px] w-[25px]"
             />
           )}
 

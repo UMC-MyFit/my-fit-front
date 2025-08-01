@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useChatting } from "../../../contexts/ChattingContext";
 import { useCoffeeChat } from "../../../contexts/coffeeChatContext";
 import { useModal } from "../../../contexts/ui/modalContext";
@@ -8,6 +8,7 @@ import InformationBox from "../InformationBox";
 function AcceptModal() {
   const { selectedTitle, selectedDate, selectedTime, selectedPlace } =
     useCoffeeChat();
+  const { chatting_room_id } = useParams();
   const { addMessage } = useChatting();
   const { setIsModalOpen } = useModal();
   const nav = useNavigate();
