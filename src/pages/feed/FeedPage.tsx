@@ -15,12 +15,14 @@ import {
   removeFeedLike,
   getFeedComments,
   createComment,
+  deleteComment,
 } from "../../apis/feed";
 import { FeedResponse } from "../../types/feed/feed";
 import CommentModal from "../../components/feed/CommentModal";
 import { motion, AnimatePresence } from "framer-motion";
 import getTimeAgo from "../../utils/timeAgo";
 import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function FeedPage() {
   const [activePostId, setActivePostId] = useState<string | null>(null);
