@@ -2,9 +2,16 @@ import CompanyLink from "./CompanyLink";
 import CardTagContainer from "./CardTagContainer";
 import { useBottomSheet } from "../../contexts/ui/bottomSheetContext";
 import { CardItem } from "../../apis/mypageAPI";
+import { useItemContext } from "../../contexts/ItemContext";
 
 function DetailCardItem({ item }: { item: CardItem }) {
   const { setIsBottomSheetOpen } = useBottomSheet();
+  const { setItemId } = useItemContext();
+
+  const handleClick = () => {
+    setIsBottomSheetOpen(true);
+    setItemId(item.id);
+  };
 
   return (
     <div className="w-full h-auto bg-ct-white rounded-[10px] p-[16px] flex flex-col gap-[10px] items-center">
@@ -13,7 +20,7 @@ function DetailCardItem({ item }: { item: CardItem }) {
         <img
           src="/assets/profile/settingIcon.svg"
           alt="설정"
-          onClick={() => setIsBottomSheetOpen(true)}
+          onClick={handleClick}
         />
       </div>
       <img

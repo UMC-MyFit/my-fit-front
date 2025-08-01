@@ -5,6 +5,10 @@ import DetailIntroductionSkeleton from "../../components/skeletons/mypage/Detail
 import DetailFeedItemSkeleton from "../../components/skeletons/mypage/DetailFeedItemSkeleton";
 import { useGetFeeds } from "../../hooks/mypageQueries";
 import { useAuth } from "../../contexts/AuthContext";
+import BottomSheet from "../../components/ui/BottomSheet";
+import BottomSheetContent from "../../components/profile/BottomSheetContent";
+import Modal from "../../components/ui/Modal";
+import ModalContent from "../../components/profile/ModalContent";
 
 const TopBarContent = () => {
   return (
@@ -41,6 +45,12 @@ function FeedDetail() {
           </>
         )}
       </div>
+      <BottomSheet>
+        <BottomSheetContent />
+      </BottomSheet>
+      <Modal>
+        <ModalContent />
+      </Modal>
     </TopBarContainer>
   );
 }

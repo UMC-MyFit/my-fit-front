@@ -82,14 +82,16 @@ export interface UpdateProfileStatusResponse extends BaseResponse {
   };
 }
 export const updateProfileStatus = async ({
+  service_id,
   recruiting_status,
 }: {
+  service_id: string;
   recruiting_status: string;
 }): Promise<UpdateProfileStatusResponse> => {
   try {
     const { data } = await apiClient.patch<UpdateProfileStatusResponse>(
-      `/api/mypage/recruiting_status`,
-      { recruiting_status }
+      `/api/mypage/recruiting_status/update`,
+      { recruiting_status, params: { service_id } }
     );
     return data;
   } catch (error) {
@@ -186,6 +188,33 @@ export const getCards = async ({
     return data;
   } catch (error) {
     console.error("getCards error:", error);
+    throw error;
+  }
+};
+
+export interface DeleteFeedResponse {
+  isSuccess: boolean;
+  code: number;
+  message: {
+    message: string;
+  };
+  result: {
+    errorCode: string;
+    data: string;
+  };
+}
+export const deleteFeed = async ({
+  feed_id,
+}: {
+  feed_id: string;
+}): Promise<DeleteFeedResponse> => {
+  try {
+    const { data } = await apiClient.delete<DeleteFeedResponse>(
+      `/api/feeds/${feed_id}`
+    );
+    return data;
+  } catch (error) {
+    console.error("deleteFeed error:", error);
     throw error;
   }
 };

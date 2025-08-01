@@ -8,6 +8,7 @@ import { UserProvider } from "./UserContext";
 import { ChattingProvider } from "./ChattingContext";
 import { AuthProvider } from "./AuthContext";
 import { SignupProvider } from "./SignupContext";
+import { ItemContextProvider } from "./ItemContext";
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   return (

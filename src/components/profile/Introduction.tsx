@@ -31,7 +31,7 @@ function Introduction({
           className="w-[70px] h-[70px] rounded-full"
           onClick={() => setEditProfile(true)}
         />
-        <div className="w-[160px] h-full flex flex-col justify-between">
+        <div className="w-[150px] h-full flex flex-col justify-between">
           <div className="h-[20px] flex items-center gap-1">
             <span className="text-sub1 text-ct-black-100">
               {profile?.result.user.name}
@@ -56,7 +56,7 @@ function Introduction({
             </span>
           </div>
         </div>
-        <div className="w-[80px] h-full flex flex-col justify-between">
+        <div className="w-[90px] h-full flex flex-col justify-between">
           <div
             className="w-full h-[29px] rounded-[3px] ct-center bg-ct-main-blue-200"
             onClick={() => navigate("/mypage/status")}

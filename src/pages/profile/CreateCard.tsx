@@ -6,7 +6,6 @@ import InputField from "../../components/onboarding/InputField";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createActivityCard } from "../../apis/onboarding";
 import { ActivityCardRequest } from "../../types/common/activityCard";
-import { useSignup } from "../../contexts/SignupContext";
 import { useAuth } from "../../contexts/AuthContext";
 
 function CreateCard() {
