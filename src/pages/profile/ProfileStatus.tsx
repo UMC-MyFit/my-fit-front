@@ -4,7 +4,7 @@ import { useState } from "react";
 const TopBarContent = () => {
   return (
     <div className="relative w-full ct-center">
-      <span className="text-ct-black-100 text-h1">나의 상태 </span>
+      <span className="text-ct-black-100 text-h1">나의 상태</span>
       <div className="absolute right-[22px]">
         <span>완료</span>
       </div>

@@ -7,11 +7,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { createActivityCard } from "../../apis/onboarding";
 import { ActivityCardRequest } from "../../types/common/activityCard";
 import { useSignup } from "../../contexts/SignupContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 function CreateCard() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { signupData } = useSignup();
+  const { user } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // 폼 데이터 상태
@@ -48,11 +49,8 @@ function CreateCard() {
       setIsSubmitting(true);
 
       // 필수 데이터 검증
-      if (!signupData.serviceId) {
-        console.error(
-          "❌ [CompanyCardRegister] service_id가 없습니다:",
-          signupData
-        );
+      if (!user?.id) {
+        console.error("❌ [CompanyCardRegister] service_id가 없습니다:", user);
         alert("회원가입 정보가 없습니다. 다시 로그인해주세요.");
         return;
       }
@@ -74,7 +72,7 @@ function CreateCard() {
 
       // 이력/활동 카드 등록 API 호출
       const cardRequest: ActivityCardRequest = {
-        service_id: signupData.serviceId!, // 위에서 null 체크 완료
+        service_id: user.id!, // 위에서 null 체크 완료
         card_img: cardImageUrl,
         card_one_line_profile: oneLineIntro.trim(),
         detailed_profile: detailedDescription.trim(),
@@ -83,13 +81,13 @@ function CreateCard() {
       };
 
       console.log("🎯 [CompanyCardRegister] 카드 등록 요청:", cardRequest);
-      console.log("🔍 [CompanyCardRegister] SignupData 상태:", signupData);
+      console.log("🔍 [CompanyCardRegister] SignupData 상태:", user);
 
       const response = await createActivityCard(cardRequest);
 
       if (response.message) {
         console.log("✅ [CompanyCardRegister] 카드 등록 성공:", response);
-        navigate("/onboarding/company-verification");
+        navigate("/mypage");
       } else {
         throw new Error(response.message || "카드 등록 실패");
       }

@@ -28,7 +28,6 @@ export const useGetFeeds = ({ service_id }: { service_id: string }) => {
     staleTime: 1000 * 60,
     initialPageParam: "0",
     getNextPageParam: (lastPage) => {
-      console.log("lastPage", lastPage);
       if (!lastPage.result.pagination.has_next) return undefined;
       return lastPage.result.pagination.next_cursor;
     },
