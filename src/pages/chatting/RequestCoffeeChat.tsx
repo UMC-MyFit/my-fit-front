@@ -20,7 +20,7 @@ function RequestCoffeeChat() {
   const { editMode, modalType, setModalType } = useCoffeeChatModal();
   const { setSelectedTime } = useCoffeeChat();
   const { chattingRoomId } = useParams();
-
+  if (!chattingRoomId) return null;
   const selections = {
     time: ["AM", "PM"],
     hour: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
@@ -132,7 +132,9 @@ function RequestCoffeeChat() {
         </button>
       </div>
       <Modal>
-        {modalType === "request" && <RequestModal />}
+        {modalType === "request" && (
+          <RequestModal roomId={Number(chattingRoomId)} />
+        )}
         {modalType === "editConfirm" && <EditConfirmedModal />}
       </Modal>
     </TopBarContainer>

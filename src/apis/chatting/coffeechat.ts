@@ -19,6 +19,7 @@ export interface CoffeeChatResponse {
     sender_id: number;
     receiver_id: number;
     created_at: string;
+    name: string;
   };
 }
 
@@ -31,6 +32,25 @@ export interface Participants {
 export interface CoffeeChatPreviewResponse {
   result: {
     participants: Participants[];
+  };
+}
+
+export type Status = "PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED";
+
+export interface CoffeeChatDetailResponse {
+  isSuccess: boolean;
+  code: number;
+  message: string;
+  result: {
+    coffeechat_id: number;
+    chatting_room_id: number;
+    sender: Participants;
+    receiver: Participants;
+    title: string;
+    place: string;
+    scheduled_at: string;
+    status: Status;
+    created_at: string;
   };
 }
 
@@ -63,4 +83,14 @@ export const PatchAcceptCoffeeChat = async (
     body
   );
   return resposne.data;
+};
+
+export const GetCoffeeChatDetail = async (
+  chatting_room_id: number,
+  coffeechat_id: number
+): Promise<CoffeeChatDetailResponse> => {
+  const response = await apiInstance.get(
+    `api/chatting-rooms/${chatting_room_id}/coffeechats/${coffeechat_id}`
+  );
+  return response.data;
 };

@@ -88,6 +88,10 @@ export interface SubScribedResponse {
   };
 }
 
+export interface CreateChattingRoomResponse {
+  result: { chatting_room_id: number; is_new: boolean };
+}
+
 export const RegisterRecruitPost = async (
   data: RegisterRecruitRequest
 ): Promise<RegisterRecruitResponse> => {
@@ -142,5 +146,17 @@ export const getSubscribedRecruitment = async (
   const response = await apiInstance.get("/api/recruitments/subscribe", {
     params: { total_page },
   });
+  return response.data;
+};
+
+export const createChattingRoom = async (
+  service_id: number
+): Promise<CreateChattingRoomResponse> => {
+  const response = await apiInstance.post(
+    "/api/chatting-rooms/check-or-create",
+    {
+      service_id,
+    }
+  );
   return response.data;
 };

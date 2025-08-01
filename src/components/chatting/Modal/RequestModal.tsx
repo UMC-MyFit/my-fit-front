@@ -10,15 +10,14 @@ import {
   useRequestCoffeeChatMutation,
 } from "../../../hooks/chatting/coffeechat";
 
-function RequestModal() {
+function RequestModal({ roomId }: { roomId: number }) {
   const nav = useNavigate();
   const { setIsModalOpen } = useModal();
   const { addMessage } = useChatting();
   const { selectedTitle, selectedDate, selectedTime, selectedPlace } =
     useCoffeeChat();
   const { setRequestStatus } = useCoffeeChatModal();
-  const { chattingRoomId } = useParams();
-  const numericRoomId = Number(chattingRoomId);
+  const numericRoomId = Number(roomId);
 
   const formattedDate = selectedDate
     ? formatDateWithDay(
@@ -74,7 +73,7 @@ function RequestModal() {
           className="w-[61px] h-[61px] rounded-full"
         />
         <img
-          src={data?.result.participants[0]?.profile_img}
+          src={data?.result.participants[1]?.profile_img}
           alt="receiverprofile"
           className="w-[61px] h-[61px] rounded-full"
         />
@@ -101,12 +100,13 @@ function RequestModal() {
                 setRequestStatus("requested");
                 addMessage({
                   id: res.result.coffeechat_id,
+                  sender_name: res.result.name,
                   sender_id: res.result.sender_id,
                   type: "COFFEECHAT",
                   detail_message: "",
                   created_at: res.result.created_at,
                 });
-                nav(`/chatting/${res.result.chattingRoomId}`);
+                nav(`/chatting/${roomId}`);
                 setIsModalOpen(false);
               },
               onError: (err) => {

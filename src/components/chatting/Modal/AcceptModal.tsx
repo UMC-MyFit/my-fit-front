@@ -8,7 +8,6 @@ import InformationBox from "../InformationBox";
 function AcceptModal() {
   const { selectedTitle, selectedDate, selectedTime, selectedPlace } =
     useCoffeeChat();
-  const { chatting_room_id } = useParams();
   const { addMessage } = useChatting();
   const { setIsModalOpen } = useModal();
   const nav = useNavigate();
@@ -69,7 +68,7 @@ function AcceptModal() {
             id: Date.now(),
             text: "",
             sender: "me",
-            type: "coffeechat",
+            type: "COFFEECHAT",
             status: "rejected",
           });
           nav("/chatting");

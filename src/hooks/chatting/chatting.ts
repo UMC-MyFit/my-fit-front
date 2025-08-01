@@ -1,4 +1,8 @@
-import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
+import {
+  QueryFunctionContext,
+  useInfiniteQuery,
+  useMutation,
+} from "@tanstack/react-query";
 import { useChatting } from "../../contexts/ChattingContext";
 import { useAuth } from "../../contexts/AuthContext";
 import {
@@ -21,6 +25,7 @@ export const useSendChatMessageMutation = (chattingRoomId: number | null) => {
       const tempId = Date.now();
       const optimisticMessage = {
         id: tempId,
+        name: user.username,
         sender_id: user.id,
         detail_message: newMessage.detail_message,
         created_at: new Date().toISOString(),
@@ -31,15 +36,9 @@ export const useSendChatMessageMutation = (chattingRoomId: number | null) => {
 
       return { tempId };
     },
-    onSuccess: (response, _newMessage, context) => {
-      if (context?.tempId) {
-        replaceMessage(context.tempId, response);
-      } else addMessage(response);
-    },
-    onError: (_error, _newMessage, context) => {
-      if (context?.tempId) {
-        removeMessage(context.tempId);
-      }
+    onSuccess: (_ack, _vars, context) => {},
+    onError: (_err, _vars, context) => {
+      if (context?.tempId) removeMessage(context.tempId);
     },
   });
 };
@@ -49,12 +48,14 @@ export const useChatMessageInfiniteQuery = (
 ) => {
   return useInfiniteQuery({
     queryKey: ["chatMessages", chatting_room_id],
-    queryFn: ({ pageParam }) => {
-      return getChatMessage(chatting_room_id!, pageParam as number | undefined);
-    },
+    queryFn: ({
+      pageParam,
+    }: QueryFunctionContext<(string | number | null)[], number | undefined>) =>
+      getChatMessage(chatting_room_id!, pageParam),
     initialPageParam: undefined,
-    getNextPageParam: (lastPage: FetchChatMessageResponse) =>
-      lastPage.result.next_cursor ?? undefined,
+    getNextPageParam: (lastPage) => {
+      return lastPage.result.has_next ? lastPage.result.next_cursor : undefined;
+    },
     enabled: !!chatting_room_id,
   });
 };

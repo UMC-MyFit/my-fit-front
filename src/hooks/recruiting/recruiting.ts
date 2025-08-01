@@ -1,6 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import {
+  createChattingRoom,
+  CreateChattingRoomResponse,
   getRecruitmentDetail,
   getRecruitments,
   getSubscribedRecruitment,
@@ -16,7 +18,7 @@ export const useRegisterRecruitPost = () => {
     mutationFn: (data: RegisterRecruitRequest) => RegisterRecruitPost(data),
     onSuccess: () => {
       alert("공고가 성공적으로 등록되었습니다.");
-      nav("/recruit");
+      nav("/recruiting");
     },
   });
 };
@@ -71,5 +73,12 @@ export const useGetSubscribedRecruitment = (total_page: number) => {
   return useQuery({
     queryKey: ["subscribedRecruitment", total_page],
     queryFn: () => getSubscribedRecruitment(total_page),
+  });
+};
+
+export const useCreateChattingRoomMutation = () => {
+  return useMutation<CreateChattingRoomResponse, Error, number>({
+    mutationFn: (target_service_id: number) =>
+      createChattingRoom(target_service_id),
   });
 };

@@ -17,9 +17,12 @@ export interface ChatMessageResponse {
 export interface ChatMessage {
   id: number;
   sender_id: number;
+  sender_name?: string;
   detail_message: string;
   created_at: string;
   type: "TEXT" | "COFFEECHAT" | "SYSTEM";
+  isTemp?: boolean;
+  coffeechat_id?: number;
 }
 
 export interface FetchChatMessageResponse {
@@ -43,6 +46,7 @@ export const sendChatMessage = async (
   const res = response.data;
   return {
     id: res.message_id,
+    sender_name: res.name,
     sender_id: res.sender_id,
     detail_message: res.message,
     created_at: res.created_at,

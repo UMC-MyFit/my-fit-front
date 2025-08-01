@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   CoffeeChatRequest,
   CoffeeChatResponse,
+  GetCoffeeChatDetail,
   GetCoffeeChatPreview,
   PatchAcceptCoffeeChat,
   PostRequestCoffeeChat,
@@ -26,5 +27,16 @@ export const usePatchAcceptCoffeeChatMutation = (chattingRoomId: number) => {
   return useMutation({
     mutationFn: (body: { coffeechat_id: number }) =>
       PatchAcceptCoffeeChat(chattingRoomId, body),
+  });
+};
+
+export const useGetCoffeeChatDetailQuery = (
+  chatting_room_id: number,
+  coffeechat_id: number
+) => {
+  return useQuery({
+    queryKey: ["coffeeChatDetail", chatting_room_id, coffeechat_id],
+    queryFn: () => GetCoffeeChatDetail(chatting_room_id, coffeechat_id),
+    enabled: !!chatting_room_id && !!coffeechat_id,
   });
 };

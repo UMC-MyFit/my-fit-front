@@ -10,6 +10,7 @@ import {
   useChatMessageInfiniteQuery,
   useSendChatMessageMutation,
 } from "../../hooks/chatting/chatting";
+import { useLocation } from "react-router-dom";
 
 function Chatting() {
   const { messages, addMessage, prependMessages, clearMessages } =
@@ -17,11 +18,13 @@ function Chatting() {
   const { setEditMode } = useCoffeeChatModal();
   const { resetSelections } = useCoffeeChat();
   const nav = useNavigate();
-  const { chatting_room_id } = useParams();
-  const numericRoomId = Number(chatting_room_id);
+  const { chattingRoomId } = useParams();
+  const numericRoomId = Number(chattingRoomId);
   const bottomRef = useRef<HTMLDivElement>(null);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useChatMessageInfiniteQuery(numericRoomId);
+  const location = useLocation();
+  const targetServiceId = location.state?.targetServiceId;
 
   useEffect(() => {
     if (data) {
@@ -56,7 +59,7 @@ function Chatting() {
             alt="남성프로필"
             className="w-[49px] h-[49px]"
           />
-          <span className="text-h2 text-ct-black-100">임호현</span>
+          <span className="text-h2 text-ct-black-100">김기업</span>
           <img
             src="/assets/chatting/calender.svg"
             alt="캘린더 아이콘"

@@ -10,7 +10,6 @@ import { ChatMessage } from "../apis/chatting/chatting";
 
 interface ChattingContextType {
   roomId: number | null;
-  setRoomId: (id: number | null) => void;
   messages: ChatMessage[];
   addMessage: (msg: ChatMessage) => void;
   prependMessages: (msgs: ChatMessage[]) => void;
@@ -23,24 +22,55 @@ const ChattingContext = createContext<ChattingContextType | undefined>(
   undefined
 );
 
-export const ChattingProvider = ({ children }: { children: ReactNode }) => {
-  const [roomId, setRoomId] = useState<number | null>(null);
+export const ChattingProvider = ({
+  roomId,
+  children,
+}: {
+  roomId: number;
+  children: ReactNode;
+}) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
 
   const addMessage = (msg: ChatMessage) => {
     setMessages((prev) => [...prev, msg]);
   };
-
+  console.log("📤 emitting join to:", `chat:${roomId}`);
   useEffect(() => {
     if (!roomId) return;
-    socket.emit("join", roomId);
-    socket.on("receiveMessage", (msg: ChatMessage) => {
-      setMessages((prev) => [...prev, msg]);
-    });
-  }, []);
+
+    const roomName = `chat:${roomId}`;
+    console.log("📤 emitting join to:", roomName);
+    socket.emit("join", roomName);
+
+    const handler = (msg: ChatMessage) => {
+      setMessages((prev) => {
+        const tempIdx = prev.findIndex(
+          (p) => p.isTemp && p.sender_id === msg.sender_id
+        );
+        if (tempIdx !== -1) {
+          const next = [...prev];
+          next[tempIdx] = msg;
+          return next;
+        }
+        return [...prev, msg];
+      });
+    };
+
+    socket.on("receiveMessage", handler);
+
+    return () => {
+      console.log("👋 leaving room:", roomName);
+      socket.emit("leave", roomName);
+      socket.off("receiveMessage", handler);
+    };
+  }, [roomId]);
 
   const prependMessages = (msgs: ChatMessage[]) => {
-    setMessages((prev) => [...msgs, ...prev]);
+    setMessages((prev) => {
+      const ids = new Set(prev.map((m) => m.id));
+      const unique = msgs.filter((m) => !ids.has(m.id));
+      return [...unique, ...prev];
+    });
   };
 
   const clearMessages = () => {
@@ -61,7 +91,6 @@ export const ChattingProvider = ({ children }: { children: ReactNode }) => {
     <ChattingContext.Provider
       value={{
         roomId,
-        setRoomId,
         messages,
         addMessage,
         prependMessages,

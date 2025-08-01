@@ -3,11 +3,12 @@ import ImageDisplay from "../../components/common/ImageDisplay";
 import TopBarContainer from "../../components/common/TopBarContainer";
 import BottomNav from "../../components/layouts/BottomNav";
 import {
+  useCreateChattingRoomMutation,
   usegetRecruitmentDetailQuery,
   useSubscribeRecruitmentMutation,
   useUnSubscribeRecruitmentMutation,
 } from "../../hooks/recruiting/recruiting";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function RecruitAnnouncement() {
   const { recruitment_id } = useParams();
@@ -18,8 +19,10 @@ function RecruitAnnouncement() {
   const { mutate: subscribe } = useSubscribeRecruitmentMutation(recruitmentId);
   const { mutate: unsubscribe } =
     useUnSubscribeRecruitmentMutation(recruitmentId);
+  const { mutate: createChattingRoom } = useCreateChattingRoomMutation();
 
   const [isSubscribed, setIsSubscribed] = useState<boolean | null>(null);
+  const nav = useNavigate();
 
   const handleSubscribe = () => {
     subscribe(undefined, {
@@ -37,10 +40,24 @@ function RecruitAnnouncement() {
     });
   };
 
+  const targetServiceId = data?.result.recruitment.writer.id;
+  console.log(targetServiceId);
+  const handleClick = () => {
+    if (!targetServiceId) return;
+    createChattingRoom(targetServiceId, {
+      onSuccess: (res) => {
+        nav(`/chatting/${res.result.chatting_room_id}`);
+      },
+    });
+  };
+
   const TopBarContent = () => {
     return (
       <div className="flex items-center gap-[6px]">
-        <div className="w-[24px] h-[24px] bg-[#d9d9d9] rounded-[10px]" />
+        <img
+          className="w-[24px] h-[24px]"
+          src={data?.result.recruitment.writer.profile_img}
+        />
         <span className="text-h1 font-Pretendard text-ct-black-100 tracking-[-0.31px]">
           {data?.result.recruitment.writer.name}
         </span>
@@ -130,7 +147,10 @@ function RecruitAnnouncement() {
             />
           )}
 
-          <button className="w-[132px] h-[34px] rounded-[16px] bg-ct-main-blue-100 text-sub2 font-Pretendard text-ct-white">
+          <button
+            className="w-[132px] h-[34px] rounded-[16px] bg-ct-main-blue-100 text-sub2 font-Pretendard text-ct-white"
+            onClick={handleClick}
+          >
             채팅으로 문의
           </button>
         </div>

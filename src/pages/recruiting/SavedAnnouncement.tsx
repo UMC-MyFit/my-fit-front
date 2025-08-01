@@ -16,7 +16,7 @@ function SavedAnnouncement() {
   const nav = useNavigate();
 
   const handleCardClick = (id: number) => {
-    nav(`/recruit/announcement/${id}`);
+    nav(`/recruiting/${id}`);
   };
 
   useEffect(() => {
