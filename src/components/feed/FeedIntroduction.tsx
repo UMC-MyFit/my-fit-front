@@ -1,7 +1,11 @@
 import { useGetProfile } from "../../hooks/mypageQueries";
+import { useParams } from "react-router-dom";
 
 function FeedIntroduction() {
-  const { data: profile, isLoading } = useGetProfile();
+  const { id } = useParams();
+  const { data: profile, isLoading } = useGetProfile({
+    service_id: id as string,
+  });
 
   if (isLoading) {
     return null;

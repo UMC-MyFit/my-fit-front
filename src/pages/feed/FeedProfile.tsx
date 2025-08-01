@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import ProfileCardContainer from "../../components/profile/ProfileCardContainer";
 import ProfileFeedContainer from "../../components/profile/ProfileFeedContainer";
-import CreateItemButton from "../../components/profile/CreateItemButton";
 import NetworkingBar from "../../components/profile/NetworkingBar";
 import CompanyLink from "../../components/profile/CompanyLink";
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
@@ -12,11 +11,15 @@ import NetworkingBarSkeleton from "../../components/skeletons/mypage/NetworkingB
 import ProfileCardSkeleton from "../../components/skeletons/mypage/ProfileCardSkeleton";
 import FeedIntroduction from "../../components/feed/FeedIntroduction";
 import { useGetProfile } from "../../hooks/mypageQueries";
+import { useParams } from "react-router-dom";
 
 function ProfileItem() {
   const [selectedTab, setSelectedTab] = useState<"card" | "feed">("card");
+  const { id } = useParams();
 
-  const { data: profile, isLoading } = useGetProfile();
+  const { data: profile, isLoading } = useGetProfile({
+    service_id: id as string,
+  });
 
   if (isLoading) {
     return (
@@ -35,12 +38,12 @@ function ProfileItem() {
         <FeedIntroduction />
         <div className="mt-[20px] w-[335px]">
           <span className="text-ct-black-100 text-body1">
-            {/* {profile?.result.user.one_line_profile} */}
+            {profile?.result.user.one_line_profile}
           </span>
         </div>
-        {/* {profile?.result.user.link && (
-              <CompanyLink link={profile?.result.user.link} />
-            )} */}
+        {profile?.result.user.link && (
+          <CompanyLink link={profile?.result.user.link} />
+        )}
         <NetworkingBar />
         <div className="w-full h-[40px] bg-ct-gray-100 flex sticky top-0 mt-[17px] mb-[17px]">
           <div
@@ -87,7 +90,6 @@ function ProfileItem() {
         ) : (
           <ProfileFeedContainer />
         )}
-        <CreateItemButton />
       </div>
     </>
   );
