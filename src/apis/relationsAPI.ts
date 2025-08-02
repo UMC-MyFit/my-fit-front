@@ -60,8 +60,31 @@ export const deleteInterest = async ({
   }
 };
 
+export interface InterestType {
+  id: string;
+  sender_id: string;
+  recipient_id: string;
+  created_at: string;
+  recipient: {
+    id: string;
+    service_name: string;
+    network_status: string;
+    profile_img: string;
+    description: string;
+  };
+}
 export interface GetMyInterestResponse extends BaseResponse {
-  result: CommonResultType;
+  result: {
+    interests: InterestType[];
+    pagination: {
+      currentPage: number;
+      totalPages: number;
+      totalCount: number;
+      limit: number;
+      hasNext: boolean;
+      hasPrev: boolean;
+    };
+  };
 }
 export const getMyInterest = async ({
   page,

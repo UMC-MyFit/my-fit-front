@@ -3,18 +3,37 @@ import { useEffect, useState } from "react";
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
 import ProfileResult from "../../components/feed/ProfileResult";
 import ProfileResultSkeleton from "../../components/skeletons/common/ProfileResultSkeleton";
+import {
+  useGetMyNetwork,
+  useGetReceivedNetwork,
+  useGetPeopleWhoInterestMe,
+  useGetMyInterest,
+} from "../../hooks/relationQueries";
 
 function Networking() {
   const [selectedTab, setSelectedTab] = useState<
     "network" | "request" | "send" | "receive"
   >("network");
-  const [isReady, setIsReady] = useState<boolean>(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsReady(true);
-    }, 3000);
-  }, []);
+  const { data: network, isLoading: networkLoading } = useGetMyNetwork();
+  const { data: receivedNetwork, isLoading: receivedNetworkLoading } =
+    useGetReceivedNetwork();
+  const { data: receivedInterests, isLoading: receivedInterestsLoading } =
+    useGetPeopleWhoInterestMe();
+  const { data: myInterests, isFetching: myInterestsFetching } =
+    useGetMyInterest();
+
+  const isReady =
+    !networkLoading &&
+    !receivedNetworkLoading &&
+    !receivedInterestsLoading &&
+    !myInterestsFetching;
+
+  if (!isReady) return null;
+
+  const myInterestsData = myInterests?.pages.flatMap(
+    (page) => page?.result?.interests
+  );
 
   return (
     <TopBarContainer>

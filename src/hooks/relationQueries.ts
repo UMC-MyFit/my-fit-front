@@ -1,4 +1,9 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  useInfiniteQuery,
+} from "@tanstack/react-query";
 import {
   // Interest
   postInterest,
@@ -52,11 +57,16 @@ export const useDeleteInterest = () => {
   });
 };
 
-export const useGetMyInterest = ({ page }: { page: number }) => {
-  return useQuery({
-    queryKey: ["my-interest", page],
-    queryFn: () => getMyInterest({ page }),
+export const useGetMyInterest = () => {
+  return useInfiniteQuery({
+    queryKey: ["my-interest"],
+    queryFn: ({ pageParam = 1 }) => getMyInterest({ page: pageParam }),
     staleTime: 1000 * 60,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      if (!lastPage.result?.pagination.hasNext) return undefined;
+      return lastPage.result?.pagination.currentPage + 1;
+    },
   });
 };
 

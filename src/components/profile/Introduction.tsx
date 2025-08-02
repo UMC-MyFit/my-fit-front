@@ -65,7 +65,10 @@ function Introduction({
               {profile?.result.service.recruiting_status}
             </span>
           </div>
-          <div className="w-full h-[40px] flex flex-col justify-between">
+          <div
+            className="w-full h-[40px] flex flex-col justify-between"
+            onClick={() => navigate("/mypage/networking")}
+          >
             <div className="flex justify-end items-center gap-2 h-[20px]">
               <img
                 src="/assets/profile/networkingIcon.svg"
