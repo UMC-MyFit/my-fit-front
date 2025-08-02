@@ -105,9 +105,14 @@ export const getMyInterest = async ({
   }
 };
 
-// 이건 InfiniteQuery 적용 안 하나?
+export interface PeopleWhoInterestMeType {
+  id: string;
+  sender_id: string;
+  sender_name: string;
+  sender_profile_img: string;
+}
 export interface GetPeopleWhoInterestMeResponse extends BaseResponse {
-  result: CommonResultType;
+  result: PeopleWhoInterestMeType[];
 }
 export const getPeopleWhoInterestMe =
   async (): Promise<GetPeopleWhoInterestMeResponse> => {

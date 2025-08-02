@@ -14,10 +14,10 @@ type NetworkingResultProps = {
     | "receivedInterest";
 };
 function NetworkingResult({ selectedTab }: NetworkingResultProps) {
-  const { data: {result: network}, isLoading: networkLoading } = useGetMyNetwork();
-  const { data: receivedNetwork, isLoading: receivedNetworkLoading } =
+  const { data: {result: network} = {result: []}, isLoading: networkLoading } = useGetMyNetwork();
+  const { data: {result: receivedNetwork} = {result: []}, isLoading: receivedNetworkLoading } =
     useGetReceivedNetwork();
-  const { data: receivedInterests, isLoading: receivedInterestsLoading } =
+  const { data: {result: receivedInterests} = {result: []}, isLoading: receivedInterestsLoading } =
     useGetPeopleWhoInterestMe();
   const { data: myInterests, isFetching: myInterestsFetching } =
     useGetMyInterest();
