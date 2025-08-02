@@ -13,21 +13,23 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   return (
     <>
       <AuthProvider>
-        <SignupProvider>
-          <CoffeeChatProvider>
-            <BottomSheetProvider>
-              <UserProvider>
-                <ModalProvider>
-                  <CoffeeChatModalProvider>
-                    <ProfileImgModalProvider>
-                      {children}
-                    </ProfileImgModalProvider>
-                  </CoffeeChatModalProvider>
-                </ModalProvider>
-              </UserProvider>
-            </BottomSheetProvider>
-          </CoffeeChatProvider>
-        </SignupProvider>
+        <ItemContextProvider>
+          <SignupProvider>
+            <CoffeeChatProvider>
+              <BottomSheetProvider>
+                <UserProvider>
+                  <ModalProvider>
+                    <CoffeeChatModalProvider>
+                      <ProfileImgModalProvider>
+                        {children}
+                      </ProfileImgModalProvider>
+                    </CoffeeChatModalProvider>
+                  </ModalProvider>
+                </UserProvider>
+              </BottomSheetProvider>
+            </CoffeeChatProvider>
+          </SignupProvider>
+        </ItemContextProvider>
       </AuthProvider>
     </>
   );

@@ -11,7 +11,6 @@ function ModalContent() {
   const { mutate } = useDeleteFeed({ service_id: user?.id?.toString() || "" });
 
   const handleDelete = () => {
-    console.log(itemId);
     setIsModalOpen(false);
     mutate({ feed_id: itemId });
   };

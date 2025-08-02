@@ -5,6 +5,7 @@ import {
   useQueryClient,
   useQuery,
 } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import FeedCard from "../../components/feed/FeedCard";
 import FixedHeader from "../../components/feed/FixedHeader";
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
@@ -28,6 +29,7 @@ export default function FeedPage() {
   const queryClient = useQueryClient();
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const { user } = useAuth(); // 현재 사용자 정보
+  const navigate = useNavigate();
 
   // 좋아요 추가 mutation
   const addLikeMutation = useMutation({
@@ -237,6 +239,16 @@ export default function FeedPage() {
                 onLikeClick={() =>
                   handleLikeToggle(feed.feed_id, feed.is_liked)
                 }
+                onProfileClick={() => {
+                  console.log("프로필 클릭됨:", feed.user);
+                  if (feed.user?.id) {
+                    console.log(
+                      "프로필 페이지로 이동:",
+                      `/feed/profile/${feed.user.id}`
+                    );
+                    navigate(`/feed/profile/${feed.user.id}`);
+                  }
+                }}
               />
             ))}
 

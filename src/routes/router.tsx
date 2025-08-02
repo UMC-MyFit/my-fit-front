@@ -49,8 +49,6 @@ import ChattingContainer from "../pages/outlets/ChattingContainer";
 import RecruitingContainer from "../pages/outlets/RecruitingContainer";
 import CreateCard from "../pages/profile/CreateCard";
 import CardKeyword from "../pages/profile/CardKeyword";
-import { ChattingProvider } from "../contexts/ChattingContext";
-import ChattingWrapper from "../pages/chatting/ChattingWrapper";
 
 const router = createBrowserRouter([
   {
@@ -112,7 +110,7 @@ const router = createBrowserRouter([
 
           {
             path: "chatting",
-            element: <ChattingWrapper />,
+            element: <ChattingContainer />,
             children: [
               { index: true, element: <ChattingList /> },
               {
