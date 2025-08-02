@@ -5,6 +5,7 @@ import {
   useGetPeopleWhoInterestMe,
   useGetMyInterest,
 } from "../../hooks/relationQueries";
+import { useNavigate } from "react-router-dom";
 
 type NetworkingResultProps = {
   selectedTab:
@@ -14,6 +15,8 @@ type NetworkingResultProps = {
     | "receivedInterest";
 };
 function NetworkingResult({ selectedTab }: NetworkingResultProps) {
+  const navigate = useNavigate();
+
   const {
     data: { result: network } = { result: [] },
     isLoading: networkLoading,
@@ -79,7 +82,11 @@ function NetworkingResult({ selectedTab }: NetworkingResultProps) {
             const { name, profile_img, sector } = matchingData[selectedTab];
 
             return (
-              <div key={user.id} className="ml-2 flex items-center gap-4">
+              <div
+                key={user.id}
+                className="ml-2 flex items-center gap-4"
+                onClick={() => navigate(`/feed/profile/${user.id}`)}
+              >
                 <img
                   src={user[profile_img]}
                   alt="프로필 이미지"
