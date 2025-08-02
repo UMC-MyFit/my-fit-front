@@ -11,6 +11,7 @@ interface NetworkType {
   other_service_id: string;
   other_service_name: string;
   other_service_profile_img: string;
+  [key: string]: any;
 }
 interface BaseResponse {
   isSuccess: boolean;
@@ -72,6 +73,7 @@ export interface InterestType {
     profile_img: string;
     description: string;
   };
+  [key: string]: any;
 }
 export interface GetMyInterestResponse extends BaseResponse {
   result: {
@@ -110,6 +112,7 @@ export interface PeopleWhoInterestMeType {
   sender_id: string;
   sender_name: string;
   sender_profile_img: string;
+  [key: string]: any;
 }
 export interface GetPeopleWhoInterestMeResponse extends BaseResponse {
   result: PeopleWhoInterestMeType[];
@@ -306,6 +309,7 @@ export interface ReceivedNetworkType {
   sender_service_profile_img: string;
   status: string;
   requested_at: string;
+  [key: string]: any;
 }
 export interface GetReceivedNetworkResponse extends BaseResponse {
   result: ReceivedNetworkType[] | null;

@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { FeedItem } from "../../apis/mypageAPI";
 import { useBottomSheet } from "../../contexts/ui/bottomSheetContext";
 import { useItemContext } from "../../contexts/ItemContext";
+import { formatTimeAgo } from "../../utils/date";
 
 function DetailFeedItem({ item }: { item: FeedItem }) {
   const [_, setIsReady] = useState(false);
@@ -59,7 +60,9 @@ function DetailFeedItem({ item }: { item: FeedItem }) {
       </div>
       <div className="w-full flex justify-between items-center">
         <div>
-          <span className="text-ct-gray-200 text-sub2">30분 전</span>
+          <span className="text-ct-gray-200 text-sub2">
+            {formatTimeAgo(item.created_at)}
+          </span>
         </div>
         <div className="flex items-center gap-1">
           <div className="flex items-center gap-1">
@@ -68,7 +71,7 @@ function DetailFeedItem({ item }: { item: FeedItem }) {
               alt="좋아요"
               className="w-[20px] h-[20px]"
             />
-            <span className="text-ct-black-300 text-body2">10</span>
+            <span className="text-ct-black-300 text-body2">{item.heart}</span>
           </div>
           <div className="flex items-center gap-1">
             <img
@@ -76,7 +79,9 @@ function DetailFeedItem({ item }: { item: FeedItem }) {
               alt="댓글"
               className="w-[20px] h-[20px]"
             />
-            <span className="text-ct-black-300 text-body2">10</span>
+            <span className="text-ct-black-300 text-body2">
+              {item.comment_count}
+            </span>
           </div>
         </div>
       </div>
