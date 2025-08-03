@@ -23,6 +23,7 @@ function Introduction({
         src="/assets/profile/setting.svg"
         alt="설정"
         className="w-[20px] h-[20px]"
+        onClick={() => navigate("/mypage/setting")}
       />
       <div className="w-full flex justify-between items-center mt-4 h-[80px]">
         <img
