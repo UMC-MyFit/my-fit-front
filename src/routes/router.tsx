@@ -90,6 +90,8 @@ const router = createBrowserRouter([
               { path: "alarm", element: <MyAlarm /> },
               { path: "post", element: <PostFeed /> },
               { path: "profile/:id", element: <FeedProfile /> },
+              { path: "profile/:id/card", element: <CardDetail /> },
+              { path: "profile/:id/feed", element: <FeedDetail /> },
             ],
           },
 

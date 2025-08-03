@@ -9,12 +9,15 @@ import { FeedItem } from "../../apis/mypageAPI";
 import { useBottomSheet } from "../../contexts/ui/bottomSheetContext";
 import { useItemContext } from "../../contexts/ItemContext";
 import { formatTimeAgo } from "../../utils/date";
+import { useLocation } from "react-router-dom";
 
 function DetailFeedItem({ item }: { item: FeedItem }) {
   const [_, setIsReady] = useState(false);
   const paginationRef = useRef<HTMLDivElement>(null);
   const { setIsBottomSheetOpen } = useBottomSheet();
   const { setItemId } = useItemContext();
+  const location = useLocation();
+  const isMine = location.pathname.startsWith("/mypage");
 
   const handleClick = () => {
     setIsBottomSheetOpen(true);
@@ -29,11 +32,13 @@ function DetailFeedItem({ item }: { item: FeedItem }) {
     <div className="w-full h-auto bg-ct-white rounded-[10px] p-[16px] flex flex-col gap-[10px] items-center">
       <div className="w-full h-[30px] px-[5px] py-[14px] flex items-center justify-between">
         <span className="text-ct-main-blue-100 text-body1">활동 피드</span>
-        <img
-          src="/assets/profile/settingIcon.svg"
-          alt="설정"
-          onClick={handleClick}
-        />
+        {isMine && (
+          <img
+            src="/assets/profile/settingIcon.svg"
+            alt="설정"
+            onClick={handleClick}
+          />
+        )}
       </div>
       <Swiper
         modules={[Pagination]}

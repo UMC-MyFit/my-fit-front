@@ -1,10 +1,10 @@
 import { useAuth } from "../../contexts/AuthContext";
 import { useGetProfile } from "../../hooks/mypageQueries";
 
-function DetailIntroduction() {
+function DetailIntroduction({ serviceId }: { serviceId?: string }) {
   const { user } = useAuth();
   const { data: profile, isLoading } = useGetProfile({
-    service_id: user?.id?.toString() || "",
+    service_id: serviceId || user?.id?.toString() || "",
   });
 
   if (isLoading) {

@@ -85,10 +85,10 @@ function ProfileItem() {
           isLoading ? (
             <ProfileCardSkeleton />
           ) : (
-            <ProfileCardContainer />
+            <ProfileCardContainer serviceId={id} />
           )
         ) : (
-          <ProfileFeedContainer />
+          <ProfileFeedContainer serviceId={id} />
         )}
       </div>
     </>
