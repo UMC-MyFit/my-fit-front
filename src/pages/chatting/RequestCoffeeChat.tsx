@@ -135,7 +135,9 @@ function RequestCoffeeChat() {
         {modalType === "request" && (
           <RequestModal roomId={Number(chattingRoomId)} />
         )}
-        {modalType === "editConfirm" && <EditConfirmedModal />}
+        {modalType === "editConfirm" && (
+          <EditConfirmedModal roomId={Number(chattingRoomId)} />
+        )}
       </Modal>
     </TopBarContainer>
   );

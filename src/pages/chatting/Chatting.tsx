@@ -8,9 +8,11 @@ import { useCoffeeChatModal } from "../../contexts/CoffeeChatModalContext";
 import { useCoffeeChat } from "../../contexts/coffeeChatContext";
 import {
   useChatMessageInfiniteQuery,
+  usePartnerProfileQuery,
   useSendChatMessageMutation,
 } from "../../hooks/chatting/chatting";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Chatting() {
   const { messages, addMessage, prependMessages, clearMessages } =
@@ -21,11 +23,9 @@ function Chatting() {
   const { chattingRoomId } = useParams();
   const numericRoomId = Number(chattingRoomId);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const { data: parnterProfile } = usePartnerProfileQuery(numericRoomId);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useChatMessageInfiniteQuery(numericRoomId);
-  const location = useLocation();
-  const targetServiceId = location.state?.targetServiceId;
-
   useEffect(() => {
     if (data) {
       const allMessages = data.pages
@@ -55,11 +55,13 @@ function Chatting() {
         {" "}
         <div className="flex flex-col gap-[3px] ct-center">
           <img
-            src="/assets/chatting/manprofile.svg"
-            alt="남성프로필"
-            className="w-[49px] h-[49px]"
+            src={parnterProfile?.result.profile_img}
+            alt="프로필 사진"
+            className="w-[49px] h-[49px] rounded-full"
           />
-          <span className="text-h2 text-ct-black-100">김기업</span>
+          <span className="text-h2 text-ct-black-100">
+            {parnterProfile?.result.name}
+          </span>
           <img
             src="/assets/chatting/calender.svg"
             alt="캘린더 아이콘"

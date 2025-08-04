@@ -1,14 +1,9 @@
 import apiInstance from "../apiClient";
 
 export interface CoffeeChatRequest {
-  receiver_id: number;
   title: string;
   scheduled_at: string;
   place: string;
-}
-
-export interface AcceptCoffeeChatRequest {
-  coffeechat_id: number;
 }
 
 export interface CoffeeChatResponse {
@@ -20,6 +15,17 @@ export interface CoffeeChatResponse {
     receiver_id: number;
     created_at: string;
     name: string;
+  };
+}
+export interface UpdateCoffeeChatResponse {
+  isSuccess: boolean;
+  code: number;
+  message: string;
+  result: {
+    coffeechat_id: number;
+    title: string;
+    scheduled_at: string;
+    place: string;
   };
 }
 
@@ -54,6 +60,30 @@ export interface CoffeeChatDetailResponse {
   };
 }
 
+export interface CoffeeChatListResponse {
+  isSuccess: boolean;
+  code: number;
+  message: string;
+  result: {
+    coffeechats: [
+      {
+        coffeechat_id: number;
+        chatting_room_id: number;
+        opponent: {
+          name: string;
+          age: number;
+          job: string;
+          profile_image: string;
+        };
+        scheduled_at: string;
+        place: string;
+      }
+    ];
+    next_cursor: number;
+    has_next: boolean;
+  };
+}
+
 export const PostRequestCoffeeChat = async (
   chattingRoomId: number,
   data: CoffeeChatRequest
@@ -76,11 +106,11 @@ export const GetCoffeeChatPreview = async (
 
 export const PatchAcceptCoffeeChat = async (
   chattingRoomId: number,
-  body: AcceptCoffeeChatRequest
+  coffeechat_id: number
 ) => {
   const resposne = await apiInstance.patch(
-    `/api/${chattingRoomId}/coffeechats/accept`,
-    body
+    `/api/chatting-rooms/${chattingRoomId}/coffeechats/accept`,
+    coffeechat_id
   );
   return resposne.data;
 };
@@ -90,7 +120,45 @@ export const GetCoffeeChatDetail = async (
   coffeechat_id: number
 ): Promise<CoffeeChatDetailResponse> => {
   const response = await apiInstance.get(
-    `api/chatting-rooms/${chatting_room_id}/coffeechats/${coffeechat_id}`
+    `/api/chatting-rooms/${chatting_room_id}/coffeechats/${coffeechat_id}`
   );
+  return response.data;
+};
+
+export const PatchUpdateCoffeeChat = async (
+  chattingRoomId: number,
+  body: CoffeeChatRequest
+): Promise<CoffeeChatResponse> => {
+  const response = await apiInstance.patch(
+    `/api/chatting-rooms/${chattingRoomId}/coffeechats/update`,
+    body
+  );
+  return response.data;
+};
+
+export const PatchRejectCoffeeChat = async (
+  chattingRoomId: number,
+  coffeechat_id: number
+) => {
+  const resposne = await apiInstance.patch(
+    `/api/chatting-rooms/${chattingRoomId}/coffeechats/reject`,
+    coffeechat_id
+  );
+  return resposne.data;
+};
+export const PatchCancelCoffeeChat = async (
+  chattingRoomId: number,
+  coffeechat_id: number
+) => {
+  const resposne = await apiInstance.patch(
+    `/api/chatting-rooms/${chattingRoomId}/coffeechats/cancel`,
+    coffeechat_id
+  );
+  return resposne.data;
+};
+export const GetCoffeeChatList = async (cursor?: number, limit?: number) => {
+  const response = await apiInstance.get("api/coffeechats", {
+    params: { cursor, limit },
+  });
   return response.data;
 };

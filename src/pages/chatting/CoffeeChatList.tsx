@@ -11,7 +11,7 @@ function CoffeeChatList() {
       <div className="flex w-full h-[39px] fixed bg-ct-white">
         <button
           className="flex-1 border-b-[3px] border-[#D9D9D9] text-ct-gray-200 text-[18px] font-[600]"
-          onClick={() => nav("/chatting/chattinglist")}
+          onClick={() => nav("/chatting")}
         >
           대화
         </button>
