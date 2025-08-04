@@ -106,7 +106,6 @@ export interface FeedItem {
   user: {
     id: string;
     name: string;
-    sector: string;
     profile_img: string;
   };
   created_at: string;
@@ -114,6 +113,7 @@ export interface FeedItem {
   feed_text: string;
   hashtags: string;
   heart: number;
+  is_liked: boolean;
   comment_count: number;
 }
 export interface GetFeedsResponse extends BaseResponse {

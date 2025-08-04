@@ -10,6 +10,7 @@ import { useBottomSheet } from "../../contexts/ui/bottomSheetContext";
 import { useItemContext } from "../../contexts/ItemContext";
 import { formatTimeAgo } from "../../utils/date";
 import { useLocation } from "react-router-dom";
+import { useAddFeedLike, useDeleteFeedLike } from "../../hooks/relationQueries";
 
 function DetailFeedItem({ item }: { item: FeedItem }) {
   const [_, setIsReady] = useState(false);
@@ -22,6 +23,20 @@ function DetailFeedItem({ item }: { item: FeedItem }) {
   const handleClick = () => {
     setIsBottomSheetOpen(true);
     setItemId(item.feed_id);
+  };
+
+  const { mutate: addFeedLike } = useAddFeedLike({
+    service_id: item.user.id,
+  });
+  const { mutate: deleteFeedLike } = useDeleteFeedLike({
+    service_id: item.user.id,
+  });
+  const handleHeartClick = () => {
+    if (item.is_liked) {
+      deleteFeedLike({ feed_id: item.feed_id });
+    } else {
+      addFeedLike({ feed_id: item.feed_id });
+    }
   };
 
   useEffect(() => {
@@ -70,7 +85,7 @@ function DetailFeedItem({ item }: { item: FeedItem }) {
           </span>
         </div>
         <div className="flex items-center gap-1">
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1" onClick={handleHeartClick}>
             <img
               src="/assets/profile/heart.svg"
               alt="좋아요"
