@@ -4,10 +4,18 @@ import BottomNav from "../../components/layouts/BottomNav";
 import { useModal } from "../../contexts/ui/modalContext";
 import Modal from "../../components/ui/Modal";
 import DeleteAccountModal from "../../components/setting/DeleteAccountModal";
+import { usePostLogout } from "../../hooks/settingQueries";
 
 function Account() {
   const nav = useNavigate();
   const { setIsModalOpen } = useModal();
+
+  const { mutate: logout } = usePostLogout();
+
+  const handleLogoutClick = () => {
+    logout();
+  };
+
   const TopBarContent = () => {
     return (
       <span className="text-h2 font-Pretendard text-ct-black-100">계정</span>
@@ -34,7 +42,7 @@ function Account() {
           </button>
           <button
             className="w-full h-[47.97px] text-left pl-[32px] text-sub1 font-Pretendard text-ct-red-100 border-none"
-            onClick={() => nav("/onboarding")}
+            onClick={handleLogoutClick}
           >
             로그아웃
           </button>
