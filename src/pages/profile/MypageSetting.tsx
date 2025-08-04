@@ -1,20 +1,22 @@
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
 import TopBarContainer from "../../components/common/TopBarContainer";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function MypageSetting() {
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location.pathname);
 
   const handleProfileClick = () => {
-    navigate("/mypage/setting/profile");
+    navigate(`${location.pathname}/profile`);
   };
 
   const handleAccountClick = () => {
-    navigate("/mypage/setting/account");
+    navigate(`${location.pathname}/account`);
   };
 
   const handleAlarmClick = () => {
-    navigate("/mypage/setting/alarm");
+    navigate(`${location.pathname}/alarm`);
   };
 
   return (
