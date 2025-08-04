@@ -178,7 +178,7 @@ export const useGetReceivedNetwork = () => {
   });
 };
 
-export const useGetIsNetworking = (service_id: string) => {
+export const useGetIsNetworking = ({ service_id }: { service_id: string }) => {
   return useQuery({
     queryKey: ["is-networking", service_id],
     queryFn: () => getIsNetworking({ service_id }),

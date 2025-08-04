@@ -329,7 +329,7 @@ export const getReceivedNetwork =
 
 export interface GetIsNetworkingResponse extends BaseResponse {
   result: {
-    status: string;
+    status: "NO_RELATION" | "PENDING_SENT" | "CONNECTED";
   };
 }
 export const getIsNetworking = async ({
