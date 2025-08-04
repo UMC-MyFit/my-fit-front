@@ -289,6 +289,7 @@ export default function FeedPage() {
               onReplyCreate={handleReplyCreate}
               onCommentDelete={handleCommentDelete}
               currentUserId={user?.id}
+              postOwnerId={allFeeds.find(feed => feed.feed_id === Number(activePostId))?.user?.id}
             />
           </>
         )}

@@ -15,6 +15,7 @@ interface CommentModalProps {
   onReplyCreate: (commentText: string, parentCommentId: number) => void;
   onCommentDelete?: (commentId: number) => void;
   currentUserId?: number;
+  postOwnerId?: number;
 }
 
 export default function CommentModal({
@@ -25,6 +26,7 @@ export default function CommentModal({
   onReplyCreate,
   onCommentDelete,
   currentUserId,
+  postOwnerId,
 }: CommentModalProps) {
   const [closing, setClosing] = useState(false);
   const [replyToCommentId, setReplyToCommentId] = useState<number | null>(null);
@@ -106,6 +108,7 @@ export default function CommentModal({
             }}
             onDeleteClick={onCommentDelete}
             currentUserId={currentUserId}
+            postOwnerId={postOwnerId}
           />
         </div>
         <div className="fixed bottom-0 left-0 right-0 z-50 bg-white px-4 pt-2 pb-4 space-y-2 border-t border-gray-200">

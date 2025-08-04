@@ -7,11 +7,16 @@ interface Props {
   onReplyClick?: (commentId: number, userName: string) => void;
   onDeleteClick?: (commentId: number) => void;
   currentUserId?: number; // 현재 사용자 ID (삭제 권한 확인용)
+  postOwnerId?: number; // 게시물 작성자 ID (삭제 권한 확인용)
 }
 
-function CommentItem({ comment, isReply = false, onReplyClick, onDeleteClick, currentUserId }: Props) {
+function CommentItem({ comment, isReply = false, onReplyClick, onDeleteClick, currentUserId, postOwnerId }: Props) {
   // 현재 사용자가 작성한 댓글인지 확인
   const isMyComment = currentUserId && comment.service.id === currentUserId;
+  // 현재 사용자가 게시물 작성자인지 확인
+  const isPostOwner = currentUserId && postOwnerId && currentUserId === postOwnerId;
+  // 삭제 권한이 있는지 확인 (자신의 댓글이거나 게시물 작성자)
+  const canDelete = isMyComment || isPostOwner;
   return (
     <div className={`flex gap-2 ${isReply ? "ml-10" : ""}`}>
       {/* 프로필 이미지 */}
@@ -45,7 +50,7 @@ function CommentItem({ comment, isReply = false, onReplyClick, onDeleteClick, cu
               </button>
             )}
           </div>
-          {isMyComment && onDeleteClick && (
+          {canDelete && onDeleteClick && (
             <button 
               type="button" 
               className="hover:underline text-red-500"
