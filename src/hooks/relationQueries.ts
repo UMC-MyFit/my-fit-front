@@ -246,11 +246,8 @@ export const useAddFeedLike = ({ service_id }: { service_id: string }) => {
     mutationFn: ({ feed_id }: { feed_id: string }) =>
       addFeedLike(Number(feed_id)),
     onSuccess: () => {
-      // Invalidate all pages of the infinite query
       queryClient.invalidateQueries({
         queryKey: ["feeds", service_id],
-        refetchType: "active",
-        exact: true,
       });
     },
   });
@@ -263,11 +260,8 @@ export const useDeleteFeedLike = ({ service_id }: { service_id: string }) => {
     mutationFn: ({ feed_id }: { feed_id: string }) =>
       removeFeedLike(Number(feed_id)),
     onSuccess: () => {
-      // Invalidate all pages of the infinite query
       queryClient.invalidateQueries({
         queryKey: ["feeds", service_id],
-        refetchType: "active",
-        exact: true,
       });
     },
   });
