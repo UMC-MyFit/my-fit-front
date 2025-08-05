@@ -48,7 +48,6 @@ import ChattingContainer from "../pages/outlets/ChattingContainer";
 import RecruitingContainer from "../pages/outlets/RecruitingContainer";
 import CreateCard from "../pages/profile/CreateCard";
 import CardKeyword from "../pages/profile/CardKeyword";
-import NetworkError from "../pages/error/NetworkError";
 import NotFound from "../pages/error/NotFound";
 
 const router = createBrowserRouter([
