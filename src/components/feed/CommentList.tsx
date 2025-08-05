@@ -6,11 +6,12 @@ interface Props {
   comments: Comment[];
   onReplyClick?: (commentId: number, userName: string) => void;
   onDeleteClick?: (commentId: number) => void;
+  onProfileClick?: (userId: number) => void;
   currentUserId?: number;
   postOwnerId?: number;
 }
 
-function CommentList({ comments, onReplyClick, onDeleteClick, currentUserId, postOwnerId }: Props) {
+function CommentList({ comments, onReplyClick, onDeleteClick, onProfileClick, currentUserId, postOwnerId }: Props) {
   return (
     <div className="flex flex-col gap-6">
       {comments.map((comment) => (
@@ -19,6 +20,7 @@ function CommentList({ comments, onReplyClick, onDeleteClick, currentUserId, pos
           comment={comment} 
           onReplyClick={onReplyClick}
           onDeleteClick={onDeleteClick}
+          onProfileClick={onProfileClick}
           currentUserId={currentUserId}
           postOwnerId={postOwnerId}
         />
@@ -30,13 +32,15 @@ function CommentList({ comments, onReplyClick, onDeleteClick, currentUserId, pos
 function CommentThread({ 
   comment, 
   onReplyClick, 
-  onDeleteClick, 
+  onDeleteClick,
+  onProfileClick,
   currentUserId,
   postOwnerId
 }: { 
   comment: Comment; 
   onReplyClick?: (commentId: number, userName: string) => void;
   onDeleteClick?: (commentId: number) => void;
+  onProfileClick?: (userId: number) => void;
   currentUserId?: number;
   postOwnerId?: number;
 }) {
@@ -49,6 +53,7 @@ function CommentThread({
         comment={comment} 
         onReplyClick={onReplyClick}
         onDeleteClick={onDeleteClick}
+        onProfileClick={onProfileClick}
         currentUserId={currentUserId}
         postOwnerId={postOwnerId}
       />
@@ -77,6 +82,7 @@ function CommentThread({
               comment={reply} 
               isReply
               onDeleteClick={onDeleteClick}
+              onProfileClick={onProfileClick}
               currentUserId={currentUserId}
               postOwnerId={postOwnerId}
             />

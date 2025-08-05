@@ -41,6 +41,7 @@ import Networking from "../pages/profile/Networking";
 import MypageSetting from "../pages/profile/MypageSetting";
 import ProtectedRoute from "./ProtectedRoute";
 import FeedProfile from "../pages/feed/FeedProfile";
+import FeedSearchResult from "../pages/feed/FeedSearchResult";
 import MypageContainer from "../pages/outlets/MypageContainer";
 import OnboardingContainer from "../pages/outlets/OnboardingContainer";
 import FeedContainer from "../pages/outlets/FeedContainer";
@@ -87,6 +88,7 @@ const router = createBrowserRouter([
             children: [
               { index: true, element: <FeedPage /> },
               { path: "search", element: <FeedSearch /> },
+              { path: "search-result", element: <FeedSearchResult /> },
               { path: "alarm", element: <MyAlarm /> },
               { path: "post", element: <PostFeed /> },
               { path: "profile/:id", element: <FeedProfile /> },

@@ -6,11 +6,12 @@ interface Props {
   isReply?: boolean;
   onReplyClick?: (commentId: number, userName: string) => void;
   onDeleteClick?: (commentId: number) => void;
+  onProfileClick?: (userId: number) => void;
   currentUserId?: number; // 현재 사용자 ID (삭제 권한 확인용)
   postOwnerId?: number; // 게시물 작성자 ID (삭제 권한 확인용)
 }
 
-function CommentItem({ comment, isReply = false, onReplyClick, onDeleteClick, currentUserId, postOwnerId }: Props) {
+function CommentItem({ comment, isReply = false, onReplyClick, onDeleteClick, onProfileClick, currentUserId, postOwnerId }: Props) {
   // 현재 사용자가 작성한 댓글인지 확인
   const isMyComment = currentUserId && comment.service.id === currentUserId;
   // 현재 사용자가 게시물 작성자인지 확인
@@ -20,18 +21,28 @@ function CommentItem({ comment, isReply = false, onReplyClick, onDeleteClick, cu
   return (
     <div className={`flex gap-2 ${isReply ? "ml-10" : ""}`}>
       {/* 프로필 이미지 */}
-      <img
-        src={comment.service.profile_img}
-        alt={comment.service.name}
-        className="w-10 h-10 rounded-full object-cover"
-      />
+      <button
+        onClick={() => onProfileClick?.(comment.service.id)}
+        className="hover:opacity-80 transition-opacity"
+      >
+        <img
+          src={comment.service.profile_img}
+          alt={comment.service.name}
+          className="w-10 h-10 rounded-full object-cover"
+        />
+      </button>
 
       <div className="flex flex-col text-sm w-full">
         {/* 이름 / 직무 */}
-        <p className="text-sub3 text-ct-black-200">
-          <span>{comment.service.name}</span>
-          <span> / {comment.service.high_sector}</span>
-        </p>
+        <button
+          onClick={() => onProfileClick?.(comment.service.id)}
+          className="text-left hover:opacity-80 transition-opacity"
+        >
+          <p className="text-sub3 text-ct-black-200">
+            <span>{comment.service.name}</span>
+            <span> / {comment.service.high_sector}</span>
+          </p>
+        </button>
 
         {/* 댓글 텍스트 */}
         <p className="mt-1 text-ct-black-100">{comment.content}</p>

@@ -1,6 +1,7 @@
 // CommentModal.tsx - 바텀시트 스타일 모달 컴포넌트
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CommentList from "../feed/CommentList";
 import { Comment } from "../../types/feed/comment";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
@@ -28,11 +29,17 @@ export default function CommentModal({
   currentUserId,
   postOwnerId,
 }: CommentModalProps) {
+  const navigate = useNavigate();
   const [closing, setClosing] = useState(false);
   const [replyToCommentId, setReplyToCommentId] = useState<number | null>(null);
   const [replyToUserName, setReplyToUserName] = useState<string>("");
 
   const handleRequestClose = () => setClosing(true);
+
+  // 프로필 클릭 핸들러
+  const handleProfileClick = (userId: number) => {
+    navigate(`/feed/profile/${userId}`);
+  };
 
   const modalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<CommentInputFieldRef>(null);
@@ -107,6 +114,7 @@ export default function CommentModal({
               inputRef.current?.focus();
             }}
             onDeleteClick={onCommentDelete}
+            onProfileClick={handleProfileClick}
             currentUserId={currentUserId}
             postOwnerId={postOwnerId}
           />
