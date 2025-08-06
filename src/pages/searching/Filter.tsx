@@ -1,8 +1,8 @@
 import TopBarContainer from "../../components/common/TopBarContainer";
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import PersonalInputField from "../../components/setting/PersonalInputField";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { z } from "zod";
 import { useModal } from "../../contexts/ui/modalContext";
 import Modal from "../../components/ui/Modal";
@@ -19,11 +19,19 @@ function TopBarContent() {
 
 function Filter() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [region, setRegion] = useState("");
   const [employmentStatus, setEmploymentStatus] = useState("");
   const [keyword, setKeyword] = useState<string[]>([]);
   const [keywordInput, setKeywordInput] = useState("");
   const [keywordError, setKeywordError] = useState("");
+  const [selectedJob, setSelectedJob] = useState("");
+
+  useEffect(() => {
+    const { high_sector, low_sector } = location.state;
+
+    if (low_sector) setSelectedJob(low_sector);
+  }, [location.state]);
 
   // Zod schema for keyword validation
   const keywordSchema = z.object({
@@ -101,14 +109,30 @@ function Filter() {
                 </span>
               )}
             </div>
-            {/* 여기 */}
+            <div className="flex flex-col gap-[11px] w-full mb-[10px]">
+              <label className="ml-1 text-sub1 text-ct-black-200">직무</label>
+              <input
+                type="text"
+                value={selectedJob}
+                readOnly
+                placeholder="직무를 선택해주세요"
+                className="w-full flex text-body1 placeholder:text-ct-gray-300 text-ct-black-200 font-Pretendard min-h-[44px] rounded-[10px] pl-[26px] bg-ct-gray-100 cursor-pointer"
+                onClick={() => {
+                  navigate("/searching/filter/job-select", {
+                    state: {
+                      from: "filter",
+                      selectedJob: selectedJob,
+                    },
+                  });
+                }}
+              />
+            </div>
           </div>
           <div
             className="mb-[30px] px-[40px] py-[10px] rounded-[100px] border-[1px] border-ct-main-blue-200 cursor-pointer"
             onClick={() => {
               // Only navigate if there are no validation errors
               if (!keywordError) {
-                console.log("Searching with keywords:", keyword);
                 navigate("/searching/filter/result", {
                   state: {
                     keywords: keyword,
