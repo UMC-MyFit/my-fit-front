@@ -19,18 +19,14 @@ function NetworkingBar() {
   const { mutate: deleteNetwork } = useDeleteNetwork();
 
   const handleNetworkClick = () => {
-    console.log("before return");
     if (networkStatusLoading) return;
-    console.log("after return");
     if (networkStatus === "NO_RELATION") {
-      console.log("NO_RELATION");
       postNetwork({ service_id: id });
       sendInterest({ service_id: id });
     } else if (
       networkStatus === "PENDING_SENT" ||
       networkStatus === "CONNECTED"
     ) {
-      console.log("PENDING_SENT");
       deleteNetwork({
         network_id: networkStatusData?.result.network_id as string,
       });
