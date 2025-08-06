@@ -5,6 +5,7 @@ import { FormattedDate, FormattedTime } from "../../../utils/format";
 import { useAcceptCoffeeChatMutation } from "../../../hooks/chatting/coffeechat";
 import CancelModal from "./CancelModal";
 import { useState } from "react";
+import { useModal } from "../../../contexts/ui/modalContext";
 
 interface Props {
   data: CoffeeChatDetailResponse["result"];
@@ -15,6 +16,7 @@ function AcceptModal({ data }: Props) {
   const nav = useNavigate();
   const numericRoomId = Number(chattingRoomId);
   const [showCancelModal, setShowCancelModal] = useState(false);
+  const { setIsModalOpen } = useModal();
 
   const { mutate: acceptChat } = useAcceptCoffeeChatMutation(numericRoomId);
 
@@ -25,8 +27,10 @@ function AcceptModal({ data }: Props) {
     acceptChat(data.coffeechat_id, {
       onSuccess: () => {
         nav(`/chatting/${chattingRoomId}`);
+        setIsModalOpen(false);
       },
       onError: (error) => {
+        console.log("커피챗아이디", data.coffeechat_id);
         console.error("커피챗 수락 실패", error);
       },
     });

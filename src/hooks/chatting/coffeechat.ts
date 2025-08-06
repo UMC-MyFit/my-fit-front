@@ -1,8 +1,15 @@
-import { useMutation, useQuery, UseQueryOptions } from "@tanstack/react-query";
 import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  UseQueryOptions,
+} from "@tanstack/react-query";
+import {
+  CoffeeChatListResponse,
   CoffeeChatRequest,
   CoffeeChatResponse,
   GetCoffeeChatDetail,
+  GetCoffeeChatList,
   GetCoffeeChatPreview,
   PatchAcceptCoffeeChat,
   PatchRejectCoffeeChat,
@@ -68,3 +75,14 @@ export const useCancelCoffeeChatMutation = (chattingRoomId: number) => {
       PatchAcceptCoffeeChat(chattingRoomId, coffeechat_id),
   });
 };
+
+export const useCoffeeChatListInfiniteQuery = () =>
+  useInfiniteQuery<CoffeeChatListResponse, Error>({
+    queryKey: ["coffeeChatList"],
+    queryFn: ({ pageParam = 0 }) => GetCoffeeChatList(pageParam as number, 10),
+    getNextPageParam: (lastPage) => {
+      const nextCursor = lastPage.result.next_cursor;
+      return nextCursor !== null ? nextCursor : undefined;
+    },
+    initialPageParam: 0,
+  });

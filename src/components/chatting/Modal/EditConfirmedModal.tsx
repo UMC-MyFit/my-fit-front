@@ -9,13 +9,17 @@ import {
   useUpdateCoffeeChatMutation,
 } from "../../../hooks/chatting/coffeechat";
 
-function EditConfirmedModal({ roomId }: { roomId: number }) {
+interface EditConfirmedModalProps {
+  roomId: number;
+  coffeechatId: number;
+}
+
+function EditConfirmedModal({ roomId, coffeechatId }: EditConfirmedModalProps) {
   const nav = useNavigate();
   const { setIsModalOpen } = useModal();
   const { selectedTitle, selectedDate, selectedTime, selectedPlace } =
     useCoffeeChat();
   const { requestStatus } = useCoffeeChatModal();
-  const numericRoomId = Number(roomId);
 
   const formattedDate = selectedDate
     ? formatDateWithDay(
@@ -25,8 +29,8 @@ function EditConfirmedModal({ roomId }: { roomId: number }) {
       )
     : "";
 
-  const { data } = useGetCoffeeChatPreviewQuery(numericRoomId);
-  const { mutate: editCoffeeChat } = useUpdateCoffeeChatMutation(numericRoomId);
+  const { data } = useGetCoffeeChatPreviewQuery(roomId);
+  const { mutate: editCoffeeChat } = useUpdateCoffeeChatMutation(roomId);
 
   function toISOString(
     timeStr: string,
@@ -51,6 +55,7 @@ function EditConfirmedModal({ roomId }: { roomId: number }) {
   }
 
   if (!selectedDate) return null;
+
   const scheduledAt = toISOString(selectedTime, selectedDate);
 
   return (
@@ -83,20 +88,15 @@ function EditConfirmedModal({ roomId }: { roomId: number }) {
           time={selectedTime}
           place={selectedPlace}
         />
-
-        {requestStatus === "PENDING" ? (
-          <img
-            src="/assets/chatting/disablecheck.svg"
-            alt="비활성 체크"
-            className="absolute top-[10px] right-[10px]"
-          />
-        ) : (
-          <img
-            src="/assets/chatting/check.svg"
-            alt="활성화 체크"
-            className="absolute top-[10px] right-[10px]"
-          />
-        )}
+        <img
+          src={
+            requestStatus === "PENDING"
+              ? "/assets/chatting/disablecheck.svg"
+              : "/assets/chatting/check.svg"
+          }
+          alt={requestStatus === "PENDING" ? "비활성 체크" : "활성화 체크"}
+          className="absolute top-[10px] right-[10px]"
+        />
       </div>
 
       <button
@@ -104,13 +104,13 @@ function EditConfirmedModal({ roomId }: { roomId: number }) {
         onClick={() => {
           editCoffeeChat(
             {
+              coffeechat_id: coffeechatId,
               title: selectedTitle,
               scheduled_at: scheduledAt,
               place: selectedPlace,
             },
             {
               onSuccess: () => {
-                // 메시지는 소켓을 통해 자동 수신됨
                 nav(`/chatting/${roomId}`);
                 setIsModalOpen(false);
               },

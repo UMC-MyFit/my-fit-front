@@ -60,7 +60,11 @@ function PendingModal({ data }: Props) {
         className="mt-[20px] w-[70px] h-[23px] border-b border-ct-gray-300 text-sub1 text-ct-gray-300"
         onClick={() => {
           setEditMode(true);
-          nav(`/chatting/coffeechatrequest/${roomId}`);
+          nav(`/chatting/coffeechatrequest/${roomId}`, {
+            state: {
+              coffeechatId: data.coffeechat_id,
+            },
+          });
           setIsModalOpen(false);
         }}
       >

@@ -4,7 +4,7 @@ import { useModal } from "../../../contexts/ui/modalContext";
 import { useRejectCoffeeChatMutation } from "../../../hooks/chatting/coffeechat";
 
 interface CancelModalProps {
-  onClose: () => void;
+  onClose?: () => void;
   data: CoffeeChatDetailResponse["result"];
 }
 

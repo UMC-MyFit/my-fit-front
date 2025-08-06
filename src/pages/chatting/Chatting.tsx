@@ -11,14 +11,14 @@ import {
   usePartnerProfileQuery,
   useSendChatMessageMutation,
 } from "../../hooks/chatting/chatting";
-import { useLocation } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
+import { useModal } from "../../contexts/ui/modalContext";
 
 function Chatting() {
   const { messages, addMessage, prependMessages, clearMessages } =
     useChatting();
-  const { setEditMode } = useCoffeeChatModal();
+  const { setEditMode, setModalType } = useCoffeeChatModal();
   const { resetSelections } = useCoffeeChat();
+  const { setIsModalOpen } = useModal();
   const nav = useNavigate();
   const { chattingRoomId } = useParams();
   const numericRoomId = Number(chattingRoomId);
@@ -26,6 +26,12 @@ function Chatting() {
   const { data: parnterProfile } = usePartnerProfileQuery(numericRoomId);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useChatMessageInfiniteQuery(numericRoomId);
+
+  useEffect(() => {
+    setIsModalOpen(false);
+    setModalType("none");
+  }, []);
+
   useEffect(() => {
     if (data) {
       const allMessages = data.pages
@@ -37,6 +43,7 @@ function Chatting() {
       prependMessages(allMessages);
     }
   }, [data]);
+
   const { mutate: sendMessage } = useSendChatMessageMutation(numericRoomId);
 
   const handleSend = (text: string) => {
@@ -45,6 +52,7 @@ function Chatting() {
       type: "TEXT",
     });
   };
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -52,7 +60,6 @@ function Chatting() {
   const TopBarContent = () => {
     return (
       <div className="w-full h-[70px] bg-white">
-        {" "}
         <div className="flex flex-col gap-[3px] ct-center">
           <img
             src={parnterProfile?.result.profile_img}
@@ -65,7 +72,7 @@ function Chatting() {
           <img
             src="/assets/chatting/calender.svg"
             alt="캘린더 아이콘"
-            className="absolute right-[28px] "
+            className="absolute right-[28px]"
             onClick={() => {
               resetSelections();
               setEditMode(false);
@@ -76,6 +83,7 @@ function Chatting() {
       </div>
     );
   };
+
   return (
     <TopBarContainer TopBarContent={<TopBarContent />}>
       <div className="pt-[24px] h-[calc(100vh-42px)] flex flex-col overflow-hidden">
@@ -87,4 +95,5 @@ function Chatting() {
     </TopBarContainer>
   );
 }
+
 export default Chatting;

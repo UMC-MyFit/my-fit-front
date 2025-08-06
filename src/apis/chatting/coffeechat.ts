@@ -1,6 +1,7 @@
 import apiInstance from "../apiClient";
 
 export interface CoffeeChatRequest {
+  coffeechat_id: number;
   title: string;
   scheduled_at: string;
   place: string;
@@ -73,7 +74,7 @@ export interface CoffeeChatListResponse {
           name: string;
           age: number;
           job: string;
-          profile_image: string;
+          profile_img: string;
         };
         scheduled_at: string;
         place: string;
@@ -110,7 +111,7 @@ export const PatchAcceptCoffeeChat = async (
 ) => {
   const resposne = await apiInstance.patch(
     `/api/chatting-rooms/${chattingRoomId}/coffeechats/accept`,
-    coffeechat_id
+    { coffeechat_id }
   );
   return resposne.data;
 };
@@ -157,7 +158,7 @@ export const PatchCancelCoffeeChat = async (
   return resposne.data;
 };
 export const GetCoffeeChatList = async (cursor?: number, limit?: number) => {
-  const response = await apiInstance.get("api/coffeechats", {
+  const response = await apiInstance.get("/api/chatting-rooms/coffeechats", {
     params: { cursor, limit },
   });
   return response.data;
