@@ -101,30 +101,7 @@ function Filter() {
                 </span>
               )}
             </div>
-            <PersonalInputField
-              label="희망 직무를 선택해주세요"
-              value={selectedSkillLabel}
-              placeholder="희망직무 입력"
-              onClick={() =>
-                nav("/onboarding/jobpreference", {
-                  state: {
-                    from: "onboarding",
-                    prevData: {
-                      region,
-                      subRegion,
-                      birthDate,
-                      employ,
-                      academic,
-                      nickname,
-                      shortIntro,
-                      educationLevel,
-                    },
-                    high_sector: highSector,
-                    low_sector: lowSector,
-                  },
-                })
-              }
-            />
+            {/* 여기 */}
           </div>
           <div
             className="mb-[30px] px-[40px] py-[10px] rounded-[100px] border-[1px] border-ct-main-blue-200 cursor-pointer"

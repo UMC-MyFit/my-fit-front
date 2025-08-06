@@ -173,6 +173,7 @@ const router = createBrowserRouter([
               { index: true, element: <Searching /> },
               { path: "filter", element: <Filter /> },
               { path: "filter/result", element: <FilterResult /> },
+              { path: "filter/job-select", element: <JobPreference /> },
             ],
           },
         ],
