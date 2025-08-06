@@ -34,8 +34,6 @@ function NetworkingBar() {
     }
   };
 
-  console.log(networkStatus);
-
   // 관심
   const { mutate: sendInterest } = usePostInterest();
   const { mutate: deleteInterest } = useDeleteInterest();
