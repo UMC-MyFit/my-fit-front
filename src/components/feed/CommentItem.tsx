@@ -23,7 +23,7 @@ function CommentItem({ comment, isReply = false, onReplyClick, onDeleteClick, on
       {/* 프로필 이미지 */}
       <button
         onClick={() => onProfileClick?.(comment.service.id)}
-        className="hover:opacity-80 transition-opacity"
+        className="hover:opacity-80 transition-opacity self-start flex-shrink-0"
       >
         <img
           src={comment.service.profile_img}
@@ -38,14 +38,14 @@ function CommentItem({ comment, isReply = false, onReplyClick, onDeleteClick, on
           onClick={() => onProfileClick?.(comment.service.id)}
           className="text-left hover:opacity-80 transition-opacity"
         >
-          <p className="text-sub3 text-ct-black-200">
+          <p className="text-sub3 text-ct-gray-300">
             <span>{comment.service.name}</span>
-            <span> / {comment.service.high_sector}</span>
+            <span> / {comment.service.low_sector}</span>
           </p>
         </button>
 
         {/* 댓글 텍스트 */}
-        <p className="mt-1 text-ct-black-100">{comment.content}</p>
+        <p className="mt-1 text-ct-black-300">{comment.content}</p>
 
         {/* 하단 정보: 시간 / 답글달기 / 삭제 */}
         <div className="flex justify-between items-center mt-1 text-body2 text-ct-gray-300">
