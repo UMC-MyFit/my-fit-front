@@ -19,20 +19,26 @@ function NetworkingBar() {
   const { mutate: deleteNetwork } = useDeleteNetwork();
 
   const handleNetworkClick = () => {
+    console.log("before return");
     if (networkStatusLoading) return;
+    console.log("after return");
     if (networkStatus === "NO_RELATION") {
+      console.log("NO_RELATION");
       postNetwork({ service_id: id });
       sendInterest({ service_id: id });
     } else if (
       networkStatus === "PENDING_SENT" ||
       networkStatus === "CONNECTED"
     ) {
+      console.log("PENDING_SENT");
       deleteNetwork({
         network_id: networkStatusData?.result.network_id as string,
       });
       deleteInterest({ service_id: id });
     }
   };
+
+  console.log(networkStatus);
 
   // 관심
   const { mutate: sendInterest } = usePostInterest();
@@ -54,6 +60,20 @@ function NetworkingBar() {
               className="w-[20px] h-[20px]"
             />
             <span className="text-sub1 text-ct-white">네트워크</span>
+          </div>
+        </div>
+      ) : networkStatus === "PENDING_SENT" ? (
+        <div className="flex-[2] h-[29px] ct-center">
+          <div
+            className="w-full h-full ct-center gap-1 bg-ct-main-blue-200 rounded-[3px]"
+            onClick={handleNetworkClick}
+          >
+            <img
+              src="/assets/profile/networkingIcon-white.svg"
+              alt="네트워킹"
+              className="w-[20px] h-[20px]"
+            />
+            <span className="text-sub1 text-ct-white">네트워크 요청 취소</span>
           </div>
         </div>
       ) : (
