@@ -1,7 +1,7 @@
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
 import { useState } from "react";
 import { jobs } from "../../data/jobs";
-import SearchingItemBig from "../../components/searching/SearchingItemBig";
+import SearchingSwipeItem from "../../components/searching/SearchingSwipeItem";
 import { useNavigate } from "react-router-dom";
 
 function Searching() {
@@ -95,7 +95,7 @@ function Searching() {
 
         {/* 검색 결과 */}
         <div className="w-full ct-center flex-col mt-[30px]">
-          <SearchingItemBig />
+          <SearchingSwipeItem />
         </div>
       </div>
     </BottomNavContainer>
