@@ -50,6 +50,7 @@ import RecruitingContainer from "../pages/outlets/RecruitingContainer";
 import CreateCard from "../pages/profile/CreateCard";
 import CardKeyword from "../pages/profile/CardKeyword";
 import NotFound from "../pages/error/NotFound";
+import EditFeed from "../pages/feed/EditFeed";
 
 const router = createBrowserRouter([
   {
@@ -91,6 +92,7 @@ const router = createBrowserRouter([
               { path: "search-result", element: <FeedSearchResult /> },
               { path: "alarm", element: <MyAlarm /> },
               { path: "post", element: <PostFeed /> },
+              { path: "edit/:feedId", element: <EditFeed /> },
               { path: "profile/:id", element: <FeedProfile /> },
               { path: "profile/:id/card", element: <CardDetail /> },
               { path: "profile/:id/feed", element: <FeedDetail /> },
