@@ -33,36 +33,29 @@ function CompanyProfile() {
     <TopBarContainer TopBarContent={<TopBarContent />}>
       <div className="flex flex-col gap-[27px] mt-[21px] items-center">
         <CompanyInputField
-          label="회사"
-          placeholder="입력"
+          label="회사/팀 이름"
+          placeholder="입력해주세요"
           value={company}
           onChange={(val) => setCompany(val)}
-          hintLabel="선택"
-          hintDescription="회사의 공식명칙을 입력해주세요!"
         />
         <CompanyInputField
-          label="닉네임"
-          placeholder="입력"
+          label="한줄 소개"
+          placeholder="40자 이내"
           value={nickName}
           onChange={(val) => setNickName(val)}
-          hintLabel="필수"
-          hintDescription="10자 이내로 작성해주세요!"
+          hintDescription="한줄로 팀에 대해 나타내보세요!"
         />
         <CompanyInputField
-          label="생년월일"
+          label="주 활동 지역"
           value={birth}
-          placeholder="입력"
-          hintLabel="필수"
-          hintDescription="정확한 생년월일을 입력해주세요!"
+          placeholder="'시/도'를 선택해주세요!"
           onClick={() => setIsModalOpen(true)}
         />
         <CompanyInputField
-          label="업종"
-          placeholder="입력"
+          label="주 활동 세부 지역"
+          placeholder="세부 활동 지역을 선택해주세요!"
           value={business}
           onChange={(val) => setBusiness(val)}
-          hintLabel="필수"
-          hintDescription="해당하는 업종을 입력해주세요!"
         />
       </div>
       <BottomNav />
