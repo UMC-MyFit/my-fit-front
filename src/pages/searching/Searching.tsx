@@ -2,12 +2,14 @@ import BottomNavContainer from "../../components/layouts/BottomNavContainer";
 import { useState } from "react";
 import { jobs } from "../../data/jobs";
 import SearchingItemBig from "../../components/searching/SearchingItemBig";
+import { useNavigate } from "react-router-dom";
 
 function Searching() {
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("기획/PM");
   const [selectedSkill, setSelectedSkill] = useState<string>("서비스 기획자");
   const currentCategory = jobs.find((j) => j.category === selectedCategory);
+  const navigate = useNavigate();
 
   const handleSearch = () => {
     if (searchText.trim()) {
@@ -18,7 +20,7 @@ function Searching() {
   return (
     <BottomNavContainer>
       {/* 검색어 */}
-      <div className="w-full ct-center flex-col">
+      <div className="w-full h-full ct-center flex-col">
         <div className="border-b border-ct-gray-300 w-[340px] flex items-center px-1 py-2">
           <input
             type="text"
@@ -82,7 +84,10 @@ function Searching() {
           <div>
             <span className="text-sub2 text-ct-black-200">최신 순</span>
           </div>
-          <div className="w-[60px] h-[25px] ct-center bg-ct-main-blue-100 rounded-[5px]">
+          <div
+            className="w-[60px] h-[25px] ct-center bg-ct-main-blue-100 rounded-[5px]"
+            onClick={() => navigate("/searching/filter")}
+          >
             <span className="text-ct-white text-body1 mr-[6px]">필터</span>
             <img src="/assets/searching/filter.svg" alt="필터 아이콘" />
           </div>

@@ -53,6 +53,8 @@ import NotFound from "../pages/error/NotFound";
 import SearchingContainer from "../pages/outlets/SearchingContainer";
 import Searching from "../pages/searching/Searching";
 import EditFeed from "../pages/feed/EditFeed";
+import Filter from "../pages/searching/Filter";
+import FilterResult from "../pages/searching/FilterResult";
 import ChattingWrapper from "../pages/chatting/ChattingWrapper";
 
 const router = createBrowserRouter([
@@ -167,7 +169,11 @@ const router = createBrowserRouter([
           {
             path: "searching",
             element: <SearchingContainer />,
-            children: [{ index: true, element: <Searching /> }],
+            children: [
+              { index: true, element: <Searching /> },
+              { path: "filter", element: <Filter /> },
+              { path: "filter/result", element: <FilterResult /> },
+            ],
           },
         ],
       },
