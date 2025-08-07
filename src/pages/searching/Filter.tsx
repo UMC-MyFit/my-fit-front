@@ -25,12 +25,15 @@ function Filter() {
   const [keyword, setKeyword] = useState<string[]>([]);
   const [keywordInput, setKeywordInput] = useState("");
   const [keywordError, setKeywordError] = useState("");
-  const [selectedJob, setSelectedJob] = useState("");
+  const [highSector, setHighSector] = useState<string[]>([]);
+  const [lowSector, setLowSector] = useState<string[]>([]);
 
   useEffect(() => {
-    const { high_sector, low_sector } = location.state;
+    if (!location.state) return;
 
-    if (low_sector) setSelectedJob(low_sector);
+    const { high_sector, low_sector } = location.state;
+    if (high_sector) setHighSector(high_sector);
+    if (low_sector) setLowSector(low_sector);
   }, [location.state]);
 
   // Zod schema for keyword validation
@@ -113,7 +116,7 @@ function Filter() {
               <label className="ml-1 text-sub1 text-ct-black-200">직무</label>
               <input
                 type="text"
-                value={selectedJob}
+                value={lowSector}
                 readOnly
                 placeholder="직무를 선택해주세요"
                 className="w-full flex text-body1 placeholder:text-ct-gray-300 text-ct-black-200 font-Pretendard min-h-[44px] rounded-[10px] pl-[26px] bg-ct-gray-100 cursor-pointer"
@@ -121,7 +124,6 @@ function Filter() {
                   navigate("/searching/filter/job-select", {
                     state: {
                       from: "filter",
-                      selectedJob: selectedJob,
                     },
                   });
                 }}

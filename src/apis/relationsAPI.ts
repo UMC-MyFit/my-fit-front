@@ -220,13 +220,13 @@ export interface PatchAcceptNetworkResponse extends BaseResponse {
   result: CommonResultType;
 }
 export const patchAcceptNetwork = async ({
-  service_id,
+  network_id,
 }: {
-  service_id: string;
+  network_id: string;
 }): Promise<PatchAcceptNetworkResponse> => {
   try {
     const { data } = await apiClient.patch(
-      `/api/relationships/networks/request/${service_id}/accept`
+      `/api/relationships/networks/request/${network_id}/accept`
     );
     return data;
   } catch (error) {
@@ -239,13 +239,13 @@ export interface PatchRejectNetworkResponse extends BaseResponse {
   result: CommonResultType;
 }
 export const patchRejectNetwork = async ({
-  service_id,
+  network_id,
 }: {
-  service_id: string;
+  network_id: string;
 }): Promise<PatchRejectNetworkResponse> => {
   try {
     const { data } = await apiClient.patch(
-      `/api/relationships/networks/request/${service_id}/reject`
+      `/api/relationships/networks/request/${network_id}/reject`
     );
     return data;
   } catch (error) {
@@ -329,7 +329,7 @@ export const getReceivedNetwork =
 
 export interface GetIsNetworkingResponse extends BaseResponse {
   result: {
-    status: "NO_RELATION" | "PENDING_SENT" | "CONNECTED";
+    status: "NO_RELATION" | "PENDING_SENT" | "CONNECTED" | "PENDING_RECEIVED";
     network_id: string;
   };
 }

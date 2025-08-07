@@ -56,7 +56,7 @@ function NetworkingResult({ selectedTab }: NetworkingResultProps) {
       message: "받은 요청이 없습니다.",
       name: "sender_name",
       profile_img: "sender_profile_img",
-      sector: "sender_sector",
+      sector: "sender_service_sector",
     },
     sendInterest: {
       data: myInterestsData,
@@ -76,7 +76,7 @@ function NetworkingResult({ selectedTab }: NetworkingResultProps) {
 
   return (
     <>
-      <div className="w-full h-auto">
+      <div className="w-full h-auto flex flex-col gap-[20px]">
         {matchingData[selectedTab].data?.length ? (
           matchingData[selectedTab].data.map((user) => {
             const { name, profile_img, sector } = matchingData[selectedTab];

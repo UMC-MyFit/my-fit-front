@@ -123,8 +123,8 @@ export const usePatchAcceptNetwork = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ service_id }: { service_id: string }) =>
-      patchAcceptNetwork({ service_id }),
+    mutationFn: ({ network_id }: { network_id: string }) =>
+      patchAcceptNetwork({ network_id }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["network"] });
     },
@@ -135,8 +135,8 @@ export const usePatchRejectNetwork = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ service_id }: { service_id: string }) =>
-      patchRejectNetwork({ service_id }),
+    mutationFn: ({ network_id }: { network_id: string }) =>
+      patchRejectNetwork({ network_id }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["network"] });
     },

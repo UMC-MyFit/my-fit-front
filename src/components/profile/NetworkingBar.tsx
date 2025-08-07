@@ -5,6 +5,8 @@ import {
   usePostNetwork,
   useDeleteNetwork,
   useGetIsNetworking,
+  usePatchAcceptNetwork,
+  usePatchRejectNetwork,
 } from "../../hooks/relationQueries";
 import { useCreateChattingRoomMutation } from "../../hooks/recruiting/recruiting";
 
@@ -13,7 +15,7 @@ function NetworkingBar() {
   const service_id = location.pathname.split("/")[3];
   const nav = useNavigate();
 
-  //네트워크 NO_RELATION, PENDING_SENT, CONNECTED
+  //네트워크 NO_RELATION, PENDING_SENT, CONNECTED, PENDING_RECEIVED
   const { data: networkStatusData, isLoading: networkStatusLoading } =
     useGetIsNetworking({ service_id });
   const networkStatus = networkStatusData?.result.status;
@@ -29,12 +31,24 @@ function NetworkingBar() {
       networkStatus === "PENDING_SENT" ||
       networkStatus === "CONNECTED"
     ) {
-      console.log(networkStatusData?.result.network_id);
       deleteNetwork({
         network_id: networkStatusData?.result.network_id as string,
       });
       deleteInterest({ service_id });
     }
+  };
+
+  const { mutate: acceptNetwork } = usePatchAcceptNetwork();
+  const { mutate: rejectNetwork } = usePatchRejectNetwork();
+  const handleAcceptNetwork = () => {
+    acceptNetwork({
+      network_id: networkStatusData?.result.network_id as string,
+    });
+  };
+  const handleRejectNetwork = () => {
+    rejectNetwork({
+      network_id: networkStatusData?.result.network_id as string,
+    });
   };
 
   // 관심
@@ -85,6 +99,35 @@ function NetworkingBar() {
             <span className="text-sub1 text-ct-white">네트워크 요청 취소</span>
           </div>
         </div>
+      ) : networkStatus === "PENDING_RECEIVED" ? (
+        <>
+          <div className="flex-1 h-[29px] ct-center">
+            <div
+              className="w-full h-full ct-center gap-1 bg-ct-gray-100 rounded-[3px]"
+              onClick={handleAcceptNetwork}
+            >
+              <img
+                src="/assets/profile/networkingIcon.svg"
+                alt="네트워킹"
+                className="w-[20px] h-[20px]"
+              />
+              <span className="text-sub1 text-ct-main-blue-200">요청 수락</span>
+            </div>
+          </div>
+          <div className="flex-1 h-[29px] ct-center">
+            <div
+              className="w-full h-full ct-center gap-1 bg-ct-gray-100 rounded-[3px]"
+              onClick={handleRejectNetwork}
+            >
+              <img
+                src="/assets/profile/networkingIcon.svg"
+                alt="네트워킹"
+                className="w-[20px] h-[20px]"
+              />
+              <span className="text-sub1 text-ct-main-blue-200">요청 거절</span>
+            </div>
+          </div>
+        </>
       ) : (
         <>
           <div className="flex-1 h-[29px] ct-center">
