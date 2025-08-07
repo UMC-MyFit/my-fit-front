@@ -51,3 +51,61 @@ export const sectorBaseSearching = async ({
     throw error;
   }
 };
+
+export interface CountCardResponse extends BaseResponse {
+  result: {
+    count: number;
+  };
+}
+export type CountCardParams = {
+  area?: string;
+  status?: string;
+  hope_job?: string;
+  keywords?: string[];
+};
+export const countCard = async ({
+  area,
+  status,
+  hope_job,
+  keywords,
+}: CountCardParams): Promise<CountCardResponse> => {
+  try {
+    const { data } = await apiClient.get<CountCardResponse>(
+      `/api/cards/count`,
+      {
+        params: {
+          area,
+          status,
+          hope_job,
+          ...(keywords && { keywords }), // Only include keywords if it exists
+        },
+        paramsSerializer: (params) => {
+          // Handle array parameters by repeating the key for each value
+          const searchParams = new URLSearchParams();
+          
+          Object.entries(params).forEach(([key, value]) => {
+            if (value === undefined || value === null) return;
+            
+            if (Array.isArray(value)) {
+              // For arrays, append each value with the same key
+              value.forEach((item) => {
+                if (item !== undefined && item !== null) {
+                  searchParams.append(key, item);
+                }
+              });
+            } else {
+              // For non-array values, append normally
+              searchParams.append(key, value);
+            }
+          });
+          
+          return searchParams.toString();
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.error("countCard error:", error);
+    throw error;
+  }
+};

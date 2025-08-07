@@ -1,5 +1,9 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { sectorBaseSearching } from "../apis/searchingAPI";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import {
+  sectorBaseSearching,
+  CountCardParams,
+  countCard,
+} from "../apis/searchingAPI";
 
 export const useSectorBaseSearching = ({
   high_sector,
@@ -25,5 +29,17 @@ export const useSectorBaseSearching = ({
     },
     initialPageParam: "0",
     enabled: !!high_sector && !!low_sector && !!sort,
+  });
+};
+
+export const useCountCard = (params: CountCardParams) => {
+  return useQuery({
+    queryKey: ["count-card"],
+    queryFn: () => countCard({ ...params }),
+    enabled:
+      !!params.area ||
+      !!params.status ||
+      !!params.hope_job ||
+      !!params.keywords?.length,
   });
 };
