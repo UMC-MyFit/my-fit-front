@@ -66,13 +66,9 @@ export interface InterestType {
   sender_id: string;
   recipient_id: string;
   created_at: string;
-  recipient: {
-    id: string;
-    service_name: string;
-    network_status: string;
-    profile_img: string;
-    description: string;
-  };
+  recipient_service_name: string;
+  recipient_profile_img: string;
+  recipient_sector: string;
   [key: string]: any;
 }
 export interface GetMyInterestResponse extends BaseResponse {

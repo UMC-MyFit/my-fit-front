@@ -6,7 +6,7 @@ interface BaseResponse {
   message: string;
 }
 
-export interface SeactorBaseSearchingItem {
+export interface SectorBaseSearchingItem {
   card_id: number;
   author_name: string;
   recruiting_status: string;
@@ -16,7 +16,7 @@ export interface SeactorBaseSearchingItem {
 }
 export interface SectorBaseSearchingResponse extends BaseResponse {
   result: {
-    cards: SeactorBaseSearchingItem[];
+    cards: SectorBaseSearchingItem[];
     next_cursor: string | null;
     has_next: boolean;
   };
@@ -35,7 +35,7 @@ export const sectorBaseSearching = async ({
 }: SectorBaseSearchingParams): Promise<SectorBaseSearchingResponse> => {
   try {
     const { data } = await apiClient.get<SectorBaseSearchingResponse>(
-      `/api/cards/sector-base`,
+      `/api/cards/sector`,
       {
         params: {
           high_sector,

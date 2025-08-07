@@ -11,7 +11,7 @@ export const useSectorBaseSearching = ({
   sort: "latest" | "oldest";
 }) => {
   return useInfiniteQuery({
-    queryKey: ["sector-base-searching"],
+    queryKey: ["sector-base-searching", high_sector, low_sector, sort],
     queryFn: ({ pageParam = "0" }) =>
       sectorBaseSearching({
         high_sector,

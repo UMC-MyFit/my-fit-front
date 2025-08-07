@@ -62,8 +62,8 @@ function NetworkingResult({ selectedTab }: NetworkingResultProps) {
       data: myInterestsData,
       message: "보낸 관심이 없습니다.",
       name: "recipient_service_name",
-      profile_img: "recipient_service_profile_img",
-      sector: "recipient_service_sector",
+      profile_img: "recipient_profile_img",
+      sector: "recipient_sector",
     },
     receivedInterest: {
       data: receivedInterests,
