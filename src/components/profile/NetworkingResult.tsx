@@ -6,6 +6,7 @@ import {
   useGetMyInterest,
 } from "../../hooks/relationQueries";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 type NetworkingResultProps = {
   selectedTab:
@@ -13,8 +14,23 @@ type NetworkingResultProps = {
     | "receivedNetwork"
     | "sendInterest"
     | "receivedInterest";
+  searchTerm: string;
 };
-function NetworkingResult({ selectedTab }: NetworkingResultProps) {
+function NetworkingResult({ selectedTab, searchTerm }: NetworkingResultProps) {
+  const [isFiltering, setIsFiltering] = useState(false);
+  
+  // Debounce the filtering effect
+  useEffect(() => {
+    if (searchTerm.trim()) {
+      setIsFiltering(true);
+      const timerId = setTimeout(() => {
+        setIsFiltering(false);
+      }, 300);
+      return () => clearTimeout(timerId);
+    } else {
+      setIsFiltering(false);
+    }
+  }, [searchTerm]);
   const navigate = useNavigate();
 
   const {
@@ -74,11 +90,29 @@ function NetworkingResult({ selectedTab }: NetworkingResultProps) {
     },
   };
 
+  // Filter users based on search term
+  const filteredUsers = matchingData[selectedTab].data?.filter(user => {
+    if (!searchTerm.trim()) return true;
+    
+    const { name, sector } = matchingData[selectedTab];
+    const userName = user[name]?.toLowerCase() || '';
+    const userSector = user[sector]?.toLowerCase() || '';
+    const search = searchTerm.toLowerCase();
+    
+    return userName.includes(search) || userSector.includes(search);
+  }) || [];
+
   return (
     <>
       <div className="w-full h-auto flex flex-col gap-[20px]">
-        {matchingData[selectedTab].data?.length ? (
-          matchingData[selectedTab].data.map((user) => {
+        {isFiltering ? (
+          <div className="flex flex-col gap-[20px]">
+            <ProfileResultSkeleton />
+            <ProfileResultSkeleton />
+            <ProfileResultSkeleton />
+          </div>
+        ) : filteredUsers.length > 0 ? (
+          filteredUsers.map((user) => {
             const { name, profile_img, sector } = matchingData[selectedTab];
 
             return (
@@ -103,7 +137,9 @@ function NetworkingResult({ selectedTab }: NetworkingResultProps) {
           })
         ) : (
           <p className="text-body2 text-ct-gray-200 text-center">
-            {matchingData[selectedTab].message}
+            {searchTerm.trim() 
+              ? '검색 결과가 없습니다.' 
+              : matchingData[selectedTab].message}
           </p>
         )}
       </div>
