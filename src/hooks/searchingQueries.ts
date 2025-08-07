@@ -33,13 +33,11 @@ export const useSectorBaseSearching = ({
 };
 
 export const useCountCard = (params: CountCardParams) => {
+  const { area, status, hope_job, keywords } = params;
+  
   return useQuery({
-    queryKey: ["count-card"],
-    queryFn: () => countCard({ ...params }),
-    enabled:
-      !!params.area ||
-      !!params.status ||
-      !!params.hope_job ||
-      !!params.keywords?.length,
+    queryKey: ["count-card", { area, status, hope_job, keywords }],
+    queryFn: () => countCard(params),
+    enabled: !!area || !!status || !!hope_job || !!keywords?.length,
   });
 };

@@ -2,9 +2,10 @@ import TopBarContainer from "../../components/common/TopBarContainer";
 import BottomNavContainer from "../../components/layouts/BottomNavContainer";
 import { useLocation, useNavigate } from "react-router-dom";
 import PersonalInputField from "../../components/setting/PersonalInputField";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { z } from "zod";
 import { useModal } from "../../contexts/ui/modalContext";
+import { useCountCard } from "../../hooks/searchingQueries";
 import Modal from "../../components/ui/Modal";
 import RegionModal from "../../components/onboarding/RegionModal";
 import EmploymentStatusModal from "../../components/onboarding/EmploymentStatusModal";
@@ -25,8 +26,9 @@ function Filter() {
   const [keyword, setKeyword] = useState<string[]>([]);
   const [keywordInput, setKeywordInput] = useState("");
   const [keywordError, setKeywordError] = useState("");
-  const [highSector, setHighSector] = useState<string[]>([]);
+  const [_, setHighSector] = useState<string[]>([]);
   const [lowSector, setLowSector] = useState<string[]>([]);
+  const [debouncedKeyword, setDebouncedKeyword] = useState<string[]>([]);
 
   useEffect(() => {
     if (!location.state) return;
@@ -41,6 +43,25 @@ function Filter() {
     keywords: z.array(
       z.string().max(3, "키워드는 최대 3개까지 입력 가능합니다")
     ),
+  });
+
+  // Debounce keyword input
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedKeyword(keyword);
+    }, 500);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [keyword]);
+
+  // Use the count card query
+  const { data: countData } = useCountCard({
+    area: region,
+    status: employmentStatus,
+    hope_job: lowSector[0], // Assuming we only need the first selected job
+    keywords: debouncedKeyword,
   });
 
   // Update keywords when input changes
@@ -150,7 +171,7 @@ function Filter() {
             }}
           >
             <span className="text-sub1 text-ct-black-200">
-              n개의 카드가 검색되었습니다.
+              {`${countData?.result?.count || 0}개의 카드가 검색되었습니다.`}
             </span>
           </div>
         </div>
