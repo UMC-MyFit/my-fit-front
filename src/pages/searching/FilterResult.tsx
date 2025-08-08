@@ -17,17 +17,14 @@ function FilterResult() {
   const { state } = useLocation();
   const [viewType, setViewType] = useState<"swipe" | "list">("swipe");
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    useFilterResult({
-      area: state?.region,
-      status: state?.employmentStatus,
-      hope_job: state?.lowSector,
-      keywords: state?.keyword,
-    });
+  const { data, fetchNextPage, hasNextPage, isLoading } = useFilterResult({
+    area: state?.region,
+    status: state?.employmentStatus,
+    hope_job: state?.lowSector,
+    keywords: state?.keyword,
+  });
 
   const allCards = data?.pages.flatMap((page) => page.result.cards) || [];
-
-  console.log(allCards);
 
   const handleTypeClick = () => {
     setViewType(viewType === "swipe" ? "list" : "swipe");
@@ -36,7 +33,7 @@ function FilterResult() {
   return (
     <TopBarContainer TopBarContent={<TopBarContent />}>
       <div className="w-full ct-center py-[24px]">
-        <div className="w-[330px] ct-center flex-col ">
+        <div className="w-[340px] ct-center flex-col ">
           <div className="w-full flex justify-end gap-2">
             <span
               className="text-sub2 text-ct-black-200 cursor-pointer"
@@ -50,9 +47,19 @@ function FilterResult() {
           </div>
           <div className="w-full flex flex-col mt-[30px]">
             {viewType === "swipe" ? (
-              <SwipeContainer cards={allCards} />
+              <SwipeContainer
+                cards={allCards}
+                isLoading={isLoading}
+                hasNextPage={hasNextPage}
+                fetchNextPage={fetchNextPage}
+              />
             ) : (
-              <ListContainer cards={allCards} />
+              <ListContainer
+                cards={allCards}
+                isLoading={isLoading}
+                hasNextPage={hasNextPage}
+                fetchNextPage={fetchNextPage}
+              />
             )}
           </div>
         </div>

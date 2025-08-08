@@ -4,10 +4,14 @@ function SearchingSwipeItem({ card }: { card: SectorBaseSearchingItem }) {
   return (
     <div className="w-[300px] ct-center shadow-find-card rounded-[16px] py-[16px]">
       <div className="w-[280px] ct-center flex-col gap-[8px]">
-        <img src={card.card_img} alt="카드 이미지" className="rounded-[5px]" />
+        <img
+          src={card.card_img}
+          alt="카드 이미지"
+          className="rounded-[5px] w-[280px] h-[350px] object-cover"
+        />
         <div className="w-full flex gap-[4px] justify-start items-center flex-wrap">
           {card.keywords.map((keyword, index) => (
-            <div className="px-[9px] py-[3px] bg-ct-gray-100 rounded-[5px]">
+            <div className="px-[9px] py-[2px] bg-ct-gray-100 rounded-[5px]">
               <span key={index} className="text-body2 text-ct-main-blue-100">
                 #{keyword}
               </span>
