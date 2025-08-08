@@ -161,6 +161,8 @@ function Filter() {
                     keywords: keyword,
                     region,
                     employmentStatus,
+                    lowSector,
+                    count: countData?.result?.count,
                   },
                 });
               }

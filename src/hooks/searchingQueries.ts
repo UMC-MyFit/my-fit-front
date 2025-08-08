@@ -3,6 +3,8 @@ import {
   sectorBaseSearching,
   CountCardParams,
   countCard,
+  FilterResultParams,
+  filterResult,
 } from "../apis/searchingAPI";
 
 export const useSectorBaseSearching = ({
@@ -34,10 +36,32 @@ export const useSectorBaseSearching = ({
 
 export const useCountCard = (params: CountCardParams) => {
   const { area, status, hope_job, keywords } = params;
-  
+
   return useQuery({
     queryKey: ["count-card", { area, status, hope_job, keywords }],
     queryFn: () => countCard(params),
+    enabled: !!area || !!status || !!hope_job || !!keywords?.length,
+  });
+};
+
+export const useFilterResult = (params: FilterResultParams) => {
+  const { area, status, hope_job, keywords } = params;
+
+  return useInfiniteQuery({
+    queryKey: ["filter-result", { area, status, hope_job, keywords }],
+    queryFn: ({ pageParam = "0" }) =>
+      filterResult({
+        cursor: pageParam,
+        area,
+        status,
+        hope_job,
+        keywords,
+      }),
+    getNextPageParam: (lastPage) => {
+      const nextCursor = lastPage.result.next_cursor;
+      return nextCursor ? nextCursor : undefined;
+    },
+    initialPageParam: "0",
     enabled: !!area || !!status || !!hope_job || !!keywords?.length,
   });
 };
