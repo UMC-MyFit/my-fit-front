@@ -63,7 +63,7 @@ function SwipeContainer({
   return (
     <div className="w-full flex flex-col items-center">
       <style>{bulletStyles}</style>
-      <div className="w-[300px] relative pb-8">
+      <div className="w-[320px] relative pb-8">
         {" "}
         {/* pb-8 추가로 bullet을 위한 공간 확보 */}
         <Swiper
