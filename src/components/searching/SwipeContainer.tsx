@@ -1,7 +1,12 @@
-function SwipeContainer() {
+import { SectorBaseSearchingItem } from "../../apis/searchingAPI";
+import SearchingSwipeItem from "./SearchingSwipeItem";
+
+function SwipeContainer({ cards }: { cards: SectorBaseSearchingItem[] }) {
   return (
-    <div>
-      <span>스와이프</span>
+    <div className="w-[300px] mx-auto">
+      {cards.map((card) => (
+        <SearchingSwipeItem key={card.card_id} card={card} />
+      ))}
     </div>
   );
 }
