@@ -2,7 +2,7 @@ import { SectorBaseSearchingItem } from "../../apis/searchingAPI";
 
 function SearchingSwipeItem({ card }: { card: SectorBaseSearchingItem }) {
   return (
-    <div className="w-[300px] ct-center shadow-find-card rounded-[16px] py-[16px]">
+    <div className="w-[300px] h-[540px] flex flex-col justify-start items-center rounded-[16px] py-[16px] shadow-find-card">
       <div className="w-[280px] ct-center flex-col gap-[8px]">
         <img
           src={card.card_img}
@@ -11,8 +11,11 @@ function SearchingSwipeItem({ card }: { card: SectorBaseSearchingItem }) {
         />
         <div className="w-full flex gap-[4px] justify-start items-center flex-wrap">
           {card.keywords.map((keyword, index) => (
-            <div className="px-[9px] py-[2px] bg-ct-gray-100 rounded-[5px]">
-              <span key={index} className="text-body2 text-ct-main-blue-100">
+            <div
+              key={index}
+              className="px-[9px] py-[2px] bg-ct-gray-100 rounded-[5px]"
+            >
+              <span className="text-body2 text-ct-main-blue-100">
                 #{keyword}
               </span>
             </div>
