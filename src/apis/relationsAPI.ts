@@ -128,7 +128,7 @@ export const getPeopleWhoInterestMe =
 
 export interface GetAmIInterestHimResponse extends BaseResponse {
   result: {
-    id_interested: boolean;
+    is_interested: boolean;
   };
 }
 export const getAmIInterestHim = async ({

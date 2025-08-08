@@ -7,6 +7,7 @@ import {
   useGetIsNetworking,
   usePatchAcceptNetwork,
   usePatchRejectNetwork,
+  useGetAmIInterestHim,
 } from "../../hooks/relationQueries";
 import { useCreateChattingRoomMutation } from "../../hooks/recruiting/recruiting";
 
@@ -26,7 +27,9 @@ function NetworkingBar() {
     if (networkStatusLoading) return;
     if (networkStatus === "NO_RELATION") {
       postNetwork({ service_id });
-      sendInterest({ service_id });
+      if (!interestStatus) {
+        sendInterest({ service_id });
+      }
     } else if (
       networkStatus === "PENDING_SENT" ||
       networkStatus === "CONNECTED"
@@ -52,11 +55,22 @@ function NetworkingBar() {
   };
 
   // 관심
+  const { data: interestStatusData, isLoading: interestStatusLoading } =
+    useGetAmIInterestHim({ service_id });
+  const interestStatus = interestStatusData?.result.is_interested;
   const { mutate: sendInterest } = usePostInterest();
   const { mutate: deleteInterest } = useDeleteInterest();
   const { mutate: createChattingRoom } = useCreateChattingRoomMutation();
 
-  const handleInterestClick = () => {};
+  const handleInterestClick = () => {
+    if (interestStatusLoading) return;
+    if (interestStatus) {
+      deleteInterest({ service_id });
+    } else {
+      sendInterest({ service_id });
+    }
+  };
+
   const handleChatClick = () => {
     const targetServiceId = Number(service_id);
     if (!targetServiceId) return;
@@ -145,15 +159,27 @@ function NetworkingBar() {
           </div>
           <div className="flex-1 h-[29px] ct-center">
             <div
-              className="w-full h-full ct-center gap-1 bg-ct-gray-100 rounded-[3px]"
+              className={`w-full h-full ct-center gap-1 rounded-[3px] ${
+                interestStatus ? "bg-ct-main-blue-200" : "bg-ct-gray-100"
+              }`}
               onClick={handleInterestClick}
             >
               <img
-                src="/assets/profile/follow.svg"
+                src={
+                  interestStatus
+                    ? "/assets/profile/followed.svg"
+                    : "/assets/profile/follow.svg"
+                }
                 alt="관심"
                 className="w-[11px] h-[11px]"
               />
-              <span className="text-sub1 text-ct-main-blue-200">관심</span>
+              <span
+                className={`text-sub1 ${
+                  interestStatus ? "text-ct-white" : "text-ct-main-blue-200"
+                }`}
+              >
+                관심
+              </span>
             </div>
           </div>
         </>

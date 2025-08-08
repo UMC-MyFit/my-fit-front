@@ -41,7 +41,7 @@ export const usePostInterest = () => {
     mutationFn: ({ service_id }: { service_id: string }) =>
       postInterest({ service_id }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["interest"] });
+      queryClient.invalidateQueries({ queryKey: ["am-i-interested"] });
     },
   });
 };
@@ -53,7 +53,7 @@ export const useDeleteInterest = () => {
     mutationFn: ({ service_id }: { service_id: string }) =>
       deleteInterest({ service_id }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["interest"] });
+      queryClient.invalidateQueries({ queryKey: ["am-i-interested"] });
     },
   });
 };
@@ -79,9 +79,13 @@ export const useGetPeopleWhoInterestMe = () => {
   });
 };
 
-export const useGetAmIInterestHim = (service_id: string) => {
+export const useGetAmIInterestHim = ({
+  service_id,
+}: {
+  service_id: string;
+}) => {
   return useQuery({
-    queryKey: ["am-i-interested", service_id],
+    queryKey: ["am-i-interested"],
     queryFn: () => getAmIInterestHim({ service_id }),
     enabled: !!service_id,
     staleTime: 1000 * 60,
