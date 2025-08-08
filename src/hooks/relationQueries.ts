@@ -42,6 +42,8 @@ export const usePostInterest = () => {
       postInterest({ service_id }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["am-i-interested"] });
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      queryClient.invalidateQueries({ queryKey: ["my-interest"] });
     },
   });
 };
@@ -54,6 +56,8 @@ export const useDeleteInterest = () => {
       deleteInterest({ service_id }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["am-i-interested"] });
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      queryClient.invalidateQueries({ queryKey: ["my-interest"] });
     },
   });
 };
@@ -85,7 +89,7 @@ export const useGetAmIInterestHim = ({
   service_id: string;
 }) => {
   return useQuery({
-    queryKey: ["am-i-interested"],
+    queryKey: ["am-i-interested", service_id],
     queryFn: () => getAmIInterestHim({ service_id }),
     enabled: !!service_id,
     staleTime: 1000 * 60,

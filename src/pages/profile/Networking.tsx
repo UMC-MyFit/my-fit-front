@@ -9,7 +9,7 @@ function Networking() {
   >("network");
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
-  
+
   // Debounce search term
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -109,10 +109,10 @@ function Networking() {
             </div>
           </div>
           <div className="w-[350px] mx-auto mt-[30px]">
-            <NetworkingResult 
-          selectedTab={selectedTab} 
-          searchTerm={debouncedSearchTerm}
-        />
+            <NetworkingResult
+              selectedTab={selectedTab}
+              searchTerm={debouncedSearchTerm}
+            />
           </div>
         </div>
       </BottomNavContainer>
