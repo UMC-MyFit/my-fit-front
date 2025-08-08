@@ -6,6 +6,22 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { useRef } from "react";
 
+const bulletStyles = `
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 4px;
+    border-radius: 2px;
+    background: #E5E7EB;
+    opacity: 1;
+    transition: all 0.3s ease;
+    margin: 0 2px !important;
+  }
+  .swiper-pagination-bullet-active {
+    width: 20px;
+    background: #3B82F6;
+  }
+`;
+
 function SwipeContainer({
   cards,
   isLoading,
@@ -46,6 +62,7 @@ function SwipeContainer({
 
   return (
     <div className="w-full flex flex-col items-center">
+      <style>{bulletStyles}</style>
       <div className="w-[300px] relative pb-8">
         {" "}
         {/* pb-8 추가로 bullet을 위한 공간 확보 */}
@@ -60,13 +77,15 @@ function SwipeContainer({
         >
           {cards.map((card) => (
             <SwiperSlide key={card.card_id} className="!h-auto">
-              <SearchingSwipeItem card={card} />
+              <div className="p-[10px]">
+                <SearchingSwipeItem card={card} />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
         {/* Bullet pagination을 Swiper 바로 아래에 배치 */}
         <div
-          className="swiper-pagination absolute bottom-0 left-0 right-0"
+          className="swiper-pagination absolute bottom-2 left-0 right-0"
           style={{ position: "absolute" }}
         ></div>
       </div>
