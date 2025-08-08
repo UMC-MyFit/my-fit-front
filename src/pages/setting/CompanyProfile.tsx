@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopBarContainer from "../../components/common/TopBarContainer";
 import InputField from "../../components/onboarding/InputField";
@@ -9,9 +9,15 @@ import CompanyDivisionModal from "../../components/onboarding/CompanyDivisionMod
 import EmploymentStatusModal from "../../components/onboarding/EmploymentStatusModal";
 import RegionModal from "../../components/onboarding/RegionModal";
 import SubRegionModal from "../../components/onboarding/SubRegionModal";
+import { useAuth } from "../../contexts/AuthContext";
+import { useGetProfile } from "../../hooks/mypageQueries";
 
 function CompanyProfile() {
   const { isModalOpen, setIsModalOpen } = useModal();
+  const { user } = useAuth();
+  const { data: profile } = useGetProfile({
+    service_id: user?.id?.toString() || "",
+  });
 
   // 상태 관리 - 빈 문자열로 초기화하여 controlled input 보장
   const [companyName, setCompanyName] = useState("");
@@ -23,6 +29,19 @@ function CompanyProfile() {
   const [division, setDivision] = useState("");
   const [industry, setIndustry] = useState("");
   const [website, setWebsite] = useState("");
+
+  useEffect(() => {
+    if (profile) {
+      setCompanyName(profile.result.user.name);
+      setShortIntro(profile.result.user.one_line_profile);
+      setRegion(profile.result.service.userArea.high_area);
+      setSubRegion(profile.result.service.userArea.low_area);
+      setEmploymentStatus(profile.result.service.recruiting_status);
+      setDivision(profile.result.service.low_sector);
+      setIndustry(profile.result.user.industry || "");
+      setWebsite(profile.result.user.link || "");
+    }
+  }, [profile]);
 
   // 모달 타입 관리
   const [modalType, setModalType] = useState<

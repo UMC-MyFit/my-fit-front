@@ -26,11 +26,6 @@ function Searching() {
     }
   };
 
-  console.log(selectedCategory);
-  console.log(selectedSkill);
-  console.log(sortOption);
-  console.log(data?.pages[0].result.cards);
-
   const cardsData = data?.pages.flatMap((page) => page.result.cards);
 
   return (
