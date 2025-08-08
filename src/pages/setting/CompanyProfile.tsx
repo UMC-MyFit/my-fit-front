@@ -11,8 +11,10 @@ import RegionModal from "../../components/onboarding/RegionModal";
 import SubRegionModal from "../../components/onboarding/SubRegionModal";
 import { useAuth } from "../../contexts/AuthContext";
 import { useGetProfile } from "../../hooks/mypageQueries";
+import { usePatchBusinessProfile } from "../../hooks/settingQueries";
 
 function CompanyProfile() {
+  const navigate = useNavigate();
   const { isModalOpen, setIsModalOpen } = useModal();
   const { user } = useAuth();
   const { data: profile } = useGetProfile({
@@ -55,11 +57,22 @@ function CompanyProfile() {
     setIsModalOpen(true);
   };
 
+  const { mutate: updateProfile } = usePatchBusinessProfile({
+    service_id: user?.id?.toString() || "",
+  });
+
   const handleSubmit = async () => {
-    try {
-    } catch (error) {
-      console.error("회사 프로필 수정 실패:", error);
-    }
+    updateProfile({
+      name: companyName,
+      one_line_profile: shortIntro,
+      team_division: division,
+      industry: industry,
+      high_area: region,
+      low_area: subRegion,
+      recruiting_status: employmentStatus,
+      link: website,
+    });
+    navigate("/mypage");
   };
 
   const TopBarContent = () => {
