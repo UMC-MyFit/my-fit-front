@@ -89,9 +89,7 @@ function ProfileCardRegister() {
 
       if (response.message) {
         console.log("✅ [ProfileCardRegister] 카드 등록 성공:", response);
-        navigate("/onboarding", {
-          state: { message: "카드 등록이 완료되었습니다! 로그인해주세요." },
-        });
+        navigate("/feed");
       } else {
         throw new Error("카드 등록 실패");
       }
