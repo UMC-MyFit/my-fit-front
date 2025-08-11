@@ -14,7 +14,7 @@ function SelectMembers() {
   const handleNextStep = () => {
     if (!signupData.division) return;
     nextStep();
-    navigate("/onboarding/register-method");
+    navigate("/onboarding/register-email");
   };
 
   return (
