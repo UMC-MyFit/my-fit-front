@@ -1,6 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 function ProfileAddFeed() {
+  const navigate = useNavigate();
   return (
-    <div className="w-[122px] h-[128px] rounded-[5px] bg-ct-gray-100 ct-center">
+    <div
+      className="w-[122px] h-[128px] rounded-[5px] bg-ct-gray-100 ct-center"
+      onClick={() => navigate("/feed/post")}
+    >
       <img src="/assets/onboarding/plus.svg" alt="plus" />
     </div>
   );
