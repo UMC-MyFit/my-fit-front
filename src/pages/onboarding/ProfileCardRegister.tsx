@@ -87,7 +87,7 @@ function ProfileCardRegister() {
 
       const response = await createActivityCard(cardRequest);
 
-      if (response.message) {
+      if (response.isSuccess) {
         console.log("✅ [ProfileCardRegister] 카드 등록 성공:", response);
         navigate("/feed");
       } else {
