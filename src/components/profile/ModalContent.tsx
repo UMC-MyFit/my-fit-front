@@ -3,7 +3,7 @@ import { useItemContext } from "../../contexts/ItemContext";
 import { useDeleteFeed } from "../../hooks/mypageQueries";
 import { useAuth } from "../../contexts/AuthContext";
 
-function ModalContent() {
+function ModalContent({ type }: { type: "feed" | "card" }) {
   const { setIsModalOpen } = useModal();
   const { itemId } = useItemContext();
   const { user } = useAuth();
@@ -19,10 +19,14 @@ function ModalContent() {
     <div className="w-full py-[30px] ct-center flex-col gap-[15px]">
       <div className="ct-center flex-col gap-2">
         <span className="text-ct-black-200 text-h2">
-          해당 피드를 삭제하시겠나요?
+          {type === "feed"
+            ? "해당 피드를 삭제하시겠나요?"
+            : "해당 카드를 삭제하시겠나요?"}
         </span>
         <p className="text-body1 text-ct-gray-300 w-[170px] text-center">
-          삭제한 피드는 24시간 안에만 복원할 수 있어요!
+          {type === "feed"
+            ? "삭제한 피드는 24시간 안에만 복원할 수 있어요!"
+            : "삭제한 카드는 24시간 안에만 복원할 수 있어요!"}
         </p>
       </div>
       <div>
