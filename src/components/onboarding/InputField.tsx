@@ -6,7 +6,9 @@ interface InputFieldProps {
   helperText?: string | React.ReactNode;
   as?: "input" | "textarea"; // textarea 지원
   value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   onClick?: () => void;
   maxLength?: number;
   showCounter?: boolean;
@@ -25,7 +27,7 @@ function InputField({
 }: InputFieldProps) {
   const currentLength = value?.length || 0;
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  
+
   const handleAutoResize = (textarea: HTMLTextAreaElement) => {
     textarea.style.height = "44px"; // 최소 높이로 리셋
     textarea.style.height = `${Math.min(textarea.scrollHeight, 88)}px`; // 최대 88px로 제한
@@ -41,9 +43,7 @@ function InputField({
   return (
     <div className="mb-[27px]">
       <div className="flex justify-between items-center mb-[8px]">
-        <label className="pl-[7px] text-sub1 text-ct-black-200">
-          {label}
-        </label>
+        <label className="pl-[7px] text-sub1 text-ct-black-200">{label}</label>
         {showCounter && maxLength && (
           <span className="text-body2 text-ct-gray-300">
             {currentLength}/{maxLength}

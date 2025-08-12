@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { 
-  addFeedLike, 
-  removeFeedLike, 
-  createComment, 
-  deleteComment 
+import {
+  addFeedLike,
+  removeFeedLike,
+  createComment,
+  deleteComment,
 } from "../../apis/feed";
 
 interface UseFeedMutationsProps {
@@ -11,9 +11,8 @@ interface UseFeedMutationsProps {
   invalidateQueryKey?: string | string[];
 }
 
-export const useFeedMutations = ({ 
-  activePostId, 
-  invalidateQueryKey = ["feeds"] 
+export const useFeedMutations = ({
+  activePostId,
 }: UseFeedMutationsProps = {}) => {
   const queryClient = useQueryClient();
 
@@ -122,7 +121,7 @@ export const useFeedMutations = ({
   };
 
   const handleCommentCreate = (commentText: string) => {
-    if (activePostId && commentText.trim()) {
+    if (activePostId && commentText.trim() && !createCommentMutation.isPending) {
       createCommentMutation.mutate({
         feedId: Number(activePostId),
         commentText: commentText.trim(),
@@ -131,7 +130,7 @@ export const useFeedMutations = ({
   };
 
   const handleReplyCreate = (commentText: string, parentCommentId: number) => {
-    if (activePostId && commentText.trim()) {
+    if (activePostId && commentText.trim() && !createReplyMutation.isPending) {
       createReplyMutation.mutate({
         feedId: Number(activePostId),
         commentText: commentText.trim(),

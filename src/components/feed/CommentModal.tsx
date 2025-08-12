@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CommentList from "../feed/CommentList";
 import { Comment } from "../../types/feed/comment";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+// import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import CommentInputField, { CommentInputFieldRef } from "./CommentInputField";
 
 interface CommentModalProps {
@@ -22,7 +22,6 @@ interface CommentModalProps {
 }
 
 export default function CommentModal({
-  postId,
   comments,
   onClose,
   onCommentCreate,
@@ -54,12 +53,14 @@ export default function CommentModal({
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const target = modalRef.current;
-    if (target) disableBodyScroll(target);
+    // 단순히 overflow만 차단
+    document.body.style.overflow = 'hidden';
+    
     return () => {
-      if (target) enableBodyScroll(target);
+      document.body.style.overflow = '';
     };
   }, []);
+
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -74,7 +75,12 @@ export default function CommentModal({
     const observer = new IntersectionObserver(
       (entries) => {
         const target = entries[0];
-        if (target.isIntersecting && hasNextPage && !isFetchingNextPage && fetchNextPage) {
+        if (
+          target.isIntersecting &&
+          hasNextPage &&
+          !isFetchingNextPage &&
+          fetchNextPage
+        ) {
           console.log("🔄 댓글 무한스크롤: 다음 페이지 로드");
           fetchNextPage();
         }
@@ -106,7 +112,10 @@ export default function CommentModal({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
       onClick={handleRequestClose} // 👈 배경 누르면 닫
-      className="fixed inset-0 z-50 flex items-end justify-center"
+      onTouchStart={(e) => e.preventDefault()} // 👈 터치 시작부터 차단
+      onTouchMove={(e) => e.preventDefault()} // 👈 iOS 터치 스크롤 차단
+      onTouchEnd={(e) => e.preventDefault()} // 👈 터치 끝까지 차단
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/30"
     >
       <motion.div
         key="comment-modal"
@@ -120,6 +129,9 @@ export default function CommentModal({
           if (closing) onClose();
         }}
         onClick={(e) => e.stopPropagation()} // 👈 모달 내부 클릭은 전파 방지
+        onTouchStart={(e) => e.stopPropagation()} // 👈 모달 내부 터치 시작 허용
+        onTouchMove={(e) => e.stopPropagation()} // 👈 모달 내부 터치 무브 허용
+        onTouchEnd={(e) => e.stopPropagation()} // 👈 모달 내부 터치 끝 허용
         className="w-full h-[75vh] max-h-[65vh] bg-white rounded-t-[20px] flex flex-col"
       >
         {/* 핸들바 */}
@@ -156,7 +168,7 @@ export default function CommentModal({
             currentUserId={currentUserId}
             postOwnerId={postOwnerId}
           />
-          
+
           {/* 무한스크롤 트리거 */}
           <div
             ref={loadMoreRef}
@@ -169,7 +181,7 @@ export default function CommentModal({
             )}
           </div>
         </div>
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white px-4 pt-2 pb-4 space-y-2 border-t border-gray-200">
+        <div className="bg-white px-4 pt-2 pb-4 space-y-2 border-t border-gray-200">
           <CommentInputField
             ref={inputRef}
             onSend={(text) => {

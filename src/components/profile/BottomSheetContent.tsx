@@ -4,7 +4,7 @@ import { useBottomSheet } from "../../contexts/ui/bottomSheetContext";
 import { useModal } from "../../contexts/ui/modalContext";
 import { useItemContext } from "../../contexts/ItemContext";
 
-function BottomSheetContent() {
+function BottomSheetContent({ type }: { type: "feed" | "card" }) {
   const navigate = useNavigate();
   const { setIsBottomSheetOpen } = useBottomSheet();
   const { setIsModalOpen } = useModal();
@@ -19,9 +19,12 @@ function BottomSheetContent() {
   return (
     <div className="w-full h-auto bg-ct-white ct-center flex-col gap-[15px]">
       <div className="w-[265px] flex flex-col items-start gap-[15px]">
-        <span className="text-h1 text-ct-black-300">피드 관리</span>
+        <span className="text-h1 text-ct-black-300">
+          {type === "feed" ? "피드 관리" : "카드 관리"}
+        </span>
         <p className="text-sub2 text-ct-gray-300">
-          프로필에 표시할 피드를 자유롭게 숨기거나 보여줄 수 있어요.
+          프로필에 표시할 {type === "feed" ? "피드" : "카드"}를 자유롭게
+          숨기거나 보여줄 수 있어요.
         </p>
       </div>
       <div
@@ -58,14 +61,14 @@ function BottomSheetContent() {
         />
         <span className="text-sub2 text-ct-black-200 ml-[14px]">숨기기</span>
       </div>
-      <div className="w-full flex justify-between">
-        <div 
-          className="bg-ct-light-blue-100 w-[152px] h-[46px] rounded-[10px] ct-center cursor-pointer hover:bg-ct-light-blue-200 transition-colors"
+      <div className="w-full flex justify-between gap-[15px]">
+        <div
+          className="bg-ct-light-blue-100 flex-1 h-[46px] rounded-[10px] ct-center cursor-pointer hover:bg-ct-light-blue-200 transition-colors"
           onClick={handleEdit}
         >
           <span className="text-sub2 text-ct-sub-blue-300">수정하기</span>
         </div>
-        <div className="bg-ct-main-blue-100 w-[152px] h-[46px] rounded-[10px] ct-center">
+        <div className="bg-ct-main-blue-100 flex-1 h-[46px] rounded-[10px] ct-center">
           <span className="text-sub2 text-ct-white">저장하기</span>
         </div>
       </div>
@@ -76,7 +79,7 @@ function BottomSheetContent() {
         }}
       >
         <span className="text-ct-gray-400 text-sub2 border-b-[1px] border-ct-gray-400">
-          피드 삭제
+          {type === "feed" ? "피드 삭제" : "카드 삭제"}
         </span>
       </div>
     </div>

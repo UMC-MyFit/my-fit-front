@@ -36,7 +36,7 @@ function FeedDetail() {
 
   return (
     <TopBarContainer TopBarContent={<TopBarContent />}>
-      <div className="w-full h-full bg-ct-gray-100 flex flex-col gap-[7px]">
+      <div className="w-full h-full bg-ct-gray-100 flex flex-col gap-[7px] relative">
         {isLoading ? (
           <>
             <DetailIntroductionSkeleton />
@@ -52,10 +52,10 @@ function FeedDetail() {
         )}
       </div>
       <BottomSheet>
-        <BottomSheetContent />
+        <BottomSheetContent type="feed" />
       </BottomSheet>
       <Modal>
-        <ModalContent />
+        <ModalContent type="feed" />
       </Modal>
     </TopBarContainer>
   );

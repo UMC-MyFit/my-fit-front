@@ -107,7 +107,7 @@ function ImageUploadBox({
       ) : (
         <>
           <img
-            src="/public/assets/common/pluswhite.svg"
+            src="/assets/common/pluswhite.svg"
             alt="사진 추가 아이콘"
           />
           <div

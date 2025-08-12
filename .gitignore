@@ -24,10 +24,10 @@ dev-dist
 *.sln
 *.sw?
 
-.env
-
 # Claude AI local guide
 CLAUDE.md
 
 # Environment variables
 .env
+.env.production
+.env.development

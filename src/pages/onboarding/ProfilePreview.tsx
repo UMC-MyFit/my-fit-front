@@ -7,7 +7,7 @@ import { useSignup } from "../../contexts/SignupContext";
 function CompanyPreview() {
   const location = useLocation();
   const { signupData } = useSignup();
-  
+
   // ProfileCardRegister에서 전달된 데이터
   const cardData = location.state?.cardData || {};
   const {
@@ -15,13 +15,13 @@ function CompanyPreview() {
     oneLineIntro = "기본 한줄 소개",
     detailedDescription = "기본 상세 설명",
     link = "",
-    keywords = []
+    keywords = [],
   } = cardData;
-  
+
   // SignupContext에서 사용자 정보 가져오기
   const userName = signupData.name || "사용자";
   const userJobTitle = signupData.highSector || keywords[0] || "키워드";
-  
+
   const TopBarContent = () => {
     return (
       <div className="flex ct-center">
