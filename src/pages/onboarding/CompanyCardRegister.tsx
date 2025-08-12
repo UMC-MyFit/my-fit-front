@@ -82,7 +82,7 @@ function CompanyCardRegister() {
       
       const response = await createActivityCard(cardRequest);
 
-      if (response.message) {
+      if (response.isSuccess) {
         console.log("✅ [CompanyCardRegister] 카드 등록 성공:", response);
         navigate("/onboarding/company-verification");
       } else {
