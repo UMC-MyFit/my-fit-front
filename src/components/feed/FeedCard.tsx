@@ -105,7 +105,6 @@ function FeedCard({
       <div className="w-full flex flex-col items-center">
         <style>{bulletStyles}</style>
         <div className="w-full relative pb-8">
-          {" "}
           <Swiper
             ref={swiperRef}
             modules={[Pagination]}
@@ -113,6 +112,7 @@ function FeedCard({
             slidesPerView={1}
             centeredSlides={true}
             pagination={paginationConfig || false}
+            className="h-[360px]"
           >
             {post.images.map((img, index) => (
               <SwiperSlide key={index} className="!h-auto">
@@ -124,10 +124,12 @@ function FeedCard({
               </SwiperSlide>
             ))}
           </Swiper>
-          <div
-            ref={paginationRef}
-            className="swiper-pagination absolute bottom-2 left-0 right-0"
-          ></div>
+          {post.images.length > 1 && (
+            <div
+              ref={paginationRef}
+              className="swiper-pagination absolute bottom-2 left-0 right-0"
+            ></div>
+          )}
         </div>
       </div>
       {/* 좋아요 / 댓글 */}
