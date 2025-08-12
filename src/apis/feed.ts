@@ -56,6 +56,21 @@ export const getFeedComments = async ({ feedId, last_comment_id, size }: GetComm
   try {
     const response = await apiClient.get<CommentsResponse>(`/api/feeds/${feedId}/comments`, { params });
     console.log('✅ [API] 댓글 조회 응답 성공:', response.data);
+    
+    // 응답 데이터 유효성 검사
+    if (!response.data || !response.data.result || !Array.isArray(response.data.result.feeds)) {
+      console.warn('⚠️ [API] 잘못된 응답 구조, 빈 배열 반환');
+      return { 
+        isSuccess: false, 
+        code: 200, 
+        message: "빈 응답", 
+        result: { 
+          feeds: [], 
+          pagination: { hasMore: false, next_cursor: 0 }
+        } 
+      };
+    }
+    
     return response.data;
   } catch (error: any) {
     console.error('❌ [API] 댓글 조회 실패:', {
