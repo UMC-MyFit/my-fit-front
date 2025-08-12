@@ -38,8 +38,8 @@ function CompanyPreview() {
           {/* <-- 여기에 padding-bottom 주의 */}
           {/* ✅ 스텝 인디케이터 */}
           <div className="absolute top-[12px] right-0 flex items-center gap-[6px]">
-            <img src="/public/assets/onboarding/nonestep.svg" alt="none" />
-            <img src="/public/assets/onboarding/step2.svg" alt="현재 스텝 2" />
+            <img src="/assets/onboarding/nonestep.svg" alt="none" />
+            <img src="/assets/onboarding/step2.svg" alt="현재 스텝 2" />
           </div>
           {/* 카드 미리보기 */}
           <CardPreview
