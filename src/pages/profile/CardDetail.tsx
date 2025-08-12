@@ -55,7 +55,7 @@ function CardDetail() {
         <BottomSheetContent type="card" />
       </BottomSheet>
       <Modal>
-        <ModalContent />
+        <ModalContent type="card" />
       </Modal>
     </TopBarContainer>
   );

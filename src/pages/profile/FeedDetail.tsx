@@ -55,7 +55,7 @@ function FeedDetail() {
         <BottomSheetContent type="feed" />
       </BottomSheet>
       <Modal>
-        <ModalContent />
+        <ModalContent type="feed" />
       </Modal>
     </TopBarContainer>
   );
