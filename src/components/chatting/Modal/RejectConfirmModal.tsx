@@ -9,7 +9,7 @@ interface RejectModalProps {
   data: CoffeeChatDetailResponse["result"];
 }
 
-function RejectConfirmModal({ data }: RejectModalProps) {
+function RejectConfirmModal({ onClose, data }: RejectModalProps) {
   const { roomId } = useChatting();
   const numericRoomId = Number(roomId);
   const { setIsModalOpen } = useModal();

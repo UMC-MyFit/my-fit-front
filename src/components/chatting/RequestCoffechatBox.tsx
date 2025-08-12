@@ -28,9 +28,11 @@ function RequestCoffeeChatBox({
   const { setIsModalOpen } = useModal();
   const { roomId } = useChatting();
   const { user } = useAuth();
-  const { refetch } = useGetCoffeeChatDetailQuery(roomId!, coffeechat_id, {
-    enabled: false,
-  });
+  const { data, refetch } = useGetCoffeeChatDetailQuery(
+    roomId!,
+    coffeechat_id,
+    { enabled: false }
+  );
   const { setRequestStatus } = useCoffeeChatModal();
   const [modalComponent, setModalComponent] = useState<React.ReactNode>(null);
 
