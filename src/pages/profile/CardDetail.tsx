@@ -52,7 +52,7 @@ function CardDetail() {
         )}
       </div>
       <BottomSheet>
-        <BottomSheetContent />
+        <BottomSheetContent type="card" />
       </BottomSheet>
       <Modal>
         <ModalContent />
