@@ -7,10 +7,10 @@ function SelectMembers() {
   const navigate = useNavigate();
   const { signupData, updateDivision, nextStep } = useSignup();
 
-  const handleSelect = (type: "personal" | "company") => {
+  const handleSelect = (type: 'personal' | 'company') => {
     updateDivision(type);
   };
-
+  
   const handleNextStep = () => {
     if (!signupData.division) return;
     nextStep();

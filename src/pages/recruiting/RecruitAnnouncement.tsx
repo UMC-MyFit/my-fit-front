@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ImageDisplay from "../../components/common/ImageDisplay";
 import TopBarContainer from "../../components/common/TopBarContainer";
 import BottomNav from "../../components/layouts/BottomNav";
@@ -14,13 +14,14 @@ function RecruitAnnouncement() {
   const { recruitment_id } = useParams();
   const recruitmentId = String(recruitment_id);
 
-  const { data } = usegetRecruitmentDetailQuery(recruitmentId);
+  const { data, isLoading, isError } =
+    usegetRecruitmentDetailQuery(recruitmentId);
   const { mutate: subscribe } = useSubscribeRecruitmentMutation(recruitmentId);
   const { mutate: unsubscribe } =
     useUnSubscribeRecruitmentMutation(recruitmentId);
   const { mutate: createChattingRoom } = useCreateChattingRoomMutation();
 
-  const [_, setIsSubscribed] = useState<boolean | null>(null);
+  const [isSubscribed, setIsSubscribed] = useState<boolean | null>(null);
   const nav = useNavigate();
 
   const handleSubscribe = () => {

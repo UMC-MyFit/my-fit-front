@@ -15,7 +15,6 @@ interface UserType {
 
 interface AuthContextType {
   isLoggedIn: boolean;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   user: UserType | null;
   login: (userData: UserType) => void;
   logout: () => void;
@@ -33,14 +32,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const initializeAuth = async () => {
       // 공개 페이지 경로 목록
-      const publicPaths = ["/onboarding", "/recruiting"];
+      const publicPaths = ['/onboarding', '/recruiting'];
       const currentPath = window.location.pathname;
-
+      
       // 공개 페이지에서는 세션 확인 스킵
-      const isPublicPath = publicPaths.some((path) =>
+      const isPublicPath = publicPaths.some(path => 
         currentPath.startsWith(path)
       );
-
+      
       if (isPublicPath) {
         console.log("공개 페이지 - 세션 확인 스킵:", currentPath);
         setIsLoading(false);
@@ -94,7 +93,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, user, login, logout, isLoading, setIsLoggedIn }}
+      value={{ isLoggedIn, user, login, logout, isLoading }}
     >
       {children}
     </AuthContext.Provider>

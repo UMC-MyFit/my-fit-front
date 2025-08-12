@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useGetProfile } from "../../hooks/mypageQueries";
 
-function DetailIntroduction() {
+function DetailIntroduction({ serviceId }: { serviceId?: string }) {
   const location = useLocation();
   const isMine = location.pathname.startsWith("/mypage");
   const { user } = useAuth();

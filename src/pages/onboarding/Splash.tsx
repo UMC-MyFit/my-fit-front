@@ -146,6 +146,7 @@ function Splash() {
             회원가입
           </button>
         </div>
+
       </div>
     </div>
   );

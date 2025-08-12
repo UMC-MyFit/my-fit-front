@@ -1,5 +1,6 @@
 // CommentPage.tsx (댓글 전용 페이지 - React + Vite)
 import { useParams, useNavigate } from "react-router-dom";
+import CommentList from "../../components/feed/CommentList";
 import ChatInputField from "../../components/chatting/ChatInputField";
 
 export default function CommentPage() {
