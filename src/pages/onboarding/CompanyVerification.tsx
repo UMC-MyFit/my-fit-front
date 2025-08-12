@@ -31,9 +31,9 @@ function CompanyVerification() {
       <div className="flex flex-col  pt-[24px] mx-[22px] border-t border-ct-gray-200 relative ">
         {/* ✅ 스텝 인디케이터 */}
         <div className="absolute top-[12px] right-0 flex items-center gap-[6px]">
-          <img src="/public/assets/onboarding/nonestep.svg" alt="none" />
-          <img src="/public/assets/onboarding/nonestep.svg" alt="none" />
-          <img src="/public/assets/onboarding/step3.svg" alt="현재 스텝 3" />
+          <img src="/assets/onboarding/nonestep.svg" alt="none" />
+          <img src="/assets/onboarding/nonestep.svg" alt="none" />
+          <img src="/assets/onboarding/step3.svg" alt="현재 스텝 3" />
         </div>
         {/* ✅ 사업자 등록증 첨부 */}
         <div className="flex flex-col mt-[38px]">
