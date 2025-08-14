@@ -61,9 +61,9 @@ function FeedCard({
   onLikeClick?: () => void;
   onProfileClick?: () => void;
 }) {
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<{ swiper?: any }>(null);
   const paginationRef = useRef<HTMLDivElement>(null);
-  const [paginationConfig, setPaginationConfig] = useState<any>(null);
+  const [paginationConfig, setPaginationConfig] = useState<object | null>(null);
 
   useEffect(() => {
     if (paginationRef.current) {
